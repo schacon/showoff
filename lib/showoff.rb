@@ -310,6 +310,21 @@ class ShowOff < Sinatra::Application
         out  = "#{path}/#{name}/static"
         # First make a directory
         File.makedirs("#{out}")
+
+				# Next, copy static files
+        File.makedirs("#{out}/files")
+
+				# look for file references
+				file_strings = data.scan(/\"(file:\/\/.*?)\"/)
+				file_strings.each do |match|
+					string = match[0]
+					file = string.gsub('file://', '')  # Absolute Path to File
+					rel_path = "files/#{File.basename(file)}"
+					FileUtils.copy_entry(file, "#{out}/#{rel_path}") # copy static file
+					p string
+					data.gsub!(string, rel_path) # replace the file reference in the html
+				end
+
         # Then write the html
         file = File.new("#{out}/index.html", "w")
         file.puts(data)
