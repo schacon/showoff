@@ -318,7 +318,7 @@ function keyDown(event)
             gotoSlidenum = 0;
         } else {
             debug('executeCode');
-            executeCode.call($('.sh_javaScript code:visible'));
+            executeCode.call($('.sh_javascript code:visible'));
         }
 
     }
@@ -463,7 +463,7 @@ function executeCode () {
     setTimeout(function() { codeDiv.removeClass("executing");}, 250 );
     if (result != null) print(result);
 }
-$('.sh_javaScript code').live("click", executeCode);
+$('.sh_javascript code').live("click", executeCode);
 
 
 /********************
