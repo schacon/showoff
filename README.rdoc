@@ -43,7 +43,7 @@ remove sections easily.
 ShowOff is meant to be run in a ShowOff formatted repository - that means that it has a showoff.json file and a number of sections (subdirectories) with markdown files for the slides you're presenting.
 
     $ gem install showoff
-    $ git clone (showoff-repo)
+    $ git clone (showoff-repo)/example
     $ cd (showoff-repo)
     $ showoff serve
 
