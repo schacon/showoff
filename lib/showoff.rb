@@ -127,7 +127,7 @@ class ShowOff < Sinatra::Application
       replacement_prefix = static ?
         %(img src="./file/#{path}) :
         %(img src="/image/#{path})
-      slide.gsub(/img src=\"(.*?)\"/) do |s|
+      slide.gsub(/img src=\"(?!http:)(.*?)\"/) do |s|
         img_path = File.join(path, $1)
         w, h     = get_image_size(img_path)
         src      = %(#{replacement_prefix}/#{$1}")
