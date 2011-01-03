@@ -207,9 +207,11 @@ function showSlide(back_step) {
 	}
 	location.hash = slidenum + 1;
 	$('body').addSwipeEvents().
-		bind('swipeleft',	swipeLeft).
-		bind('swiperight', swipeRight)
-	removeResults()
+		bind('tap', swipeLeft).         // next
+		bind('swipeleft', swipeLeft).   // next
+		bind('swiperight', swipeRight); // prev
+
+	removeResults();
 
 	$(currentSlide).find(".content").trigger("showoff:show");
 
@@ -395,12 +397,22 @@ function keyUp(event) {
 }
 
 
+var lastSwipeLeft = (+new Date());
+var lastSwipeRight = (+new Date());
 function swipeLeft() {
-	nextStep()
+  var time = (+new Date());
+  if((time - lastSwipeLeft) > 100) {
+    lastSwipeLeft = time;
+    nextStep();
+  }
 }
 
 function swipeRight() {
-	prevStep()
+  var time = (+new Date());
+  if((time - lastSwipeRight) > 100) {
+    lastSwipeRight = time;
+    prevStep();
+  }
 }
 
 function ListMenu(s)
