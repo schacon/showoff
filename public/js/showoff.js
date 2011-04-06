@@ -392,13 +392,22 @@ function keyUp(event) {
 	}
 }
 
-
-function swipeLeft() {
-	nextStep()
+function swipeLeft(event, touchStatus) {
+    if (enoughTimePassed())
+        nextStep();
 }
 
 function swipeRight() {
-	prevStep()
+    if (enoughTimePassed())
+        prevStep();
+}
+
+var lastSwipe = (new Date()).getTime();
+function enoughTimePassed() {
+    var now = (new Date()).getTime();
+    var enough = now - lastSwipe > 1000
+    lastSwipe = now;
+    return enough;
 }
 
 function ListMenu(s)
