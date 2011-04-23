@@ -74,7 +74,7 @@ class ShowOff < Sinatra::Application
       Dir.glob("#{options.pres_dir}/_preshow/*").map { |path| File.basename(path) }.to_json
     end
 
-    def process_markdown(name, content, static=false)
+    def process_markdown(name, content, static=false, pdf=false)
       slides = content.split(/^<?!SLIDE/)
       slides.delete('')
       final = ''
@@ -109,7 +109,7 @@ class ShowOff < Sinatra::Application
           md += "<div class=\"#{content_classes.join(' ')}\" ref=\"#{name}\">\n"
         end
         sl = Markdown.new(slide).to_html
-        sl = update_image_paths(name, sl, static)
+        sl = update_image_paths(name, sl, static, pdf)
         md += sl
         md += "</div>\n"
         md += "</div>\n"
@@ -124,12 +124,12 @@ class ShowOff < Sinatra::Application
       markdown.gsub(/<p>\.(.*?) /, '<p class="\1">')
     end
 
-    def update_image_paths(path, slide, static=false)
+    def update_image_paths(path, slide, static=false, pdf=false)
       paths = path.split('/')
       paths.pop
       path = paths.join('/')
       replacement_prefix = static ?
-        %(img src="file://#{options.pres_dir}/#{path}) :
+        ( pdf ? %(img src="file://#{options.pres_dir}/#{path}) : %(img src="./file/#{path}) ) :
         %(img src="/image/#{path})
       slide.gsub(/img src=\"(.*?)\"/) do |s|
         img_path = File.join(path, $1)
@@ -191,7 +191,7 @@ class ShowOff < Sinatra::Application
       html.root.to_s
     end
 
-    def get_slides_html(static=false)
+    def get_slides_html(static=false, pdf=false)
       sections = ShowOffUtils.showoff_sections(options.pres_dir)
       files = []
       if sections
@@ -203,7 +203,7 @@ class ShowOff < Sinatra::Application
         data = ''
         files.each do |f|
           fname = f.gsub(options.pres_dir + '/', '').gsub('.md', '')
-          data += process_markdown(fname, File.read(f), static)
+          data += process_markdown(fname, File.read(f), static, pdf)
         end
       end
       data
@@ -297,7 +297,7 @@ class ShowOff < Sinatra::Application
     end
 
     def pdf(static=true)
-      @slides = get_slides_html(static)
+      @slides = get_slides_html(static, true)
       @no_js = false
       html = erb :onepage
       # TODO make a random filename
