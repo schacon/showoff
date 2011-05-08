@@ -56,7 +56,9 @@ command :heroku do |c|
   end
 end
 
-desc 'Serves the showoff presentation in the current directory'
+desc 'Serves the showoff presentation in the specified (or current) directory'
+arg_name "[pres_dir]"
+default_value "."
 command :serve do |c|
 
   c.desc 'Port on which to run'
@@ -65,10 +67,14 @@ command :serve do |c|
 
   c.desc 'Host or ip to run on'
   c.default_value "localhost"
-  c.flag [:h,:host]
+  c.flag [:h,:host]  
+
+  c.desc 'Presentation file'
+  c.default_value "showoff.json"
+  c.flag [:f, :pres_file]
 
   c.action do |global_options,options,args|
-    ShowOff.run! :host => options[:h], :port => options[:p].to_i
+    ShowOff.run! :host => options[:h], :port => options[:p].to_i, :pres_file => options[:f], :pres_dir => args[0]
   end
 end
 

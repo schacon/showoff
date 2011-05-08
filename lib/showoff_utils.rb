@@ -1,5 +1,11 @@
 class ShowOffUtils
-  SHOWOFF_JSON_FILE = 'showoff.json'
+  def self.presentation_config_file
+    @presentation_config_file ||= 'showoff.json'
+  end
+
+  def self.presentation_config_file=(filename)
+    @presentation_config_file = filename
+  end
 
   def self.create(dirname,create_samples,dir='one')
     Dir.mkdir(dirname) if !File.exists?(dirname)
@@ -16,14 +22,14 @@ class ShowOffUtils
       end
 
       # create showoff.json
-      File.open(SHOWOFF_JSON_FILE, 'w+') do |f|
+      File.open(ShowOffUtils.presentation_config_file, 'w+') do |f|
         f.puts "{ \"name\": \"My Preso\", \"sections\": [ {\"section\":\"#{dir}\"} ]}"
       end
 
       if create_samples
         puts "done. run 'showoff serve' in #{dirname}/ dir to see slideshow"
       else
-        puts "done. add slides, modify #{SHOWOFF_JSON_FILE} and then run 'showoff serve' in #{dirname}/ dir to see slideshow"
+        puts "done. add slides, modify #{ShowOffUtils.presentation_config_file} and then run 'showoff serve' in #{dirname}/ dir to see slideshow"
       end
     end
   end
@@ -39,7 +45,7 @@ class ShowOffUtils
   # password     - String containing password to protect your heroku site; nil means no password protection
   # use_dot_gems - boolea that, if true, indicates we should use the old, deprecated .gems file instead of Bundler
   def self.heroku(name,force,password,use_dot_gems)
-    if !File.exists?(SHOWOFF_JSON_FILE)
+    if !File.exists?(ShowOffUtils.presentation_config_file)
       puts "fail. not a showoff directory"
       return false
     end
@@ -181,12 +187,12 @@ class ShowOffUtils
     puts "Creating #{dir}..."
     Dir.mkdir dir
 
-    showoff_json = JSON.parse(File.read(SHOWOFF_JSON_FILE))
+    showoff_json = JSON.parse(File.read(ShowOffUtils.presentation_config_file))
     showoff_json["section"] = dir
-    File.open(SHOWOFF_JSON_FILE,'w') do |file|
+    File.open(ShowOffUtils.presentation_config_file,'w') do |file|
       file.puts JSON.generate(showoff_json)
     end
-    puts "#{SHOWOFF_JSON_FILE} updated"
+    puts "#{ShowOffUtils.presentation_config_file} updated"
   end
 
   def self.blank?(string)
@@ -275,7 +281,7 @@ class ShowOffUtils
   end
 
   def self.showoff_sections(dir = '.')
-    index = File.join(dir, ShowOffUtils::SHOWOFF_JSON_FILE )
+    index = File.join(dir, ShowOffUtils.presentation_config_file)
     order = nil
     if File.exists?(index)
       data = JSON.parse(File.read(index))
@@ -286,12 +292,14 @@ class ShowOffUtils
         order = data
       end
       order = order.map { |s| s['section'] }
+    else
+      order = ["."] # if there's no showoff.json file, make a boring one
     end
     order
   end
 
   def self.showoff_title(dir = '.')
-    index = File.join(dir, ShowOffUtils::SHOWOFF_JSON_FILE )
+    index = File.join(dir, ShowOffUtils.presentation_config_file )
     order = nil
     if File.exists?(index)
       data = JSON.parse(File.read(index))

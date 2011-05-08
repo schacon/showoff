@@ -31,26 +31,30 @@ require 'pp'
 
 class ShowOff < Sinatra::Application
 
-  Version = VERSION = '0.4.2'
+  Version = VERSION = '0.5.0'
 
   attr_reader :cached_image_size
 
   set :views, File.dirname(__FILE__) + '/../views'
   set :public, File.dirname(__FILE__) + '/../public'
-  set :pres_dir, 'example'
 
   def initialize(app=nil)
     super(app)
-    puts dir = File.expand_path(File.join(File.dirname(__FILE__), '..'))
-    if Dir.pwd == dir
-      options.pres_dir = dir + '/example'
+    showoff_dir = File.expand_path(File.join(File.dirname(__FILE__), '..'))
+    if Dir.pwd == showoff_dir
+      options.pres_dir = "#{showoff_dir}/example"
       @root_path = "."
     else
-      options.pres_dir = Dir.pwd
+      options.pres_dir ||= Dir.pwd
       @root_path = ".."
     end
+    options.pres_dir = File.expand_path(options.pres_dir)
+    if (options.pres_file)
+      puts "Using #{options.pres_file}"
+      ShowOffUtils.presentation_config_file = options.pres_file
+    end
+    puts "Serving presentation from #{options.pres_dir}"
     @cached_image_size = {}
-    puts options.pres_dir
     @pres_name = options.pres_dir.split('/').pop
     require_ruby_files
   end
@@ -81,6 +85,12 @@ class ShowOff < Sinatra::Application
     end
 
     def process_markdown(name, content, static=false, pdf=false)
+
+      # if there are no !SLIDE markers, then make every H1 define a new slide
+      unless content =~ /^\<?!SLIDE/m
+        content = content.gsub(/^# /m, "<!SLIDE bullets>\n# ")
+      end
+
       slides = content.split(/^<?!SLIDE/)
       slides.delete('')
       final = ''
@@ -101,9 +111,6 @@ class ShowOff < Sinatra::Application
         # extract id, defaulting to none
         id = nil
         content_classes.delete_if { |x| x =~ /^#([\w-]+)/ && id = $1 }
-        puts "id: #{id}" if id
-        puts "classes: #{content_classes.inspect}"
-        puts "transition: #{transition}"
         # create html
         md += "<div"
         md += " id=\"#{id}\"" if id

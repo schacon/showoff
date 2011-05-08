@@ -1,5 +1,6 @@
 @media screen {
   body {
+			font-size: 100%;
       font-family: "Gill Sans", Helvetica, Arial, sans-serif;
       background:#333;
       overflow:hidden;
@@ -85,6 +86,13 @@
   }
 }
 
+/* plain (non-bullet) text */
+.content > p {
+	font-size: 2em;
+  margin: 1em;
+	text-align: center;
+}
+
 .center img {
     display:block;
     margin-left:auto;
@@ -99,21 +107,30 @@
   vertical-align: middle;
 }
 
-.bullets ul {
-    font-size: 3em;
+.bullets > ul {
+	font-size: 3em;
 }
-.bullets ul li {
+.bullets > ul > li {
     text-align: center;
     padding: 25px;
 }
 
-.smbullets ul {
-    font-size: 2em;
+.smbullets > ul {
+    font-size: 2.5em;
 }
-.smbullets ul li {
+.smbullets > ul > li {
     text-align: center;
     padding: 10px;
 }
+
+/* nested lists get their bullets back */
+.bullets ul ul {
+  list-style: disc;
+  margin: 10px 100px;
+  padding-left: 40px;
+  text-align: left;
+}
+.bullets ul ul > li { font-size: 80%; }
 
 .commandline pre {
     font-size: 2em;
@@ -138,9 +155,10 @@
     font-family: monospace;
 }
 
-.subsection {
+.subsection h1 {
     background: #008;
     color: #fff;
+	padding: .25em;
 }
 
 .small {
@@ -151,13 +169,10 @@
     font-size: 70%;
 }
 
-h1 { font-size: 5em; font-weight: normal; text-align: center;}
-h2 { font-size: 3em; font-weight: normal; text-align: center; }
-h3 { font-size: 2em; font-weight: normal; text-align: center; }
-
-h1, h2, h3 {
-  margin: 0.5em 0;
-}
+h1,h2,h3 { font-weight: normal; text-align: center; margin: 0.5em 0; }
+h1 { font-size: 5em; }
+h2 { font-size: 3em; }
+h3 { font-size: 2em; }
 
 pre { margin-left: 40px; font-size: 2.8em; }
 

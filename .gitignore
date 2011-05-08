@@ -16,6 +16,7 @@ tmtags
 ## PROJECT::GENERAL
 coverage
 rdoc
+doc
 pkg
 *.gem
 .bundle

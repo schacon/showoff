@@ -328,7 +328,7 @@ function keyDown(event)
 		return true;
 	}
 
-	if (key == 13){
+	if (key == 13) {
 		if (gotoSlidenum > 0) {
 			debug('go to ' + gotoSlidenum);
 			slidenum = gotoSlidenum - 1;
@@ -353,10 +353,14 @@ function keyDown(event)
 	{
 		shiftKeyActive = true;
 	}
+
 	if (key == 32) // space bar
 	{
-		if (shiftKeyActive) { prevStep() }
-		else				{ nextStep() }
+		if (shiftKeyActive) {
+			prevStep()
+		} else {
+			nextStep()
+		}
 	}
 	else if (key == 68) // 'd' for debug
 	{
@@ -382,7 +386,7 @@ function keyDown(event)
 	{
 		$('#navmenu').toggle().trigger('click')
 	}
-	else if (key == 90) // z for help
+	else if (key == 90 || key == 191) // z or ? for help
 	{
 		$('#help').toggle()
 	}
@@ -527,7 +531,7 @@ var preshow_timerRunning = false;
 var preshow_current = 0;
 var preshow_images;
 var preshow_imagesTotal = 0;
-var preshow_des;
+var preshow_des = null;
 
 function runPreShow() {
 	if(preshow_running) {
@@ -583,7 +587,7 @@ function startPreShow() {
 function addPreShowTips() {
 	time = secondsToTime(preshow_secondsLeft)
 	$('#preshow_timer').text(time + ' to go-time')
-	var des = preshow_des[tmpImg.attr("ref")]
+	var des = preshow_des && preshow_des[tmpImg.attr("ref")]
 	if(des) {
 		$('#tips').show()
 		$('#tips').text(des)
