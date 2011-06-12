@@ -424,6 +424,8 @@ So far, ShowOff has been used in the following presentations (and many others):
   http://github.com/nono/Presentations/tree/master/20100703_25_promising_projects_in_50_minutes/
 * 11th Libre Software Meeting 2010 - Ruby 1.9, The future of Ruby? - Bruno Michel
   http://github.com/nono/Presentations/tree/master/20100708_RMLL_Ruby_1.9/
+* Lone Star PHP 2011 - Drupal - Chris Christensen
+  https://github.com/christianchristensen/Presentations/tree/master/20110611-lonestarphp-drupal
 
 
 If you use it for something, please let me know so I can add it.
