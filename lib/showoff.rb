@@ -23,6 +23,9 @@ end
 begin
   require 'rdiscount'
 rescue LoadError
+  if RUBY_VERSION =~ /^1.9/
+    raise LoadError,'BlueCloth with #{RUBY_VERSION} is not compatible with showoff; please gem install rdiscount'
+  end
   require 'bluecloth'
   Object.send(:remove_const,:Markdown)
   Markdown = BlueCloth
