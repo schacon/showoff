@@ -274,12 +274,12 @@ class ShowOffUtils
     [code,lines,width]
   end
 
-  def self.showoff_sections(dir = '.')
+  def self.showoff_sections(dir,logger)
     index = File.join(dir, ShowOffUtils::SHOWOFF_JSON_FILE )
     order = nil
     if File.exists?(index)
       data = JSON.parse(File.read(index))
-      pp data
+      logger.debug data
       if data.is_a?(Hash)
         order = data['sections']
       else

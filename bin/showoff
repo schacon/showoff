@@ -59,6 +59,9 @@ end
 desc 'Serves the showoff presentation in the current directory'
 command :serve do |c|
 
+  c.desc 'Show verbose messaging'
+  c.switch :verbose
+
   c.desc 'Port on which to run'
   c.default_value "9090"
   c.flag [:p,:port]
@@ -68,7 +71,7 @@ command :serve do |c|
   c.flag [:h,:host]
 
   c.action do |global_options,options,args|
-    ShowOff.run! :host => options[:h], :port => options[:p].to_i
+    ShowOff.run! :host => options[:h], :port => options[:p].to_i, :verbose => options[:verbose]
   end
 end
 

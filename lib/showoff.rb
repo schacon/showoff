@@ -3,6 +3,7 @@ require 'sinatra/base'
 require 'json'
 require 'nokogiri'
 require 'fileutils'
+require 'logger'
 
 here = File.expand_path(File.dirname(__FILE__))
 require "#{here}/showoff_utils"
@@ -27,7 +28,6 @@ rescue LoadError
   Object.send(:remove_const,:Markdown)
   Markdown = BlueCloth
 end
-require 'pp'
 
 class ShowOff < Sinatra::Application
 
@@ -41,7 +41,13 @@ class ShowOff < Sinatra::Application
 
   def initialize(app=nil)
     super(app)
-    puts dir = File.expand_path(File.join(File.dirname(__FILE__), '..'))
+    @logger = Logger.new(STDOUT)
+    @logger.formatter = proc { |severity,datetime,progname,msg| "#{progname} #{msg}\n" }
+    @logger.level = options.verbose ? Logger::DEBUG : Logger::WARN
+
+    dir = File.expand_path(File.join(File.dirname(__FILE__), '..'))
+    @logger.debug(dir)
+
     if Dir.pwd == dir
       options.pres_dir = dir + '/example'
       @root_path = "."
@@ -50,7 +56,7 @@ class ShowOff < Sinatra::Application
       @root_path = ".."
     end
     @cached_image_size = {}
-    puts options.pres_dir
+    @logger.debug options.pres_dir
     @pres_name = options.pres_dir.split('/').pop
     require_ruby_files
   end
@@ -63,7 +69,7 @@ class ShowOff < Sinatra::Application
     def load_section_files(section)
       section = File.join(options.pres_dir, section)
       files = Dir.glob("#{section}/**/*").sort
-      pp files
+      @logger.debug files
       files
     end
 
@@ -101,9 +107,9 @@ class ShowOff < Sinatra::Application
         # extract id, defaulting to none
         id = nil
         content_classes.delete_if { |x| x =~ /^#([\w-]+)/ && id = $1 }
-        puts "id: #{id}" if id
-        puts "classes: #{content_classes.inspect}"
-        puts "transition: #{transition}"
+        @logger.debug "id: #{id}" if id
+        @logger.debug "classes: #{content_classes.inspect}"
+        @logger.debug "transition: #{transition}"
         # create html
         md += "<div"
         md += " id=\"#{id}\"" if id
@@ -198,7 +204,7 @@ class ShowOff < Sinatra::Application
     end
 
     def get_slides_html(static=false, pdf=false)
-      sections = ShowOffUtils.showoff_sections(options.pres_dir)
+      sections = ShowOffUtils.showoff_sections(options.pres_dir,@logger)
       files = []
       if sections
         sections.each do |section|
@@ -374,7 +380,7 @@ class ShowOff < Sinatra::Application
           File.open(css_path) do |file|
             data = file.read
             data.scan(/url\((.*)\)/).flatten.each do |path|
-              p path
+              @logger.debug path
               dir = File.dirname(path)
               FileUtils.makedirs(File.join(file_dir, dir))
               FileUtils.copy(File.join(pres_dir, path), File.join(file_dir, path))
