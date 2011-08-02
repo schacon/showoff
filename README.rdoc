@@ -101,7 +101,7 @@ Some useful styles for each slide are:
 * smbullets - sizes and separates more bullets (smaller, closer together)
 * subsection - creates a different background for titles
 * command - monospaces h1 title slides
-* commandline - for pasted commandline sections (needs leading '$' for commands, then output on subsequent lines)
+* commandline - for pasted commandline sections (needs leading '$' or '#' for commands, then output on subsequent lines; long commands can be split over multiple lines by using a back slash before a newline)
 * code - monospaces everything on the slide
 * incremental - can be used with 'bullets' and 'commandline' styles, will incrementally update elements on arrow key rather than switch slides
 * small - make all slide text 80%

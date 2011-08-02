@@ -178,19 +178,16 @@ class ShowOff < Sinatra::Application
 
       html.css('.commandline > pre > code').each do |code|
         out = code.text
-        lines = out.split(/^\$(.*?)$/)
-        lines.delete('')
+        lines = out.scan(/(?:[\$#](?:[^\n]+?(?:\\\n)?)+|[^\$#]+)\n?/)
         code.content = ''
-        while(lines.size > 0) do
-          command = lines.shift
-          result = lines.shift
+        lines.each do |line|
           c = Nokogiri::XML::Node.new('code', html)
-          c.set_attribute('class', 'command')
-          c.content = '$' + command
-          code << c
-          c = Nokogiri::XML::Node.new('code', html)
-          c.set_attribute('class', 'result')
-          c.content = result
+          if "$" == line[0, 1] || "#" == line[0, 1]
+            c.set_attribute('class', 'command')
+          else
+            c.set_attribute('class', 'result')
+          end
+          c.content = line
           code << c
         end
       end
