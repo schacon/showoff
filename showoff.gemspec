@@ -1,4 +1,4 @@
-require './lib/showoff'
+require './lib/showoff/version'
 Gem::Specification.new do |s|
   s.name              = "showoff"
   s.version           = ShowOff::Version

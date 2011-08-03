@@ -31,7 +31,8 @@ require 'pp'
 
 class ShowOff < Sinatra::Application
 
-  Version = VERSION = '0.4.2'
+  autoload :Version, 'showoff/version'
+  autoload :VERSION, 'showoff/version'
 
   attr_reader :cached_image_size
 
