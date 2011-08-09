@@ -86,7 +86,7 @@ function initializePresentation(prefix) {
 	}
 	setupSlideParamsCheck();
 	sh_highlightDocument(prefix+'/js/sh_lang/', '.min.js')
-	$(".preso").trigger("showoff:loaded");
+	$("#preso").trigger("showoff:loaded");
 }
 
 function centerSlides(slides) {
