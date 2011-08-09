@@ -7,6 +7,7 @@ require 'fileutils'
 here = File.expand_path(File.dirname(__FILE__))
 require "#{here}/showoff_utils"
 require "#{here}/princely"
+require "#{here}/commandline_parser"
 
 begin
   require 'RMagick'
@@ -175,6 +176,7 @@ class ShowOff < Sinatra::Application
 
     def update_commandline_code(slide)
       html = Nokogiri::XML.parse(slide)
+      parser = CommandlineParser.new
 
       html.css('pre').each do |pre|
         pre.css('code').each do |code|
@@ -190,21 +192,30 @@ class ShowOff < Sinatra::Application
 
       html.css('.commandline > pre > code').each do |code|
         out = code.text
-        lines = out.split(/^\$(.*?)$/)
-        lines.delete('')
         code.content = ''
-        while(lines.size > 0) do
-          command = lines.shift
-          result = lines.shift
-          c = Nokogiri::XML::Node.new('code', html)
-          c.set_attribute('class', 'command')
-          c.content = '$' + command
-          code << c
-          c = Nokogiri::XML::Node.new('code', html)
-          c.set_attribute('class', 'result')
-          c.content = result
-          code << c
+        tree = parser.parse(out)
+        transform = Parslet::Transform.new do
+          rule(:prompt => simple(:prompt), :input => simple(:input), :output => simple(:output)) do
+            command = Nokogiri::XML::Node.new('code', html)
+            command.set_attribute('class', 'command')
+            command.content = "#{prompt} #{input}"
+            code << command
+
+            # Add newline after the input so that users can
+            # advance faster than the typewriter effect
+            # and still keep inputs on separate lines.
+            code << "\n"
+
+            unless output.to_s.empty?
+
+              result = Nokogiri::XML::Node.new('code', html)
+              result.set_attribute('class', 'result')
+              result.content = output
+              code << result
+            end
+          end
         end
+        transform.apply(tree)
       end
       html.root.to_s
     end
