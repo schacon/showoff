@@ -40,6 +40,11 @@ function setupPreso(load_slides, prefix) {
 	/* window.onresize	= resized; */
 	/* window.onscroll = scrolled; */
 	/* window.onunload = unloaded; */
+
+	$('body').addSwipeEvents().
+		bind('tap', swipeLeft).         // next
+		bind('swipeleft', swipeLeft).   // next
+		bind('swiperight', swipeRight); // prev
 }
 
 function loadSlides(load_slides, prefix) {
@@ -204,10 +209,6 @@ function showSlide(back_step) {
 		incrSteps = 0
 	}
 	location.hash = slidenum + 1;
-	$('body').addSwipeEvents().
-		bind('tap', swipeLeft).         // next
-		bind('swipeleft', swipeLeft).   // next
-		bind('swiperight', swipeRight); // prev
 
 	removeResults();
 
@@ -423,23 +424,12 @@ function keyUp(event) {
 	}
 }
 
-
-var lastSwipeLeft = (+new Date());
-var lastSwipeRight = (+new Date());
 function swipeLeft() {
-  var time = (+new Date());
-  if((time - lastSwipeLeft) > 100) {
-    lastSwipeLeft = time;
-    nextStep();
-  }
+  nextStep();
 }
 
 function swipeRight() {
-  var time = (+new Date());
-  if((time - lastSwipeRight) > 100) {
-    lastSwipeRight = time;
-    prevStep();
-  }
+  prevStep();
 }
 
 function ListMenu(s)
