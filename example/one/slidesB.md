@@ -38,9 +38,14 @@
     some output
 
     $ command over \
-      several lines
+    > two lines
     some more output
     over several lines
+
+    $ command over \
+    > more than two \
+    > lines
+    some output
 
     $ no output command with \( backslashes \)
     $ command

@@ -22,10 +22,10 @@ class CommandlineParser < Parslet::Parser
   rule(:multiline_input) do
 
     # some command \
-    # continued \
-    # \
-    # and stop
-    ( singleline_input >> str('\\') >> newline ).repeat(1) >> singleline_input
+    # > continued \
+    # > \
+    # > and stop
+    ( singleline_input >> str('\\') >> newline >> str('>') ).repeat(1) >> singleline_input
   end
 
   rule(:command) do
