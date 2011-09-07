@@ -102,12 +102,15 @@ function centerSlides(slides) {
 
 function centerSlide(slide) {
 	var slide_content = $(slide).children(".content").first()
+	var fixedTop = $(slide).find(".content").is('.fixed-top');
 	var height = slide_content.height()
 	var mar_top = (0.5 * parseFloat($(slide).height())) - (0.5 * parseFloat(height))
 	if (mar_top < 0) {
 		mar_top = 0
 	}
-	slide_content.css('margin-top', mar_top)
+	if (!fixedTop) {
+		slide_content.css('margin-top', mar_top);
+	}
 }
 
 function setupMenu() {

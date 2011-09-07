@@ -112,6 +112,7 @@ class ShowOffUtils
     'code' => lambda { |t,size,src| make_slide(t,size,blank?(src) ? "    @@@ Ruby\n    code_here()" : src) },
     'commandline' => lambda { |t,size,dontcare| make_slide(t,"#{size} commandline","    $ command here\n    output here")},
     'full-page' => lambda { |t,size,dontcare| make_slide(t,"#{size} full-page","![Image Description](image/ref.png)")},
+    'fixed-top' => lambda { |t,size,dontcare| make_slide(t,"#{size} fixed-top","![Image Description](image/ref.png)")},
   }
 
 
