@@ -430,9 +430,13 @@ Showoff can produce a PDF version of your presentation.  To do this, you must in
 
     gem install pdfkit
 
-You'll then need to install a version of wkhtmltopdf available at http://code.google.com/p/wkhtmltopdf and make sure that +wkhtmltopdf+ is in your path when you start showoff.
+You'll then need to install a version of wkhtmltopdf available at the {wkhtmltopdf repo}[http://code.google.com/p/wkhtmltopdf/wiki/compilation] (or brew install wkhtmltopdf on a mac) and make sure that +wkhtmltopdf+ is in your path:
 
-Then, navigate to <tt>/pdf</tt> (e.g. http://localhost/pdf) of your presentation and a PDF will be generated with the browser.
+    export $PATH="/location/to/my/wkhtmltopdf/0.9.9:$PATH"
+
+
+
+Then restart showoff, and navigate to <tt>/pdf</tt> (e.g. http://localhost/pdf) of your presentation and a PDF will be generated with the browser.
 
 = Completion
 
