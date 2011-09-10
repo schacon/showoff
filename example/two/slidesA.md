@@ -55,3 +55,14 @@
     # Title of the slide #
     
     How easy is this?
+
+!SLIDE
+
+# Using MathJax in your slides #
+
+* Linked to MathJax server.
+* Math display mode: \\[A_1\cap A_2\cap \cdots\cap A_k = \emptyset\\]
+* Inline math looks like \\(B_i + A_k = \frac{1}{\sum_{x\in C}{S(x)}}\\), which is nice.
+* Some caveats:
+  * You may need to backslash escape underscores (since Markdown interprets them as emphasis delimiters).
+  * You may need spaces around carats: \\(x ^ 2\\).
