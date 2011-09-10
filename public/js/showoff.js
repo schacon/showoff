@@ -346,6 +346,10 @@ function keyDown(event)
             if ($rubyCode.length > 0) {
                 executeRuby.call($rubyCode);
             }
+            var $coffeeCode = $('.execute .sh_coffeescript code:visible')
+            if ($coffeeCode.length > 0) {
+                executeCoffee.call($coffeeCode);
+            } 
 		}
 
 	}
@@ -509,6 +513,17 @@ function executeRuby () {
 }
 $('.execute .sh_ruby code').live("click", executeRuby);
 
+function executeCoffee() {
+	result = null;
+	var codeDiv = $(this);
+	codeDiv.addClass("executing");
+  // Coffeescript encapsulates everything, so result must be attached to window.
+  var code = codeDiv.text() + ';window.result=result;'
+	eval(CoffeeScript.compile(code));
+	setTimeout(function() { codeDiv.removeClass("executing");}, 250 );
+	if (result != null) print(result);
+}
+$('.execute .sh_coffeescript code').live("click", executeCoffee);
 
 /********************
  PreShow Code
