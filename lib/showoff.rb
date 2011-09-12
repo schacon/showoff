@@ -275,7 +275,7 @@ class ShowOff < Sinatra::Application
             files = []
             files << load_section_files(section)
             files = files.flatten
-            files = files.select { |f| f =~ /.md/ }
+            files = files.select { |f| f =~ /.md$/ }
             files.each do |f|
               fname = f.gsub(options.pres_dir + '/', '').gsub('.md', '')
               data << process_markdown(fname, File.read(f), static, pdf)
