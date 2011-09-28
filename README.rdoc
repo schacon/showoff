@@ -311,6 +311,14 @@ If you need supporting libraries when you evaluate the code. You can do this by
 putting Ruby files (*.rb) into the root directory of the presentation then they
 will be required when the presentation loads.
 
+= Presenter Notes
+
+Add a line that starts with .notes:
+
+    .notes my notes here
+
+Toggle presenter notes with the n key while in the presentation.
+
 = Editor integration
 
 The "add slide" feature can allow you to add the necessary boilerplate from your editor.  If you are using vim, you can
