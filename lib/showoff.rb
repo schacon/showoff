@@ -387,7 +387,7 @@ class ShowOff < Sinatra::Application
 
       # PDFKit.new takes the HTML and any options for wkhtmltopdf
       # run `wkhtmltopdf --extended-help` for a full list of options
-      kit = PDFKit.new(html, :page_size => 'Letter', :orientation => 'Landscape')
+      kit = PDFKit.new(html, ShowOffUtils.showoff_pdf_options)
 
       # Save the PDF to a file
       file = kit.to_file('/tmp/preso.pdf')

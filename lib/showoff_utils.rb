@@ -282,6 +282,16 @@ class ShowOffUtils
     end
   end
 
+  def self.showoff_pdf_options(dir = '.')
+    index = File.join(dir, ShowOffUtils.presentation_config_file )
+    order = nil
+    if File.exists?(index)
+      data = JSON.parse(File.read(index))
+      data.is_a?(Hash) && data['pdf_options'] || {:page_size => 'Letter',
+                                                  :orientation => 'Landscape'}
+    end
+  end
+
   EXTENSIONS =  {
     'pl' => 'perl',
     'rb' => 'ruby',
