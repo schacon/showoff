@@ -21,13 +21,7 @@ rescue LoadError
   $stderr.puts 'pdf generation disabled - install pdfkit'
 end
 
-begin
-  require 'rdiscount'
-rescue LoadError
-  require 'bluecloth'
-  Object.send(:remove_const,:Markdown)
-  Markdown = BlueCloth
-end
+require 'tilt'
 
 class ShowOff < Sinatra::Application
 
@@ -212,7 +206,7 @@ class ShowOff < Sinatra::Application
         else
           content += "<div class=\"#{content_classes.join(' ')}\" ref=\"#{name}\">\n"
         end
-        sl = Markdown.new(slide.text).to_html
+        sl = Tilt[:markdown].new { slide.text }.render
         sl = update_image_paths(name, sl, static, pdf)
         content += sl
         content += "</div>\n"

@@ -21,10 +21,7 @@ context "ShowOff Utils tests" do
       ShowOffUtils.heroku('test')
       files = Dir.glob('**/*')
       content = File.read('Gemfile')
-      assert_match 'bluecloth', content
-      assert_match 'nokogiri', content
       assert_match 'showoff', content
-      assert_match 'gli', content
       assert_match 'heroku', content
     end
     assert files.include?('config.ru')

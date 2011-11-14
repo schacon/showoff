@@ -318,7 +318,7 @@ class ShowOffUtils
     EXTENSIONS[ext] || ext
   end
 
-  REQUIRED_GEMS = %w(bluecloth nokogiri showoff gli heroku)
+  REQUIRED_GEMS = %w(redcarpet showoff heroku)
 
   # Creates the file that lists the gems for heroku
   #
