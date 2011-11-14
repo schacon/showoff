@@ -35,7 +35,7 @@ class ShowOff < Sinatra::Application
   set :verbose, false
   set :pres_dir, '.'
   set :pres_file, 'showoff.json'
-  set :page_size, "Letter"
+  set :pdf_options, {}
   set :pres_template, nil
   set :showoff_config, nil
 
@@ -63,8 +63,10 @@ class ShowOff < Sinatra::Application
       showoff_json = JSON.parse(File.read(ShowOffUtils.presentation_config_file))
       settings.showoff_config = showoff_json
       
+      # load pdf options
+      settings.pdf_options = ShowOffUtils.pdf_options()
+
       # Set options for template and page size
-      settings.page_size = showoff_json["page-size"] || "Letter"
       settings.pres_template = showoff_json["templates"] 
     end
 
@@ -466,10 +468,7 @@ class ShowOff < Sinatra::Application
 
       # PDFKit.new takes the HTML and any options for wkhtmltopdf
       # run `wkhtmltopdf --extended-help` for a full list of options
-      kit = PDFKit.new(html, 
-                       :page_size => 'Letter', # This should be configurable
-                       :orientation => 'Landscape', 
-                       :print_media_type => true )
+      kit = PDFKit.new(html, ShowOffUtils.pdf_options)
 
       # Save the PDF to a file
       file = kit.to_file('/tmp/preso.pdf')

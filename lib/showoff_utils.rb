@@ -23,6 +23,21 @@ class ShowOffUtils
     result
   end
 
+  # Reads the options from the showoff configuration file if present
+  def self.pdf_options()
+    
+    options = {:page_size => "Letter", :orientation => "Landscape",
+      :print_media_type => true}
+
+    if File.exists?(ShowOffUtils.presentation_config_file)
+      showoff_json = JSON.parse(File.read(ShowOffUtils.presentation_config_file), :symbolize_names => true)
+        options.merge(showoff_json[:pdf_options] || {})
+    else
+      options
+    end
+  end
+
+
   def self.presentation_config_file
     @presentation_config_file ||= 'showoff.json'
   end

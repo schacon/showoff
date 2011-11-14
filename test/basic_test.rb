@@ -1,12 +1,27 @@
 require File.expand_path "../test_helper", __FILE__
 require 'pdf/inspector'
 
+context "ShowOff pdf tests" do
+
+    test "configure pdf options" do
+
+    ShowOffUtils.presentation_config_file = "test/fixtures/simple/showoff_pdf.json"
+    assert_equal "A4", ShowOffUtils.pdf_options[:page_size]
+    assert_equal false, ShowOffUtils.pdf_options[:print_media_type]
+    
+    ShowOffUtils.presentation_config_file = "test/fixtures/simple/showoff.json"
+    assert_equal "Letter", ShowOffUtils.pdf_options[:page_size]
+
+  end
+
+end
+
 context "ShowOff basic tests" do
 
   def app
     opt = {:verbose => false, :pres_dir => "test/fixtures/simple", :pres_file => 'showoff.json'}
     ShowOff.set opt
-    ShowOff.new
+    @showoff = ShowOff.new
   end
 
   setup do
