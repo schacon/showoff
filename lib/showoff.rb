@@ -21,13 +21,7 @@ rescue LoadError
   $stderr.puts 'pdf generation disabled - install pdfkit'
 end
 
-begin
-  require 'rdiscount'
-rescue LoadError
-  require 'bluecloth'
-  Object.send(:remove_const,:Markdown)
-  Markdown = BlueCloth
-end
+require 'tilt'
 
 class ShowOff < Sinatra::Application
 
@@ -36,32 +30,49 @@ class ShowOff < Sinatra::Application
   attr_reader :cached_image_size
 
   set :views, File.dirname(__FILE__) + '/../views'
-  set :public, File.dirname(__FILE__) + '/../public'
+  set :public_folder, File.dirname(__FILE__) + '/../public'
 
   set :verbose, false
   set :pres_dir, '.'
   set :pres_file, 'showoff.json'
+  set :pdf_options, {}
+  set :pres_template, nil
+  set :showoff_config, nil
 
   def initialize(app=nil)
     super(app)
     @logger = Logger.new(STDOUT)
     @logger.formatter = proc { |severity,datetime,progname,msg| "#{progname} #{msg}\n" }
-    @logger.level = options.verbose ? Logger::DEBUG : Logger::WARN
+    @logger.level = settings.verbose ? Logger::DEBUG : Logger::WARN
 
     dir = File.expand_path(File.join(File.dirname(__FILE__), '..'))
     @logger.debug(dir)
 
     showoff_dir = File.expand_path(File.join(File.dirname(__FILE__), '..'))
-    options.pres_dir ||= Dir.pwd
+    settings.pres_dir ||= Dir.pwd
     @root_path = "."
 
-    options.pres_dir = File.expand_path(options.pres_dir)
-    if (options.pres_file)
-      ShowOffUtils.presentation_config_file = options.pres_file
+    settings.pres_dir = File.expand_path(settings.pres_dir)
+    if (settings.pres_file)
+      ShowOffUtils.presentation_config_file = settings.pres_file
     end
+
+    # Load configuration for page size and template from the
+    # configuration JSON file
+    if File.exists?(ShowOffUtils.presentation_config_file)
+      showoff_json = JSON.parse(File.read(ShowOffUtils.presentation_config_file))
+      settings.showoff_config = showoff_json
+      
+      # load pdf options
+      settings.pdf_options = ShowOffUtils.pdf_options()
+
+      # Set options for template and page size
+      settings.pres_template = showoff_json["templates"] 
+    end
+
     @cached_image_size = {}
-    @logger.debug options.pres_dir
-    @pres_name = options.pres_dir.split('/').pop
+    @logger.debug settings.pres_dir
+    @pres_name = settings.pres_dir.split('/').pop
     require_ruby_files
   end
 
@@ -71,12 +82,12 @@ class ShowOff < Sinatra::Application
   end
 
   def require_ruby_files
-    Dir.glob("#{options.pres_dir}/*.rb").map { |path| require path }
+    Dir.glob("#{settings.pres_dir}/*.rb").map { |path| require path }
   end
 
   helpers do
     def load_section_files(section)
-      section = File.join(options.pres_dir, section)
+      section = File.join(settings.pres_dir, section)
       files = if File.directory? section
         Dir.glob("#{section}/**/*").sort
       else
@@ -87,23 +98,35 @@ class ShowOff < Sinatra::Application
     end
 
     def css_files
-      Dir.glob("#{options.pres_dir}/*.css").map { |path| File.basename(path) }
+      Dir.glob("#{settings.pres_dir}/*.css").map { |path| File.basename(path) }
     end
 
     def js_files
-      Dir.glob("#{options.pres_dir}/*.js").map { |path| File.basename(path) }
+      Dir.glob("#{settings.pres_dir}/*.js").map { |path| File.basename(path) }
     end
 
 
     def preshow_files
-      Dir.glob("#{options.pres_dir}/_preshow/*").map { |path| File.basename(path) }.to_json
+      Dir.glob("#{settings.pres_dir}/_preshow/*").map { |path| File.basename(path) }.to_json
     end
 
     # todo: move more behavior into this class
     class Slide
-      attr_reader :classes, :text
-      def initialize classes = ""
-        @classes = ["content"] + classes.strip.chomp('>').split
+      attr_reader :classes, :text, :tpl
+      def initialize( context = "")
+
+        @tpl = "default"
+        @classes = ["content"]
+
+        # Parse the context string for options and content classes
+        if context and context.match(/(\[(.*?)\])?(.*)/)
+
+          options = ShowOffUtils.parse_options($2)
+          @tpl = options["tpl"] if options["tpl"]
+          @classes += $3.strip.chomp('>').split if $3
+
+        end
+
         @text = ""
       end
       def <<(s)
@@ -131,7 +154,8 @@ class ShowOff < Sinatra::Application
       until lines.empty?
         line = lines.shift
         if line =~ /^<?!SLIDE(.*)>?/
-          slides << (slide = Slide.new($1))
+          ctx = $1 ? $1.strip : $1
+          slides << (slide = Slide.new(ctx))
         else
           slide << line
         end
@@ -144,6 +168,7 @@ class ShowOff < Sinatra::Application
         seq = 1
       end
       slides.each do |slide|
+        @slide_count += 1
         md = ''
         content_classes = slide.classes
 
@@ -156,26 +181,69 @@ class ShowOff < Sinatra::Application
         @logger.debug "id: #{id}" if id
         @logger.debug "classes: #{content_classes.inspect}"
         @logger.debug "transition: #{transition}"
+        @logger.debug "tpl: #{slide.tpl} " if slide.tpl
         # create html
         md += "<div"
         md += " id=\"#{id}\"" if id
         md += " class=\"slide\" data-transition=\"#{transition}\">"
-        if seq
-          md += "<div class=\"#{content_classes.join(' ')}\" ref=\"#{name}/#{seq.to_s}\">\n"
-          seq += 1
-        else
-          md += "<div class=\"#{content_classes.join(' ')}\" ref=\"#{name}\">\n"
+
+
+        template = "~~~CONTENT~~~"
+        # Template handling
+        if settings.pres_template
+          # We allow specifying a new template even when default is
+          # not given.
+          if settings.pres_template.include?(slide.tpl) and
+              File.exists?(settings.pres_template[slide.tpl])
+            template = File.open(settings.pres_template[slide.tpl], "r").read()
+          end
         end
-        sl = Markdown.new(slide.text).to_html
+
+        # Extract the content of the slide
+        content = ""
+        if seq
+          content += "<div class=\"#{content_classes.join(' ')}\" ref=\"#{name}/#{seq.to_s}\">\n"
+        else
+          content += "<div class=\"#{content_classes.join(' ')}\" ref=\"#{name}\">\n"
+        end
+        sl = Tilt[:markdown].new { slide.text }.render
         sl = update_image_paths(name, sl, static, pdf)
-        md += sl
-        md += "</div>\n"
+        content += sl
+        content += "</div>\n"
+
+        # Apply the template to the slide and replace the key with
+        # content of the slide
+        md += process_content_for_replacements(template.gsub(/~~~CONTENT~~~/, content), @slide_count)
+
+        # Apply other configuration
+
         md += "</div>\n"
         final += update_commandline_code(md)
         final = update_p_classes(final)
+
+        if seq
+          seq += 1
+        end
       end
       final
     end
+
+    # This method processes the content of the slide and replaces
+    # content markers with their actual value information
+    def process_content_for_replacements(content, seq)
+      result = content.gsub("~~~CURRENT_SLIDE~~~", seq.to_s)
+      # Now check for any kind of options
+      content.scan(/(~~~CONFIG:(.*?)~~~)/).each do |match|
+        result.gsub!(match[0], settings.showoff_config[match[1]]) if settings.showoff_config.key?(match[1])
+      end
+
+      result
+    end
+
+    def process_content_for_all_slides(content, num_slides)
+      content.gsub("~~~NUM_SLIDES~~~", num_slides.to_s)
+    end
+    
 
     # find any lines that start with a <p>.(something) and turn them into <p class="something">
     def update_p_classes(markdown)
@@ -187,7 +255,7 @@ class ShowOff < Sinatra::Application
       paths.pop
       path = paths.join('/')
       replacement_prefix = static ?
-        ( pdf ? %(img src="file://#{options.pres_dir}/#{path}) : %(img src="./file/#{path}) ) :
+        ( pdf ? %(img src="file://#{settings.pres_dir}/#{path}) : %(img src="./file/#{path}) ) :
         %(img src="/image/#{path})
       slide.gsub(/img src=\"([^\/].*?)\"/) do |s|
         img_path = File.join(path, $1)
@@ -265,7 +333,8 @@ class ShowOff < Sinatra::Application
     end
 
     def get_slides_html(static=false, pdf=false)
-      sections = ShowOffUtils.showoff_sections(options.pres_dir, @logger)
+      @slide_count = 0
+      sections = ShowOffUtils.showoff_sections(settings.pres_dir, @logger)
       files = []
       if sections
         data = ''
@@ -279,13 +348,13 @@ class ShowOff < Sinatra::Application
             files = files.flatten
             files = files.select { |f| f =~ /.md$/ }
             files.each do |f|
-              fname = f.gsub(options.pres_dir + '/', '').gsub('.md', '')
+              fname = f.gsub(settings.pres_dir + '/', '').gsub('.md', '')
               data << process_markdown(fname, File.read(f), static, pdf)
             end
           end
         end
       end
-      data
+      process_content_for_all_slides(data, @slide_count)
     end
 
     def inline_css(csses, pre = nil)
@@ -294,7 +363,7 @@ class ShowOff < Sinatra::Application
         if pre
           css_file = File.join(File.dirname(__FILE__), '..', pre, css_file)
         else
-          css_file = File.join(options.pres_dir, css_file)
+          css_file = File.join(settings.pres_dir, css_file)
         end
         css_content += File.read(css_file)
       end
@@ -308,7 +377,7 @@ class ShowOff < Sinatra::Application
         if pre
           js_file = File.join(File.dirname(__FILE__), '..', pre, js_file)
         else
-          js_file = File.join(options.pres_dir, js_file)
+          js_file = File.join(settings.pres_dir, js_file)
         end
         js_content += File.read(js_file)
       end
@@ -324,6 +393,11 @@ class ShowOff < Sinatra::Application
       if static
         @title = ShowOffUtils.showoff_title
         @slides = get_slides_html(static)
+
+        # Identify which languages to bundle for highlighting
+        @languages = []
+        @languages += @slides.scan(/<pre class="(sh_.*?\w)"/).uniq.map{ |w| "sh_lang/#{w[0]}.min.js"}
+
         @asset_path = "./"
       end
       erb :index
@@ -361,10 +435,10 @@ class ShowOff < Sinatra::Application
         assets << href if href
       end
 
-      css = Dir.glob("#{options.public}/**/*.css").map { |path| path.gsub(options.public + '/', '') }
+      css = Dir.glob("#{settings.public_folder}/**/*.css").map { |path| path.gsub(settings.public_folder + '/', '') }
       assets << css
 
-      js = Dir.glob("#{options.public}/**/*.js").map { |path| path.gsub(options.public + '/', '') }
+      js = Dir.glob("#{settings.public_folder}/**/*.js").map { |path| path.gsub(settings.public_folder + '/', '') }
       assets << js
 
       assets.uniq.join("\n")
@@ -382,12 +456,25 @@ class ShowOff < Sinatra::Application
     def pdf(static=true)
       @slides = get_slides_html(static, true)
       @no_js = false
+
+      # Identify which languages to bundle for highlighting
+      @languages = []
+      @languages += @slides.scan(/<pre class="(sh_.*?\w)"/).uniq.map{ |w| "/sh_lang/#{w[0]}.min.js"}
+
       html = erb :onepage
       # TODO make a random filename
 
+      # Process inline css and js for included images 
+      # The css uses relative paths for images and we prepend the file url
+      html.gsub!(/url\(([^\/].*?)\)/) do |s|
+        "url(file://#{settings.pres_dir}/#{$1})"
+      end
+
+      # Todo fix javascript path
+
       # PDFKit.new takes the HTML and any options for wkhtmltopdf
       # run `wkhtmltopdf --extended-help` for a full list of options
-      kit = PDFKit.new(html, :page_size => 'Letter', :orientation => 'Landscape')
+      kit = PDFKit.new(html, ShowOffUtils.pdf_options)
 
       # Save the PDF to a file
       file = kit.to_file('/tmp/preso.pdf')
@@ -406,7 +493,10 @@ class ShowOff < Sinatra::Application
       end
       name = showoff.instance_variable_get(:@pres_name)
       path = showoff.instance_variable_get(:@root_path)
+      logger = showoff.instance_variable_get(:@logger)
+
       data = showoff.send(what, true)
+
       if data.is_a?(File)
         FileUtils.cp(data.path, "#{name}.pdf")
       else
@@ -433,7 +523,7 @@ class ShowOff < Sinatra::Application
         # Set up file dir
         file_dir = File.join(out, 'file')
         FileUtils.makedirs(file_dir)
-        pres_dir = showoff.options.pres_dir
+        pres_dir = showoff.settings.pres_dir
 
         # ..., copy all user-defined styles and javascript files
         Dir.glob("#{pres_dir}/*.{css,js}").each { |path|
@@ -451,7 +541,7 @@ class ShowOff < Sinatra::Application
           File.open(css_path) do |file|
             data = file.read
             data.scan(/url\((.*)\)/).flatten.each do |path|
-              @logger.debug path
+              logger.debug path
               dir = File.dirname(path)
               FileUtils.makedirs(File.join(file_dir, dir))
               FileUtils.copy(File.join(pres_dir, path), File.join(file_dir, path))
@@ -475,7 +565,7 @@ class ShowOff < Sinatra::Application
 
   get %r{(?:image|file)/(.*)} do
     path = params[:captures].first
-    full_path = File.join(options.pres_dir, path)
+    full_path = File.join(settings.pres_dir, path)
     send_file full_path
   end
 
@@ -483,6 +573,7 @@ class ShowOff < Sinatra::Application
     @title = ShowOffUtils.showoff_title
     what = params[:captures].first
     what = 'index' if "" == what
+
     if (what != "favicon.ico")
       data = send(what)
       if data.is_a?(File)

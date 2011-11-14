@@ -368,7 +368,7 @@ a.fg-button { float:left; }
   }
 
   .slide .center {
-    width: 600px;
+    width: 800px;
     height: 600px;
     display: table-cell;
     text-align: center;
@@ -377,7 +377,7 @@ a.fg-button { float:left; }
 
   #preso, .slide {
       background: #fff;
-      width: 600px;
+      width: 800px;
       height: 600px;
       margin-left:auto;
       margin-right:auto;

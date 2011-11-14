@@ -1,4 +1,43 @@
 class ShowOffUtils
+
+  # Helper method to parse a comma separated options string and stores
+  # the result in a dictionrary
+  #
+  # Example:
+  # 
+  #    "tpl=hpi,title=Over the rainbow"
+  #
+  #    will be stored as
+  #
+  #      { "tpl" => "hpi", "title" => "Over the rainbow" }
+  def self.parse_options(option_string="")
+    result = {}
+
+    if option_string 
+      option_string.split(",").each do |element|
+        pair = element.split("=")
+        result[pair[0]] = pair.size > 1 ? pair[1] : nil
+      end
+    end
+
+    result
+  end
+
+  # Reads the options from the showoff configuration file if present
+  def self.pdf_options()
+    
+    options = {:page_size => "Letter", :orientation => "Landscape",
+      :print_media_type => true}
+
+    if File.exists?(ShowOffUtils.presentation_config_file)
+      showoff_json = JSON.parse(File.read(ShowOffUtils.presentation_config_file), :symbolize_names => true)
+        options.merge(showoff_json[:pdf_options] || {})
+    else
+      options
+    end
+  end
+
+
   def self.presentation_config_file
     @presentation_config_file ||= 'showoff.json'
   end
@@ -294,7 +333,7 @@ class ShowOffUtils
     EXTENSIONS[ext] || ext
   end
 
-  REQUIRED_GEMS = %w(bluecloth nokogiri showoff gli heroku)
+  REQUIRED_GEMS = %w(redcarpet showoff heroku)
 
   # Creates the file that lists the gems for heroku
   #

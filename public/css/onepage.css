@@ -9,6 +9,7 @@
       margin-left:auto; 
       margin-right:auto;
       overflow:hidden;
+      position: relative;
       border: 1px solid #333;
       page-break-after: always
   }
@@ -23,6 +24,7 @@
       height: 600px;
       overflow:hidden;
       border: none;
+      position: relative;
       page-break-after: always
   }
 }

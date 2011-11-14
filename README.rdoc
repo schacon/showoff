@@ -84,7 +84,23 @@ the following contents:
 
 That represents two slides, the first contains just a large title, and the
 second is faded into view showing the title and three bullets that are then
-incrementally shown. In order for ShowOff to see those slides, your
+incrementally shown. In addition you can configure a certain template for 
+this slide overriding the default one:
+
+     !SLIDE[tpl=title]
+
+     # My Presentation #
+
+     !SLIDE bullets incremental
+
+     # Bullet Points #
+
+     * first point
+     * second point
+     * third point
+
+
+In order for ShowOff to see those slides, your
 <tt>showoff.json</tt> file needs to look something like this:
 
     {
@@ -95,19 +111,20 @@ incrementally shown. In order for ShowOff to see those slides, your
       ]
     }
 
-If you have multiple sections in your talk, you can make this json array
-include all the sections you want to show in which order you want to show
-them.
+If you have multiple sections in your talk, you can make this json
+array include all the sections you want to show in which order you
+want to show them. Template configuration is done in
+<tt>showoff.json</tt> as well. 
 
-Instead of a hash, you can use a plain string as an entry in the `sections`
-section of `showoff.json`.
 
-And if that plain string starts with '#' then it is interpreted not as a
-filename, but as markdown. This is used for inserting interstitial slides
-or notes -- for instance, Alex Chaffee's
-[Ruby Notes](http://github.com/alexch/ruby_notes)
-uses it to insert lab instructions between lecture slide sections, which may
-vary from venue to venue.
+Instead of a hash, you can use a plain string as an entry in the
+`sections` section of `showoff.json`. And if that plain string starts
+with '#' then it is interpreted not as a filename, but as
+markdown. This is used for inserting interstitial slides or notes --
+for instance, Alex Chaffee's [Ruby
+Notes](http://github.com/alexch/ruby_notes) uses it to insert lab
+instructions between lecture slide sections, which may vary from venue
+to venue.
 
 If you want to keep the ability to emit an HTML document from your
 Markdown source file -- say, for a TextMate preview or a GitHub rendering
@@ -445,6 +462,62 @@ You'll then need to install a version of wkhtmltopdf available at the {wkhtmltop
 
 
 Then restart showoff, and navigate to <tt>/pdf</tt> (e.g. http://localhost/pdf) of your presentation and a PDF will be generated with the browser.
+
+= ShowOff Templates
+
+Templates can come handy if you need more than what you can achieve
+via CSS. To configure templates you'll have to specify them in the
+<tt>showoff.json</tt> by adding an entry called "templates". This
+entry is an object where you can specify as many templates as you
+want. The default template is marked with the "default" key.
+
+     {
+      "name": "Something",
+      "description": "Example Presentation",
+      "templates" : {
+          "default" : "tpl1.tpl",
+	  "special" : "tpl2.tpl"
+      },    
+      "sections": [
+        {"section":"one"}
+      ]
+    }
+
+If the "default" key is not given, no template will be used for the
+default slide. If you want to apply a certain layout to a slide you
+have to specify it in the slide header:
+
+     !SLIDE[tpl=special]
+     # Header
+
+== Template Commands
+
+You can place content anywhere in your template, but you have to
+explicitly mark the location using a special command:
+
+[~~~CONTENT~~~] is replaced by the slide content
+
+[~~~CURRENT_SLIDE~~~] is replaced by the current slide number
+
+[~~~NUM_SLIDES~~~] is replaced by the total number of slides
+
+[~~~CONFIG:*~~~] is replaced by any value (*) from the
+                 <tt>showoff.json</tt> configuration. This can be used to 
+		 specify an author, venue etc. A simple example would be
+		 <tt>~~~CONFIG:author~~~</tt>
+
+
+The usage of these replacements is not limited to templates, but
+anywhere in your slides. 
+
+== Template Hints
+
+You can basically put everything you want into templates, but you
+should make sure that the CSS is applied fine. The best way to apply a
+custom layout is to create a container that uses absolute positioning
+and has width and height set to 100% which are then derived from the
+parent slide element.
+
 
 = Completion
 
