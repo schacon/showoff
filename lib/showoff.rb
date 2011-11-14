@@ -168,6 +168,7 @@ class ShowOff < Sinatra::Application
         seq = 1
       end
       slides.each do |slide|
+        @slide_count += 1
         md = ''
         content_classes = slide.classes
 
@@ -212,7 +213,7 @@ class ShowOff < Sinatra::Application
 
         # Apply the template to the slide and replace the key with
         # content of the slide
-        md += process_content_for_replacements(template.gsub(/~~~CONTENT~~~/, content), seq, slides.size)
+        md += process_content_for_replacements(template.gsub(/~~~CONTENT~~~/, content), @slide_count)
 
         # Apply other configuration
 
@@ -220,23 +221,27 @@ class ShowOff < Sinatra::Application
         final += update_commandline_code(md)
         final = update_p_classes(final)
 
-        seq += 1
+        if seq
+          seq += 1
+        end
       end
       final
     end
 
     # This method processes the content of the slide and replaces
     # content markers with their actual value information
-    def process_content_for_replacements(content, seq, num)
-      result = content.gsub("~~~CURRENT_SLIDE~~~", seq.to_s).
-        gsub("~~~NUM_SLIDES~~~", num.to_s)
-
+    def process_content_for_replacements(content, seq)
+      result = content.gsub("~~~CURRENT_SLIDE~~~", seq.to_s)
       # Now check for any kind of options
       content.scan(/(~~~CONFIG:(.*?)~~~)/).each do |match|
         result.gsub!(match[0], settings.showoff_config[match[1]]) if settings.showoff_config.key?(match[1])
       end
 
       result
+    end
+
+    def process_content_for_all_slides(content, num_slides)
+      content.gsub("~~~NUM_SLIDES~~~", num_slides.to_s)
     end
     
 
@@ -328,6 +333,7 @@ class ShowOff < Sinatra::Application
     end
 
     def get_slides_html(static=false, pdf=false)
+      @slide_count = 0
       sections = ShowOffUtils.showoff_sections(settings.pres_dir, @logger)
       files = []
       if sections
@@ -348,7 +354,7 @@ class ShowOff < Sinatra::Application
           end
         end
       end
-      data
+      process_content_for_all_slides(data, @slide_count)
     end
 
     def inline_css(csses, pre = nil)

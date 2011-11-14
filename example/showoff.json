@@ -1,9 +1,14 @@
 {
   "name": "Something",
   "description": "Example Presentation",
+  "author": "Foo Bar John",
+  "templates" : {
+      "special" : "simple.tpl"
+  },
   "sections": [
     {"section":"one"},
     {"section":"two"},
-    {"section":"three"}
+    {"section":"three"},
+    {"section":"four"}
   ]
 }
