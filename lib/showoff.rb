@@ -185,7 +185,7 @@ class ShowOff < Sinatra::Application
         md += " class=\"slide\" data-transition=\"#{transition}\">"
 
 
-        template = "###CONTENT###"
+        template = "~~~CONTENT~~~"
         # Template handling
         if settings.pres_template
           # We allow specifying a new template even when default is
@@ -568,6 +568,7 @@ class ShowOff < Sinatra::Application
     @title = ShowOffUtils.showoff_title
     what = params[:captures].first
     what = 'index' if "" == what
+
     if (what != "favicon.ico")
       data = send(what)
       if data.is_a?(File)
