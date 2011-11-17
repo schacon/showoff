@@ -4,7 +4,7 @@ require 'parslet'
 class CommandlineParser < Parslet::Parser
 
   rule(:prompt) do
-    str('$') | str('#')
+    str('$') | str('#') | str('>>')
   end
 
   rule(:text) do
