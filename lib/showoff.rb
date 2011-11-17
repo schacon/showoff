@@ -186,7 +186,7 @@ class ShowOff < Sinatra::Application
       path = paths.join('/')
       replacement_prefix = static ?
         ( pdf ? %(img src="file://#{options.pres_dir}/#{path}) : %(img src="./file/#{path}) ) :
-        %(img src="/image/#{path})
+        %(img src="#{@asset_path}image/#{path})
       slide.gsub(/img src=\"([^\/].*?)\"/) do |s|
         img_path = File.join(path, $1)
         w, h     = get_image_size(img_path)
@@ -201,7 +201,7 @@ class ShowOff < Sinatra::Application
     if defined?(Magick)
       def get_image_size(path)
         if !cached_image_size.key?(path)
-          img = Magick::Image.ping(path).first
+          img = Magick::Image.ping(File.join(@asset_path, path)).first
           # don't set a size for svgs so they can expand to fit their container
           if img.mime_type == 'image/svg+xml'
             cached_image_size[path] = [nil, nil]
@@ -481,6 +481,7 @@ class ShowOff < Sinatra::Application
     @title = ShowOffUtils.showoff_title
     what = params[:captures].first
     what = 'index' if "" == what
+    @asset_path = (env['SCRIPT_NAME'] || '').gsub(/\/?$/, '/').gsub(/^\//, '')
     if (what != "favicon.ico")
       data = send(what)
       if data.is_a?(File)

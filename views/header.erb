@@ -26,11 +26,11 @@
   <link type="text/css" href="<%= @asset_path %>css/sh_style.css" rel="stylesheet" >
 
   <% css_files.each do |css_file| %>
-    <link rel="stylesheet" href="file/<%= css_file %>" type="text/css"/>
+    <link rel="stylesheet" href="<%= @asset_path %>file/<%= css_file %>" type="text/css"/>
   <% end %>
 
   <% js_files.each do |js_file| %>
-    <script type="text/javascript" src="file/<%= js_file %>"></script>
+    <script type="text/javascript" src="<%= @asset_path %>file/<%= js_file %>"></script>
   <% end %>
 
   <script type="text/javascript">
