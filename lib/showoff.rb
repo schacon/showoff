@@ -404,6 +404,7 @@ class ShowOff < Sinatra::Application
       end
       name = showoff.instance_variable_get(:@pres_name)
       path = showoff.instance_variable_get(:@root_path)
+      logger = showoff.instance_variable_get(:@logger)
       data = showoff.send(what, true)
       if data.is_a?(File)
         FileUtils.cp(data.path, "#{name}.pdf")
@@ -449,7 +450,7 @@ class ShowOff < Sinatra::Application
           File.open(css_path) do |file|
             data = file.read
             data.scan(/url\((.*)\)/).flatten.each do |path|
-              @logger.debug path
+              logger.debug path
               dir = File.dirname(path)
               FileUtils.makedirs(File.join(file_dir, dir))
               FileUtils.copy(File.join(pres_dir, path), File.join(file_dir, path))
