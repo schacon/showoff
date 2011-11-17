@@ -335,6 +335,10 @@ a.fg-button { float:left; }
   background-color: yellow;
 }
 
+.executing:hover {
+  cursor: pointer;
+}
+
 #tips, #preshow_timer {
   display:inline;
   background-color:#000;
