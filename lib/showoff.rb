@@ -31,8 +31,6 @@ end
 
 class ShowOff < Sinatra::Application
 
-  Version = VERSION = '0.7.0'
-
   attr_reader :cached_image_size
 
   set :views, File.dirname(__FILE__) + '/../views'

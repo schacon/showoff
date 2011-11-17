@@ -204,6 +204,7 @@ custom event:
 
 * *showoff:show* will be triggered as soon as you enter a page
 * *showoff:next* will be triggered when you switch to the next page
+* *showoff:incr* will be triggered when you advance to the next increment on the page
 * *showoff:prev* will be triggered when you switch to the previous page
 
 These events are triggered on the "div.content" child of the slide, so you must

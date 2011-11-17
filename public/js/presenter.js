@@ -2,7 +2,7 @@
 var w = null;
 
 $(function(){
-	w = window.open('/');
+	w = window.open('/' + window.location.search);
   // side menu accordian crap
 	$("#preso").bind("showoff:loaded", function (event) {
 		$(".menu > ul ul").hide()

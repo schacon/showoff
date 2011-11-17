@@ -252,6 +252,16 @@ function determineIncremental()
 	})
 }
 
+function showIncremental(incr)
+{
+		elem = incrElem.eq(incrCurr)
+		if (incrCode && elem.hasClass('command')) {
+			incrElem.eq(incrCurr).css('visibility', 'visible').jTypeWriter({duration:1.0})
+		} else {
+			incrElem.eq(incrCurr).css('visibility', 'visible')
+		}
+}
+
 function prevStep()
 {
 
@@ -277,13 +287,12 @@ function nextStep()
 		slidenum++
 		return showSlide()
 	} else {
-		elem = incrElem.eq(incrCurr)
-		if (incrCode && elem.hasClass('command')) {
-			incrElem.eq(incrCurr).css('visibility', 'visible').jTypeWriter({duration:1.0})
-		} else {
-			incrElem.eq(incrCurr).css('visibility', 'visible')
-		}
-		incrCurr++
+		showIncremental(incrCurr);
+		var incrEvent = jQuery.Event("showoff:incr");
+		incrEvent.slidenum = slidenum;
+		incrEvent.incr = incrCurr;
+		$(currentSlide).find(".content").trigger(incrEvent);
+		incrCurr++;
 	}
 }
 
