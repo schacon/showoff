@@ -17,8 +17,8 @@ Gem::Specification.new do |s|
   s.files            += Dir.glob("bin/**/*")
   s.files            += Dir.glob("views/**/*")
   s.files            += Dir.glob("public/**/*")
-  s.add_dependency      "sinatra"
-  s.add_dependency      "bluecloth"
+  s.add_dependency      "sinatra", "~> 1.3"
+  s.add_dependency      "redcarpet"
   s.add_dependency      "nokogiri"
   s.add_dependency      "json"
   s.add_dependency("gli",">= 1.3.2")
