@@ -2,12 +2,13 @@
 
 $LOAD_PATH.unshift File.join(File.dirname(__FILE__), '..', 'lib')
 require 'showoff'
+require 'showoff/version' 
 require 'rubygems'
 require 'gli'
 
 include GLI
 
-version ShowOff::Version 
+version SHOWOFF_VERSION
 
 desc 'Create new showoff presentation'
 arg_name 'dir_name'

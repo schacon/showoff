@@ -293,6 +293,8 @@ class ShowOffUtils
           data[option] || default
         end
       end
+    else
+      default
     end
   end
 

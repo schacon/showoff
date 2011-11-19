@@ -34,7 +34,7 @@ class ShowOff < Sinatra::Application
   attr_reader :cached_image_size
 
   set :views, File.dirname(__FILE__) + '/../views'
-  set :public, File.dirname(__FILE__) + '/../public'
+  set :public_folder, File.dirname(__FILE__) + '/../public'
 
   set :verbose, false
   set :pres_dir, '.'
@@ -61,6 +61,9 @@ class ShowOff < Sinatra::Application
     @logger.debug options.pres_dir
     @pres_name = options.pres_dir.split('/').pop
     require_ruby_files
+
+    # Default asset path
+    @asset_path = "./"
   end
 
   def self.pres_dir_current
@@ -359,10 +362,10 @@ class ShowOff < Sinatra::Application
         assets << href if href
       end
 
-      css = Dir.glob("#{options.public}/**/*.css").map { |path| path.gsub(options.public + '/', '') }
+      css = Dir.glob("#{options.public_folder}/**/*.css").map { |path| path.gsub(options.public_folder + '/', '') }
       assets << css
 
-      js = Dir.glob("#{options.public}/**/*.js").map { |path| path.gsub(options.public + '/', '') }
+      js = Dir.glob("#{options.public_folder}/**/*.js").map { |path| path.gsub(options.public_folder + '/', '') }
       assets << js
 
       assets.uniq.join("\n")
