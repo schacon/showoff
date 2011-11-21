@@ -447,6 +447,42 @@ You'll then need to install a version of wkhtmltopdf available at the {wkhtmltop
 
 Then restart showoff, and navigate to <tt>/pdf</tt> (e.g. http://localhost/pdf) of your presentation and a PDF will be generated with the browser.
 
+= Misc
+
+== Markdown Engine
+
+It is possible to configure the markdown engine of your choice to use
+with showoff. This allows you to use special features of the different
+engines.
+
+=== Maruku
+
+When you prefer using Maruku as the markdown engine of choice for your
+presentation, you can use the Latex Math Mode features of
+maruku. First you need
+{BlahTex}[http://www.mediawiki.org/wiki/Extension:Blahtex] and then
+you need to configure your presentation as following:
+
+    { /* other config */,
+     "markdown" : "maruku",
+     "maruku" : {
+     	      "use_tex" : true,
+	      "png_dir" : "images", /*optional*/
+	      "html_png_url" : "/file/images/" /*optional*/
+       }
+     }
+
+
+=== Other Engines
+
+The following engines are preconfigured
+
+* redcarpet (default)
+* bluecloth
+* maruku
+* rdiscount
+
+
 = Completion
 
 == ZSH completion

@@ -1,0 +1,7 @@
+{ "name": "My Preso", 
+  "sections": [ {"section":"one"} ],
+  "markdown" : "maruku",
+  "maruku" : {
+      "use_tex" : true
+  }
+}
