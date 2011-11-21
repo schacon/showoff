@@ -288,7 +288,7 @@ class ShowOffUtils
       data = JSON.parse(File.read(index))
       if data.is_a?(Hash)
         if default.is_a?(Hash)
-          default.merge(data[option])
+          default.merge(data[option] || default)
         else
           data[option] || default
         end
