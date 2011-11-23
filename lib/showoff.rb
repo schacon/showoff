@@ -33,6 +33,7 @@ class ShowOff < Sinatra::Application
   set :verbose, false
   set :pres_dir, '.'
   set :pres_file, 'showoff.json'
+  set :split, false
 
   def initialize(app=nil)
     super(app)
@@ -89,13 +90,44 @@ class ShowOff < Sinatra::Application
       Dir.glob("#{settings.pres_dir}/*.js").map { |path| File.basename(path) }
     end
 
-
     def preshow_files
       Dir.glob("#{settings.pres_dir}/_preshow/*").map { |path| File.basename(path) }.to_json
     end
 
-    # todo: move more behavior into this class
     class Slide
+
+      # given a chunk of Markdown text, splits it into an array of Slide objects
+      def self.split content, options = {}
+        split_all_the_h1s = options[:split_all_the_h1s]
+        unless content =~ /^\<?!SLIDE/m
+          content = content.gsub(/^# /m, "<!SLIDE>\n# ")
+        end
+
+        lines = content.split("\n")
+        slides = []
+        slides << (slide = Slide.new)
+        until lines.empty?
+          line = lines.shift
+          if line =~ /^<?!SLIDE(.*)>?/
+            slides << (slide = Slide.new($1))
+
+          elsif split_all_the_h1s and line =~ /^# / and !slide.empty?
+            # every H1 defines a new slide, unless there's a !SLIDE before it
+            slides << (slide = Slide.new())
+            slide << line
+
+          else
+            slide << line
+          end
+        end
+
+        slides.delete_if {|slide| slide.empty? }
+
+        slides
+      end
+
+      ####
+
       attr_reader :classes, :text
       def initialize classes = ""
         @classes = ["content"] + classes.strip.chomp('>').split
@@ -110,29 +142,11 @@ class ShowOff < Sinatra::Application
       end
     end
 
-
     def process_markdown(name, content, static=false, pdf=false)
-
-      # if there are no !SLIDE markers, then make every H1 define a new slide
-      unless content =~ /^\<?!SLIDE/m
-        content = content.gsub(/^# /m, "<!SLIDE>\n# ")
-      end
-
-      # todo: unit test
       lines = content.split("\n")
       @logger.debug "#{name}: #{lines.length} lines"
-      slides = []
-      slides << (slide = Slide.new)
-      until lines.empty?
-        line = lines.shift
-        if line =~ /^<?!SLIDE(.*)>?/
-          slides << (slide = Slide.new($1))
-        else
-          slide << line
-        end
-      end
 
-      slides.delete_if {|slide| slide.empty? }
+      slides = Slide.split content, :split_all_the_h1s => settings.split
 
       final = ''
       if slides.size > 1

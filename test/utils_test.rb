@@ -44,7 +44,11 @@ context "ShowOff Utils tests" do
       content = File.read('static/index.html')
       assert_match 'My Presentation', content
       assert_equal 2, content.scan(/div class="slide"/).size
-      assert_match 'img src="./file/one/chacon.jpg" width="300" height="300" alt="chacon"', content
+      if Object.const_defined? :RMagick
+        assert_match 'img src="./file/one/chacon.jpg" width="300" height="300" alt="chacon"', content
+      else
+        assert_match 'img src="./file/one/chacon.jpg" alt="chacon"', content
+      end
     end
   end
 
@@ -57,7 +61,11 @@ context "ShowOff Utils tests" do
       content = `git cat-file -p gh-pages:index.html`
       assert_match 'My Presentation', content
       assert_equal 2, content.scan(/div class="slide"/).size
-      assert_match 'img src="./file/one/chacon.jpg" width="300" height="300" alt="chacon"', content
+      if Object.const_defined? :RMagick
+        assert_match 'img src="./file/one/chacon.jpg" width="300" height="300" alt="chacon"', content
+      else
+        assert_match 'img src="./file/one/chacon.jpg" alt="chacon"', content
+      end
     end
   end
 
