@@ -259,6 +259,14 @@ class ShowOff < Sinatra::Application
       html.root.to_s
     end
 
+    def slide_subsection
+      if RUBY_VERSION >= "1.9"
+        "<!SLIDE subsection>\n".force_encoding("UTF-8") + section
+      else
+        "<!SLIDE subsection>\n" + section
+      end
+    end
+
     def get_slides_html(static=false, pdf=false)
       sections = ShowOffUtils.showoff_sections(settings.pres_dir, @logger)
       files = []
@@ -267,7 +275,7 @@ class ShowOff < Sinatra::Application
         sections.each do |section|
           if section =~ /^#/
             name = section.each_line.first.gsub(/^#*/,'').strip
-            data << process_markdown(name, "<!SLIDE subsection>\n".force_encoding("UTF-8") + section, static, pdf)
+            data << process_markdown(name, slide_subsection, static, pdf)
           else
             files = []
             files << load_section_files(section)
