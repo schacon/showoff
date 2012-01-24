@@ -260,11 +260,7 @@ class ShowOff < Sinatra::Application
     end
 
     def slide_subsection
-      if RUBY_VERSION >= "1.9"
-        "<!SLIDE subsection>\n".force_encoding("UTF-8") + section
-      else
-        "<!SLIDE subsection>\n" + section
-      end
+      RUBY_VERSION >= "1.9" ? "<!SLIDE subsection>\n".force_encoding("UTF-8") : "<!SLIDE subsection>\n"
     end
 
     def get_slides_html(static=false, pdf=false)
@@ -275,7 +271,7 @@ class ShowOff < Sinatra::Application
         sections.each do |section|
           if section =~ /^#/
             name = section.each_line.first.gsub(/^#*/,'').strip
-            data << process_markdown(name, slide_subsection, static, pdf)
+            data << process_markdown(name, slide_subsection + section, static, pdf)
           else
             files = []
             files << load_section_files(section)
