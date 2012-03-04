@@ -1,5 +1,4 @@
 function setupOnePage() {
-  sh_highlightDocument('/js/sh_lang/', '.min.js')
-  
+  sh_highlightDocument();
   centerSlides($("#slides > .slide"))
 }

@@ -28,6 +28,8 @@ function setupPreso(load_slides, prefix) {
 	}
 	preso_started = true
 
+
+        // Load slides fetches images
 	loadSlidesBool = load_slides
 	loadSlidesPrefix = prefix
 	loadSlides(loadSlidesBool, loadSlidesPrefix)
@@ -64,7 +66,7 @@ function loadSlides(load_slides, prefix) {
 
 function initializePresentation(prefix) {
 	// unhide for height to work in static mode
-  $("#slides").show();
+        $("#slides").show();
 
 	//center slides offscreen
 	centerSlides($('#slides > .slide'))
@@ -90,7 +92,11 @@ function initializePresentation(prefix) {
 		slidesLoaded = true
 	}
 	setupSlideParamsCheck();
-	sh_highlightDocument(prefix+'/js/sh_lang/', '.min.js')
+        try {
+	    sh_highlightDocument(prefix+'/js/sh_lang/', '.min.js')
+	} catch(e) {
+	    sh_highlightDocument();
+	}
 	$("#preso").trigger("showoff:loaded");
 }
 
@@ -101,7 +107,7 @@ function centerSlides(slides) {
 }
 
 function centerSlide(slide) {
-	var slide_content = $(slide).children(".content").first()
+	var slide_content = $(slide).find(".content").first()
 	var height = slide_content.height()
 	var mar_top = (0.5 * parseFloat($(slide).height())) - (0.5 * parseFloat(height))
 	if (mar_top < 0) {
@@ -117,7 +123,7 @@ function setupMenu() {
 	var menu = new ListMenu()
 
 	slides.each(function(s, elem) {
-		content = $(elem).children(".content")
+		content = $(elem).find(".content")
 		shortTxt = $(content).text().substr(0, 20)
 		path = $(content).attr('ref').split('/')
 		currSlide += 1

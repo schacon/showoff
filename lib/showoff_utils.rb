@@ -1,4 +1,28 @@
 class ShowOffUtils
+
+  # Helper method to parse a comma separated options string and stores
+  # the result in a dictionrary
+  #
+  # Example:
+  # 
+  #    "tpl=hpi,title=Over the rainbow"
+  #
+  #    will be stored as
+  #
+  #      { "tpl" => "hpi", "title" => "Over the rainbow" }
+  def self.parse_options(option_string="")
+    result = {}
+
+    if option_string 
+      option_string.split(",").each do |element|
+        pair = element.split("=")
+        result[pair[0]] = pair.size > 1 ? pair[1] : nil
+      end
+    end
+
+    result
+  end
+
   def self.presentation_config_file
     @presentation_config_file ||= 'showoff.json'
   end

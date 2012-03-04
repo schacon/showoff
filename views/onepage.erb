@@ -15,7 +15,7 @@
   <%= inline_css(css_files) %>
 
   <% if !@no_js %>
-    <%= inline_js(['jquery-1.4.2.min.js', 'jquery-print.js', 'showoff.js', 'onepage.js', 'sh_main.min.js', 'core.js', 'showoffcore.js'], 'public/js') %>
+    <%= inline_js(['jquery-1.4.2.min.js', 'jquery-print.js', 'showoff.js', 'onepage.js', 'sh_main.min.js', 'core.js', 'showoffcore.js'] + @languages, 'public/js') %>
     <script type="text/javascript">
     $(document).ready(function() {
       setupOnePage()
@@ -25,10 +25,8 @@
 </head>
 
 <body>
-
 <div id="slides">
   <%= @slides %>
 </div>
-
 </body>
 </html>
