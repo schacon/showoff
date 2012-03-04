@@ -105,7 +105,7 @@ section of `showoff.json`.
 And if that plain string starts with '#' then it is interpreted not as a
 filename, but as markdown. This is used for inserting interstitial slides
 or notes -- for instance, Alex Chaffee's
-[Ruby Notes](http://github.com/alexch/ruby_notes)
+{Ruby Notes}[http://github.com/alexch/ruby_notes]
 uses it to insert lab instructions between lecture slide sections, which may
 vary from venue to venue.
 
