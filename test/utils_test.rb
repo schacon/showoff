@@ -11,7 +11,7 @@ context "ShowOff Utils tests" do
       ShowOffUtils.create('testing', true)
       files = Dir.glob('testing/**/*')
     end
-    assert_equal ["testing/one", "testing/one/01_slide.md", "testing/showoff.json"], files
+    assert_equal %w(testing/one testing/one/01_slide.md testing/showoff.json), files.sort
   end
 
   #  heroku       - Setup your presentation to serve on Heroku
@@ -59,6 +59,19 @@ context "ShowOff Utils tests" do
       assert_equal 2, content.scan(/div class="slide"/).size
       assert_match 'img src="./file/one/chacon.jpg" width="300" height="300" alt="chacon"', content
     end
+  end
+
+  test 'should obtain value for pause_msg setting' do
+    dir = File.join(File.dirname(__FILE__), 'fixtures', 'simple')
+    msg = ShowOffUtils.pause_msg(dir)
+
+    assert_match 'Test_paused', msg
+  end
+
+  test 'should obtain default value for pause_msg setting' do
+    msg = ShowOffUtils.pause_msg
+
+    assert_match 'PAUSED', msg
   end
 
 end

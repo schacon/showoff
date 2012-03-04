@@ -58,6 +58,8 @@ class ShowOff < Sinatra::Application
 
     # Default asset path
     @asset_path = "./"
+
+    @pause_msg = ShowOffUtils.pause_msg
   end
 
   def self.pres_dir_current

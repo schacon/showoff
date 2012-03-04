@@ -41,7 +41,7 @@ context "ShowOff basic tests" do
 
   test "can create a pdf version" do
     get '/pdf'
-    assert last_response.ok?
+    assert last_response.ok?, last_response.body =~ /(No wkhtmltopdf executable found)/ ? $1 : 'Unknown error'
 
     pages = PDF::Inspector::Page.analyze(last_response.body).pages.size
     assert_equal 2, pages

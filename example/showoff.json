@@ -1,6 +1,7 @@
 {
   "name": "Something",
   "description": "Example Presentation",
+  "pause_msg": "Paused !!!",
   "sections": [
     {"section":"one"},
     {"section":"two"},

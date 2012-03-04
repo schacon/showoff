@@ -423,9 +423,14 @@ function keyDown(event)
 	{
 		removeResults();
 	}
-	else if (key == 80) // 'p' for preshow
+	else if (key == 80) // 'p' for preshow, 'P' for pause
 	{
-		togglePreShow();
+    if (shiftKeyActive) {
+      togglePause();
+    }
+    else {
+      togglePreShow();
+    }
 	}
 	return true
 }
@@ -652,3 +657,7 @@ function nextPreShowImage() {
 /********************
  End PreShow Code
  ********************/
+
+function togglePause() {
+  $("#pause-screen").toggle();
+}

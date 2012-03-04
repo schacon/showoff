@@ -23,6 +23,7 @@
     <tr><td class="key">r</td><td>reload slides</td></tr>
     <tr><td class="key">n</td><td>toggle notes</td></tr>
     <tr><td class="key">p</td><td>run preshow</td></tr>
+    <tr><td class="key">P</td><td>toggle pause</td></tr>
   </table>
 </div>
 
@@ -40,6 +41,9 @@
 
 <div id="slides" class="offscreen" <%= 'style="display:none;"' if @slides %>>
 <%= @slides %>
+</div>
+<div id="pause-screen">
+  <%= @pause_msg %>
 </div>
 
 </body>
