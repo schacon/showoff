@@ -427,6 +427,7 @@ These options are specified *after* the command.
 [<tt>-f, --pres_file=arg</tt>] Presentation file <i>(default: <tt>showoff.json</tt>)</i>
 [<tt>-h, --host=arg</tt>] Host or ip to run on <i>( default: <tt>localhost</tt>)</i>
 [<tt>-p, --port=arg</tt>] Port on which to run <i>( default: <tt>9090</tt>)</i>
+[<tt>-s, --split</tt>] Split slides on every H1 <i>( default: <tt>false</tt>)</i>
 
 
 == <tt>showoff static name</tt>
@@ -510,6 +511,8 @@ So far, ShowOff has been used in the following presentations (and many others):
   http://github.com/alexch/workshop
 * SDRuby Lightning Talk - Readable Regexps - Ian Young
   https://github.com/iangreenleaf/sdruby-lightningtalk-tregexp
+* "Ruby Notes" tutorial slides - Alex Chaffee
+  https://github.com/alexch/ruby_notes
 
 
 If you use it for something, please let me know so I can add it.

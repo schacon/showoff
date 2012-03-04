@@ -100,11 +100,15 @@ command :serve do |c|
 
   c.desc 'Host or ip to run on'
   c.default_value "localhost"
-  c.flag [:h,:host]  
+  c.flag [:h,:host]
 
   c.desc 'JSON file used to describe presentation'
   c.default_value "showoff.json"
   c.flag [:f, :pres_file]
+
+  c.desc 'every H1 (lone #) in the markdown file will become a new slide'
+  c.default_value false
+  c.switch [:s, :split]
 
   c.action do |global_options,options,args|
 
@@ -121,7 +125,12 @@ To run it from presenter view, go to: [ #{url}/presenter ]
 -------------------------
 
 "
-    ShowOff.run! :host => options[:h], :port => options[:p].to_i, :pres_file => options[:f], :pres_dir => args[0], :verbose => options[:verbose]
+    ShowOff.run! :host => options[:h],
+      :port => options[:p].to_i,
+      :pres_file => options[:f],
+      :pres_dir => args[0],
+      :verbose => options[:verbose],
+      :split => options[:split]
   end
 end
 
