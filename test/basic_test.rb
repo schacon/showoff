@@ -39,14 +39,16 @@ context "ShowOff basic tests" do
     assert_match '<div id="slides"', last_response.body
   end
 
-  test "can create a pdf version" do
-    get '/pdf'
-    assert last_response.ok?
+  if Object.const_defined? :PDFKit
+    test "can create a pdf version" do
+      get '/pdf'
+      assert last_response.ok?
 
-    pages = PDF::Inspector::Page.analyze(last_response.body).pages.size
-    assert_equal 2, pages
+      pages = PDF::Inspector::Page.analyze(last_response.body).pages.size
+      assert_equal 2, pages
 
-    assert last_response.body.size > 5000
+      assert last_response.body.size > 5000
+    end
   end
 
 end
