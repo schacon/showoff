@@ -35,6 +35,11 @@ function presPrevStep()
 
 function presNextStep()
 {
+        // TODO: figure out why these two lines are
+        // necessary. Something in the presenter view isn't correctly
+        // setting these variabls related to incremental slide display.
+        incrCurr = w.incrCurr
+        incrSteps = w.incrSteps
 	nextStep()
 	w.nextStep()
 	postSlide()

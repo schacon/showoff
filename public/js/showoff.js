@@ -236,6 +236,8 @@ function showSlide(back_step) {
 	if ('presenterView' in window) {
                 var pv = window.presenterView;
 		pv.slidenum = slidenum;
+                pv.incrCurr = incrCurr
+                pv.incrSteps = incrSteps
 		pv.showSlide(true);
 		pv.postSlide();
 	}
