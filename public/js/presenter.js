@@ -3,6 +3,10 @@ var w = null;
 
 $(function(){
 	w = window.open('/' + window.location.search);
+	// Give the slide window a handle to the presenter view window.
+	// This will let either window be made fullscreen and
+	// still process slide advance/rewinds correctly.
+	w.presenterView = window;
   // side menu accordian crap
 	$("#preso").bind("showoff:loaded", function (event) {
 		$(".menu > ul ul").hide()

@@ -223,7 +223,23 @@ function showSlide(back_step) {
   var currentContent = $(currentSlide).find(".content")
 	currentContent.trigger("showoff:show");
 
-	return getCurrentNotes()
+	var ret = getCurrentNotes()
+	// If we have a presenterView attribute, that means this window was
+	// opened by a presenter view, and we should poke it to make
+	// it be on the same slide as us and show the correct notes.
+        // 
+        // TODO: we do this in such a hacky way to avoid ever
+        // assigning to the presenterView variable here. If we do
+        // that, we can clobber the value sent in by the parent
+        // presentation view and break the feature. Is there a better
+        // way to do this?
+	if ('presenterView' in window) {
+                var pv = window.presenterView;
+		pv.slidenum = slidenum;
+		pv.showSlide(true);
+		pv.postSlide();
+	}
+	return ret;
 }
 
 function getSlideProgress()
