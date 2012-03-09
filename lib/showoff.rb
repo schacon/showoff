@@ -275,7 +275,7 @@ class ShowOff < Sinatra::Application
     if defined?(Magick)
       def get_image_size(path)
         if !cached_image_size.key?(path)
-          img = Magick::Image.ping(File.join(@asset_path, path)).first
+          img = Magick::Image.ping(File.join(".", @asset_path, path)).first
           # don't set a size for svgs so they can expand to fit their container
           if img.mime_type == 'image/svg+xml'
             cached_image_size[path] = [nil, nil]
