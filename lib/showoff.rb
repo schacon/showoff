@@ -36,6 +36,7 @@ class ShowOff < Sinatra::Application
   set :page_size, "Letter"
   set :pres_template, nil
   set :showoff_config, nil
+  set :encoding, nil
 
   def initialize(app=nil)
     super(app)
@@ -61,7 +62,8 @@ class ShowOff < Sinatra::Application
       showoff_json = JSON.parse(File.read(ShowOffUtils.presentation_config_file))
       settings.showoff_config = showoff_json
       
-      # Set options for template and page size
+      # Set options for encoding, template and page size
+      settings.encoding = showoff_json["encoding"]
       settings.page_size = showoff_json["page-size"] || "Letter"
       settings.pres_template = showoff_json["templates"] 
     end
@@ -145,6 +147,10 @@ class ShowOff < Sinatra::Application
 
 
     def process_markdown(name, content, static=false, pdf=false)
+      if settings.encoding and content.respond_to?(:force_encoding)
+        content.force_encoding(settings.encoding)
+      end
+
       # if there are no !SLIDE markers, then make every H1 define a new slide
       unless content =~ /^\<?!SLIDE/m
         content = content.gsub(/^# /m, "<!SLIDE>\n# ")
