@@ -46,7 +46,7 @@ it has a <tt>showoff.json</tt> file and a number of sections (subdirectories) wi
 markdown files for the slides you're presenting.
 
     $ gem install showoff
-    $ git clone (showoff-repo)
+    $ git clone (showoff-repo)/example
     $ cd (showoff-repo)
     $ showoff serve
 
