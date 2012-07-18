@@ -39,6 +39,7 @@ function setupPreso(load_slides, prefix) {
 	// bind event handlers
 	document.onkeydown = keyDown
 	document.onkeyup = keyUp
+	document.onclick = nextStep
 	/* window.onresize	= resized; */
 	/* window.onscroll = scrolled; */
 	/* window.onunload = unloaded; */
