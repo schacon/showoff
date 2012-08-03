@@ -119,7 +119,7 @@ class ShowOff < Sinatra::Application
 
     # todo: move more behavior into this class
     class Slide
-      attr_reader :classes, :text, :tpl
+      attr_reader :classes, :text, :tpl, :bg
       def initialize( context = "")
 
         @tpl = "default"
@@ -130,6 +130,7 @@ class ShowOff < Sinatra::Application
 
           options = ShowOffUtils.parse_options($2)
           @tpl = options["tpl"] if options["tpl"]
+          @bg = options["bg"]
           @classes += $3.strip.chomp('>').split if $3
 
         end
@@ -195,6 +196,7 @@ class ShowOff < Sinatra::Application
         # create html
         md += "<div"
         md += " id=\"#{id}\"" if id
+        md += " style=\"background: url('image/./#{slide.bg}') center no-repeat;\"" if slide.bg
         md += " class=\"slide\" data-transition=\"#{transition}\">"
 
 
