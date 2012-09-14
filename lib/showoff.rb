@@ -407,7 +407,7 @@ class ShowOff < Sinatra::Application
 
     def index(static=false)
       if static
-        @title = ShowOffUtils.showoff_title
+        @title = ShowOffUtils.showoff_title(settings.pres_dir)
         @slides = get_slides_html(static)
 
         @pause_msg = ShowOffUtils.pause_msg
@@ -588,7 +588,7 @@ class ShowOff < Sinatra::Application
   end
 
   get %r{/(.*)} do
-    @title = ShowOffUtils.showoff_title
+    @title = ShowOffUtils.showoff_title(settings.pres_dir)
     @pause_msg = ShowOffUtils.pause_msg
     what = params[:captures].first
     what = 'index' if "" == what
