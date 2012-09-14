@@ -21,7 +21,7 @@ Gem::Specification.new do |s|
   s.add_dependency      "redcarpet"
   s.add_dependency      "nokogiri"
   s.add_dependency      "json"
-  s.add_dependency      "gli",">= 1.3.2"
+  s.add_dependency      "gli",">= 2.0.0"
   s.add_dependency      "parslet"
   s.add_development_dependency "mg"
   s.description       = <<-desc
