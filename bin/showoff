@@ -6,7 +6,7 @@ require 'showoff/version'
 require 'rubygems'
 require 'gli'
 
-include GLI
+include GLI::App
 
 version SHOWOFF_VERSION
 
@@ -186,4 +186,4 @@ on_error do |exception|
   true
 end
 
-exit GLI.run(ARGV)
+exit run(ARGV)
