@@ -130,7 +130,7 @@ class ShowOff < Sinatra::Application
 
           options = ShowOffUtils.parse_options($2)
           @tpl = options["tpl"] if options["tpl"]
-          @bg = options["bg"]
+          @bg = options["bg"] if options["bg"]
           @classes += $3.strip.chomp('>').split if $3
 
         end
@@ -196,7 +196,7 @@ class ShowOff < Sinatra::Application
         # create html
         md += "<div"
         md += " id=\"#{id}\"" if id
-        md += " style=\"background: url('image/./#{slide.bg}') center no-repeat;\"" if slide.bg
+        md += " style=\"background: url('file/./#{slide.bg}') center no-repeat;\"" if slide.bg
         md += " class=\"slide\" data-transition=\"#{transition}\">"
 
 
@@ -267,9 +267,9 @@ class ShowOff < Sinatra::Application
       paths.pop
       path = paths.join('/')
       replacement_prefix = static ?
-        ( pdf ? %(img src="file://#{settings.pres_dir}/#{path}) : %(img src="./file/#{path}) ) :
-        %(img src="#{@asset_path}image/#{path})
-      slide.gsub(/img src=[\"\'](?!https?:\/\/)([^\/].*?)[\"\']/) do |s|
+        ( pdf ? %(src="file://#{settings.pres_dir}/#{path}) : %(src="./file/#{path}) ) :
+        %(src="#{@asset_path}image/#{path})
+      slide.gsub(/src=[\"\'](?!https?:\/\/)([^\/].*?)[\"\']/) do |s|
         img_path = File.join(path, $1)
         w, h     = get_image_size(img_path)
         src      = %(#{replacement_prefix}/#{$1}")
@@ -299,7 +299,7 @@ class ShowOff < Sinatra::Application
     end
 
     def update_commandline_code(slide)
-      html = Nokogiri::XML.parse(slide)
+      html = Nokogiri::HTML.parse(slide)
       parser = CommandlineParser.new
 
       html.css('pre').each do |pre|
@@ -507,6 +507,7 @@ class ShowOff < Sinatra::Application
 
       # Nasty hack to get the actual ShowOff module
       showoff = ShowOff.new
+      #TODO/FIXME: this is inifinite loop with sinatra >= 1.3.3
       while !showoff.is_a?(ShowOff)
         showoff = showoff.instance_variable_get(:@app)
       end
@@ -549,11 +550,16 @@ class ShowOff < Sinatra::Application
         }
 
         # ... and copy all needed image files
-        data.scan(/img src=[\"\'].\/file\/(.*?)[\"\']/).flatten.each do |path|
-          dir = File.dirname(path)
-          FileUtils.makedirs(File.join(file_dir, dir))
-          FileUtils.copy(File.join(pres_dir, path), File.join(file_dir, path))
+        [/src=[\"\'].\/file\/(.*?)[\"\']/,
+         /style=[\"\']background: url\(\'file\/.\/(.*?)'/
+        ].each do |img_regex|
+          data.scan(img_regex).flatten.each do |path|
+            dir = File.dirname(path)
+            FileUtils.makedirs(File.join(file_dir, dir))
+            FileUtils.copy(File.join(pres_dir, path), File.join(file_dir, path))
+          end
         end
+
         # copy images from css too
         Dir.glob("#{pres_dir}/*.css").each do |css_path|
           File.open(css_path) do |file|
