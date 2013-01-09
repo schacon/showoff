@@ -19,6 +19,7 @@ Gem::Specification.new do |s|
   s.add_dependency      "redcarpet"
   s.add_dependency      "nokogiri"
   s.add_dependency      "json"
+  s.add_dependency      "blankslate", '2.1.2.4'
   s.add_dependency      "gli","~> 1.6.0"
   s.add_dependency      "parslet", "1.4.0"
   s.add_dependency      "rubypython", "0.5.1"
