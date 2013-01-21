@@ -6,7 +6,7 @@ require 'showoff/version'
 require 'rubygems'
 require 'gli'
 
-include GLI
+include GLI::App
 
 version SHOWOFF_VERSION
 
