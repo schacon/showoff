@@ -24,6 +24,12 @@ context "ShowOff basic tests" do
     assert_match '<h1>My Presentation</h1>', last_response.body
   end
 
+  test "can skip slides" do
+    get '/slides'
+    assert last_response.ok?
+    assert_no_match /Skipped slide/, last_response.body
+  end
+
   test "can get asset list" do
     get '/assets_needed'
     assert last_response.ok?

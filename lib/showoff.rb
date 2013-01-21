@@ -143,6 +143,9 @@ class ShowOff < Sinatra::Application
       def empty?
         @text.strip == ""
       end
+      def skip?
+        @classes.include? 'skip'
+      end
     end
 
 
@@ -171,7 +174,7 @@ class ShowOff < Sinatra::Application
         end
       end
 
-      slides.delete_if {|slide| slide.empty? }
+      slides.delete_if {|slide| slide.empty? || slide.skip? }
 
       final = ''
       if slides.size > 1

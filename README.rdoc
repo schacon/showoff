@@ -166,6 +166,10 @@ definition, where tname is one of the following supported transitions:
 
 The transitions are provided by jQuery Cycle plugin. See http://www.malsup.com/jquery/cycle/browser.html to view the effects and http://www.malsup.com/jquery/cycle/adv2.html for how to add custom effects.
 
+Here's a list of other available keywords:
+
+* skip - Skips slides marked with this keyword
+
 You can manage the presentation with the following keys:
 
 * space, cursor right: next slide
