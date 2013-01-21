@@ -314,6 +314,11 @@ class ShowOffUtils
     get_config_option(dir, "markdown", "redcarpet")
   end
 
+  def self.showoff_renderer_options(dir = '.', default_options = {})
+    opts = get_config_option(dir, showoff_markdown(dir))
+    Hash[opts.map {|k, v| [k.to_sym, v]}] if opts    # keys must be symbols
+  end
+
   def self.get_config_option(dir, option, default = nil)
     index = File.join(dir, ShowOffUtils.presentation_config_file)
     if File.exists?(index)
@@ -408,18 +413,18 @@ module MarkdownConfig
       require 'maruku/ext/math'
 
       # Load maruku options
-      opts = ShowOffUtils.get_config_option(dir_name, 'maruku',
-                                            { 'use_tex' => false,
-                                              'png_dir' => 'images',
-                                              'html_png_url' => '/file/images/'})
+      opts = ShowOffUtils.showoff_renderer_options(dir_name,
+                                                   { :use_tex => false,
+                                                     :png_dir => 'images',
+                                                     :html_png_url => '/file/images/'})
 
-      if opts['use_tex']
+      if opts[:use_tex]
         MaRuKu::Globals[:html_math_output_mathml] = false
         MaRuKu::Globals[:html_math_engine] = 'none'
         MaRuKu::Globals[:html_math_output_png] = true
         MaRuKu::Globals[:html_png_engine] =  'blahtex'
-        MaRuKu::Globals[:html_png_dir] = opts['png_dir']
-        MaRuKu::Globals[:html_png_url] = opts['html_png_url']
+        MaRuKu::Globals[:html_png_dir] = opts[:png_dir]
+        MaRuKu::Globals[:html_png_url] = opts[:html_png_url]
       end
 
     when 'bluecloth'
