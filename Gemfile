@@ -1,4 +1,4 @@
-source :rubygems
+source "https://rubygems.org"
 
 gemspec
 
@@ -13,19 +13,18 @@ group :test, :development do
   gem 'guard'
   gem 'guard-rspec'
   gem "rack-test"
-  gem 'debugger'
 end
 
 #
 # Optional to provide image embedding and resizing functionality
-# 
+#
 group :images do
   gem "rmagick"
 end
 
 #
 # Optional to provide PDF output support
-# 
+#
 group :pdf do
   gem "pdfkit"
   gem "wkhtmltopdf-binary", '0.9.5.3'
