@@ -1,4 +1,4 @@
-require_relative 'renderers/html_with_pygments'
+require_relative 'renderers/html_with_rouge'
 
 module Parade
 
@@ -14,6 +14,6 @@ module Parade
     end
   end
 
-  SlidePreRenderers.register Renderers::HTMLwithPygments
+  SlidePreRenderers.register Renderers::HTMLWithRouge
 
 end

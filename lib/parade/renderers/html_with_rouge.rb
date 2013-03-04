@@ -4,11 +4,11 @@ require 'rouge/plugins/redcarpet'
 
 module Parade
   module Renderers
-    class HTMLwithPygments < Redcarpet::Render::XHTML
+    class HTMLWithRouge < Redcarpet::Render::XHTML
       include Rouge::Plugins::Redcarpet
 
       def self.render(content)
-        markdown = Redcarpet::Markdown.new(Renderers::HTMLwithPygments,
+        markdown = Redcarpet::Markdown.new(Renderers::HTMLWithRouge,
           :fenced_code_blocks => true,
           :no_intra_emphasis => true,
           :autolink => true,
