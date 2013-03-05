@@ -195,7 +195,6 @@ module Parade
     end
 
     include PDFPresentation
-    include Preshow
 
   end
 
