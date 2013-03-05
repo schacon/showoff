@@ -12,6 +12,27 @@ module Parade
 
   class Server < Sinatra::Application
 
+
+    def self.views_path
+      File.dirname(__FILE__) + '/../views'
+    end
+
+    def self.public_path
+      File.dirname(__FILE__) + '/../public'
+    end
+
+    set :views, views_path
+    set :public_folder, public_path
+    set :verbose, false
+
+    set :presentation_directory do
+      File.expand_path Dir.pwd
+    end
+
+    set :presentation_file, 'parade'
+    set :default_presentation_files, [ 'parade', 'parade.json' ]
+
+
     #
     # Includes the specified module into the server to grant the server additional
     # functionality.
@@ -43,19 +64,6 @@ module Parade
     def require_ruby_files
       Dir.glob("#{settings.presentation_directory}/*.rb").map { |path| require path }
     end
-
-    set :views, File.dirname(__FILE__) + '/../views'
-    set :public_folder, File.dirname(__FILE__) + '/../public'
-
-    set :verbose, false
-
-    set :presentation_directory do
-      File.expand_path Dir.pwd
-    end
-
-    set :presentation_file, 'parade'
-
-    set :default_presentation_files, [ 'parade', 'parade.json' ]
 
     def presentation_files
       (Array(settings.presentation_file) + settings.default_presentation_files).compact.uniq
