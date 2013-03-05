@@ -3,7 +3,6 @@ require_relative "parsers/dsl"
 require_relative 'renderers/update_image_paths'
 
 require_relative 'features/pdf_presentation'
-require_relative 'features/preshow'
 
 require_relative 'slide_post_renderers'
 require_relative 'slide_pre_renderers'
@@ -55,6 +54,21 @@ module Parade
       @javscript_files ||= []
     end
 
+    def self.register_stylesheet(css_file)
+      plugin_stylesheet_files.push css_file
+    end
+
+    def self.plugin_stylesheet_files
+      @css_files ||= []
+    end
+
+    def self.register_command(input,description)
+      plugin_commands.push OpenStruct.new(:input => input,:description => description)
+    end
+
+    def self.plugin_commands
+      @plugin_commands ||= []
+    end
 
     def initialize(app=nil)
       super(app)
@@ -112,6 +126,12 @@ module Parade
         end
       end
 
+      def plugin_css_files
+        self.class.plugin_stylesheet_files.map do |path|
+          "<style>\n#{File.read(path)}\n</style>"
+        end.join("\n")
+      end
+
       def plugin_js_files
         self.class.plugin_javascript_files.map do |path|
           "<script type='text/javascript'>#{File.read(path)}</script>"
@@ -126,6 +146,10 @@ module Parade
         custom_resource "js" do |path|
           js path
         end
+      end
+
+      def plugin_commands
+        self.class.plugin_commands
       end
 
       def presentation
