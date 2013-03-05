@@ -2,11 +2,12 @@ div.zoomed {
   zoom: 50%;
   -moz-transform: scale(0.5);
   -moz-transform-origin: 0 0;
+  margin-bottom: -50%;
 }
 
 #preso { margin-top: 20px; }
 
-#main h2 { 
+#main h2 {
   text-align: left;
   font-size: 1.5em;
 }
@@ -46,7 +47,7 @@ div.zoomed {
 
 #sidebar { background: #ddd; }
 
-#notes { 
+#notes {
   background: #ff9;
   font-size: 1.5em;
   min-height: 150px;
