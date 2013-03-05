@@ -54,6 +54,15 @@ module Parade
       @javscript_files ||= []
     end
 
+    def self.register_stylesheet(css_file)
+      plugin_stylesheet_files.push css_file
+    end
+
+    def self.plugin_stylesheet_files
+      @css_files ||= []
+    end
+
+
 
     def initialize(app=nil)
       super(app)
@@ -109,6 +118,12 @@ module Parade
         custom_resource "css" do |path|
           css path
         end
+      end
+
+      def plugin_css_files
+        self.class.plugin_stylesheet_files.map do |path|
+          "<style>\n#{File.read(path)}\n</style>"
+        end.join("\n")
       end
 
       def plugin_js_files
