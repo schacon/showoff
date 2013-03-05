@@ -270,7 +270,6 @@ pre { margin: 1em 40px; padding: .25em; }
 .offscreen { position:absolute; top:0; left:-9999px; overflow:hidden; }
 #debugInfo { margin-left: 30px; }
 #notesInfo { margin-left: 30px; display: none }
-#preshow { display: none; }
 
 #help {
     background: #9f9;
@@ -389,7 +388,7 @@ a.fg-button { float:left; }
   cursor: pointer;
 }
 
-#tips, #preshow_timer {
+#tips {
   display:inline;
   background-color:#000;
   color:#fff;
@@ -405,10 +404,6 @@ a.fg-button { float:left; }
   top: 0px;
   right: 0px;
   text-align:right;
-}
-
-#preshow_timer {
-  bottom: 0px;
 }
 
 /** Print **/
