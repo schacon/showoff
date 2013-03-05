@@ -2,7 +2,6 @@ require_relative 'section'
 require_relative "parsers/dsl"
 require_relative 'renderers/update_image_paths'
 
-require_relative 'features/live_ruby'
 require_relative 'features/pdf_presentation'
 require_relative 'features/preshow'
 
@@ -12,6 +11,29 @@ require_relative 'slide_pre_renderers'
 module Parade
 
   class Server < Sinatra::Application
+
+    #
+    # Includes the specified module into the server to grant the server additional
+    # functionality.
+    #
+    def self.register(server_module)
+      include server_module
+    end
+
+    #
+    # Register a javascript file that will be loaded after the code javscript
+    #
+    def self.register_javascript(js_file)
+      plugin_javascript_files.push js_file
+    end
+
+    #
+    # @return the javascript files that have been registered by plugins
+    #
+    def self.plugin_javascript_files
+      @javscript_files ||= []
+    end
+
 
     def initialize(app=nil)
       super(app)
@@ -82,6 +104,12 @@ module Parade
         end
       end
 
+      def plugin_js_files
+        self.class.plugin_javascript_files.map do |path|
+          "<script type='text/javascript'>#{File.read(path)}</script>"
+        end.join("\n")
+      end
+
       #
       # Create resources links to all the Javascript files found at the root of
       # presentation directory.
@@ -134,7 +162,6 @@ module Parade
       erb :onepage
     end
 
-    include LiveRuby
     include PDFPresentation
     include Preshow
 
