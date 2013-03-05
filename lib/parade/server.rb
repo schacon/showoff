@@ -62,7 +62,13 @@ module Parade
       @css_files ||= []
     end
 
+    def self.register_command(input,description)
+      plugin_commands.push OpenStruct.new(:input => input,:description => description)
+    end
 
+    def self.plugin_commands
+      @plugin_commands ||= []
+    end
 
     def initialize(app=nil)
       super(app)
@@ -140,6 +146,10 @@ module Parade
         custom_resource "js" do |path|
           js path
         end
+      end
+
+      def plugin_commands
+        self.class.plugin_commands
       end
 
       def presentation

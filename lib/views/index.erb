@@ -23,7 +23,12 @@
     <tr><td class="key">f</td><td>toggle footer</td></tr>
     <tr><td class="key">r</td><td>reload slides</td></tr>
     <tr><td class="key">n</td><td>toggle notes</td></tr>
-    <tr><td class="key">p</td><td>run preshow</td></tr>
+
+    <% plugin_commands.each do |command| %>
+      <tr><td class="key"><%= command.input %></td><td><%= command.description %></td></tr>
+    <% end %>
+
+    <!-- TODO: Plugins that define keys need a way to define additional keys -->
   </table>
 </div>
 
