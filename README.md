@@ -25,8 +25,8 @@ Parade has over presentational software:
 
 * Code Execution
 
-    > Slides are able to provide execution and show results for javascript,
-    Coffeescript, and Ruby live within the browser. Allowing for live
+    > Slides are able to provide execution and show results for JavaScript,
+    and Coffeescript live within the browser. Allowing for live
     demonstrations of code.
 
 * Web
@@ -301,7 +301,7 @@ Parade defines a number of special CSS classes:
 > make all slide text 70%
 >
 > ### execute
-> on Javascript, Coffeescript and Ruby highlighted code slides, you can
+> on Javascript and Coffeescript highlighted code slides, you can
 > click on the code to execute it and display the results on the slide
 
 
