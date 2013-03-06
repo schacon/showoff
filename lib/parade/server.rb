@@ -130,6 +130,14 @@ module Parade
         end.join("\n")
       end
 
+      #
+      # This helper method is called within the header to return the theme specified by the
+      # top level section of the preseation
+      #
+      def theme_css
+        css("themes/#{load_presentation.theme}.css") if load_presentation.theme
+      end
+
       def plugin_js_files
         self.class.plugin_javascript_files.map do |path|
           "<script type='text/javascript'>#{File.read(path)}</script>"

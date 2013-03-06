@@ -307,6 +307,56 @@ Parade defines a number of special CSS classes:
 
 # Presentation Customization
 
+## Themes
+
+Parade comes with a set of themes which can be enabled in your **parade** file:
+
+```ruby
+
+title "My Presentation"
+
+theme "hack"
+
+section "Introduction" do
+  slides "intro.md"
+end
+
+```
+
+### Available Themes
+
+* archetect
+* hack
+* merlot
+* slate
+
+## Loading Custom CSS and JavaScript
+
+By default Parade will load most CSS and JavaScript it finds within the the
+directory which parade was launched, the current working directory.
+
+You may however also specify a single resource folder or multiple resource folders
+which parade will load instead of the current working directory.
+
+```ruby
+
+title "My Presentation"
+
+theme "hack"
+resources "scripts"
+resources "stylesheets"
+
+section "Introduction" do
+  slides "intro.md"
+end
+
+```
+
+The following will look for a folder named *scripts* and a folder named
+*stylesheets* relative to the current working directory and load all
+the CSS and JavaScript files found within those directories.
+
+
 ## Custom JavaScript
 
 To insert custom JavaScript into your presentation you can either place it into
