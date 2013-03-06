@@ -93,6 +93,14 @@ module Parade
         current_section.add_resource File.join(options[:current_path], resource_filepath)
       end
 
+      #
+      # Sets the current sections theme to the specified theme
+      # @note this will only work at the top level section of the presentation
+      #
+      def theme(theme_name)
+        current_section.theme = theme_name
+      end
+
       def pause_message(message)
         current_section.pause_message = message
       end

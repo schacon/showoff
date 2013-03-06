@@ -154,6 +154,10 @@ module Parade
       @resources << resource_filepath
     end
 
+    # Allows for the scene to have a theme defined for it.
+    # @note this is only respected by the top-level scene in the presentation
+    attr_accessor :theme
+
     # @return [Array<Slide>] the slides contained within this section and any
     #   sub-section.
     def slides
