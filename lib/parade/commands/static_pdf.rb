@@ -5,7 +5,7 @@ module Parade
 
     #
     # Saves a PDF version of the presentation that is from the HtmlOutput
-    # 
+    #
     class StaticPdf
 
       def description
@@ -20,7 +20,7 @@ module Parade
 
         kit = PDFKit.new(html_content,:page_size => 'Letter', :orientation => 'Landscape')
 
-        output_file = options[:output] || default_pdf_output
+        output_file = options['output'] || default_pdf_output
 
         return if (File.exists?(output_file) and not options.key?(:force))
 
