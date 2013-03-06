@@ -54,7 +54,7 @@ command [:s,:serve,:server] do |c|
     puts "
 -------------------------
 
-Your Parade presentation is now starting up.
+yourr Parade presentation is now starting up.
 
 To view it plainly, visit [ #{url} ]
 
@@ -85,6 +85,9 @@ command [:static] do |c|
 
   c.desc "Force creation of the asset, even if one already exists with a similar name"
   c.switch [:f, :force]
+
+  c.desc 'Output file'
+  c.flag [:o,:output]
 
   c.action do |global,local,args|
 
