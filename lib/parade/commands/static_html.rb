@@ -5,9 +5,9 @@ module Parade
 
     #
     # Saves an html representation of the presentation to a single HTML file.
-    # 
+    #
     # @see HtmlOutput
-    # 
+    #
     class StaticHtml
       include RenderFromTemplate
 
@@ -21,7 +21,7 @@ module Parade
         html_generator = HtmlOutput.new
         html_content = html_generator.generate(options)
 
-        output_file = options[:output] || default_html_output
+        output_file = options['output'] || default_html_output
 
         if create_file_with_contents output_file, html_content, options
           puts "Saved HTML to #{output_file}"
