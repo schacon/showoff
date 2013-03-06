@@ -12,24 +12,7 @@
 <a tabindex="0" href="#search-engines" class="fg-button fg-button-icon-right ui-widget ui-state-default ui-corner-all" id="navmenu"><span class="ui-icon ui-icon-triangle-1-s"></span>slides</a>
 <div id="navigation" class="hidden"></div>
 
-<div id="help">
-  <table>
-    <tr><td class="key">h, ?</td><td>toggle help (this)</td></tr>
-    <tr><td class="key">space, &rarr;</td><td>next slide</td></tr>
-    <tr><td class="key">shift-space, &larr;</td><td>previous slide</td></tr>
-    <tr><td class="key">`</td><td>open/close command visor</td></tr>
-    <tr><td class="key">d</td><td>toggle debug mode</td></tr>
-    <tr><td class="key">c, t</td><td>table of contents (vi)</td></tr>
-    <tr><td class="key">f</td><td>toggle footer</td></tr>
-    <tr><td class="key">r</td><td>reload slides</td></tr>
-    <tr><td class="key">n</td><td>toggle notes</td></tr>
-
-    <% plugin_commands.each do |command| %>
-      <tr><td class="key"><%= command.input %></td><td><%= command.description %></td></tr>
-    <% end %>
-
-  </table>
-</div>
+<%= erb :help %>
 
 <div class="buttonNav">
   <input class="prev" type="submit" value="prev"/>
@@ -40,15 +23,13 @@
 <div id="codeResults" class='results' style='display: none;'></div>
 
 <div id="preso">loading presentation...</div>
-<div id="footer">
-  <span id="slideInfo"></span>
-  <span id="debugInfo"></span>
-  <span id="notesInfo"></span>
-</div>
+
+<%= erb :footer %>
 
 <div id="slides" class="offscreen" <%= 'style="display:none;"' if slides %>>
 <%= slides %>
 </div>
+
 <div id="pauseScreen">
   <%= pause_message %>
 </div>

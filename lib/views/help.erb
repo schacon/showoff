@@ -1,0 +1,18 @@
+<div id="help">
+  <table>
+    <tr><td class="key">h, ?</td><td>toggle help (this)</td></tr>
+    <tr><td class="key">space, &rarr;</td><td>next slide</td></tr>
+    <tr><td class="key">shift-space, &larr;</td><td>previous slide</td></tr>
+    <tr><td class="key">`</td><td>open/close command visor</td></tr>
+    <tr><td class="key">d</td><td>toggle debug mode</td></tr>
+    <tr><td class="key">c, t</td><td>table of contents (vi)</td></tr>
+    <tr><td class="key">f</td><td>toggle footer</td></tr>
+    <tr><td class="key">r</td><td>reload slides</td></tr>
+    <tr><td class="key">n</td><td>toggle notes</td></tr>
+
+    <% plugin_commands.each do |command| %>
+      <tr><td class="key"><%= command.input %></td><td><%= command.description %></td></tr>
+    <% end %>
+
+  </table>
+</div>
