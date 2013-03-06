@@ -5,9 +5,9 @@ module Parade
 
     #
     # Saves an html representation of the presentation to a single HTML file.
-    # 
+    #
     # @see HtmlOutput
-    # 
+    #
     class StaticHtml
       include RenderFromTemplate
 

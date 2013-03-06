@@ -513,6 +513,27 @@ Serves the parade presentation in the current directory
 >
 > parade serve
 
+## parade static html [path/to/parade/file]
+
+Generates a static html representation of the presentation.
+
+> ### Options
+>
+> These options are specified *after* the command.
+>
+> *-o, --output=file* Presentation output file
+
+## parade static pdf [path/to/parade/file]
+
+Generates a pdf representation of the presentation.
+
+> ### Options
+>
+> These options are specified *after* the command.
+>
+> *-o, --output=file* Presentation output file
+
+
 # Future Plans
 
 I really want this to evolve into a dynamic presentation software server,

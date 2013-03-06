@@ -5,7 +5,7 @@ module Parade
 
     #
     # Saves a PDF version of the presentation that is from the HtmlOutput
-    # 
+    #
     class StaticPdf
 
       def description
