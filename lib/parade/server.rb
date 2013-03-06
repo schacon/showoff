@@ -2,8 +2,6 @@ require_relative 'section'
 require_relative "parsers/dsl"
 require_relative 'renderers/update_image_paths'
 
-require_relative 'features/pdf_presentation'
-
 require_relative 'slide_post_renderers'
 require_relative 'slide_pre_renderers'
 
@@ -193,8 +191,6 @@ module Parade
     get "/onepage" do
       erb :onepage
     end
-
-    include PDFPresentation
 
   end
 
