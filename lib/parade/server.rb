@@ -126,7 +126,8 @@ module Parade
 
       def plugin_css_files
         self.class.plugin_stylesheet_files.map do |path|
-          "<style>\n#{File.read(path)}\n</style>"
+          content = File.read(path)
+          erb :inline_css, locals: { content: content }
         end.join("\n")
       end
 
@@ -140,7 +141,8 @@ module Parade
 
       def plugin_js_files
         self.class.plugin_javascript_files.map do |path|
-          "<script type='text/javascript'>#{File.read(path)}</script>"
+          content = File.read(path)
+          erb :inline_js, locals: { content: content }
         end.join("\n")
       end
 
