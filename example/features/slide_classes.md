@@ -145,12 +145,6 @@ response
 for pasted commandline sections (needs leading '$' for commands, then
 output on subsequent lines)
 
-!SLIDE code
-
-## code
-
-monospaces everything on the slide
-
 !SLIDE incremental bullets
 
 ## incremental bullets
