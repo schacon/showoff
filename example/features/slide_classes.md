@@ -17,14 +17,8 @@ centers images on a slide
 
     ## center
 
-    ![octocat](../images/octocat.png) 
+    ![octocat](../images/octocat.png)
 ```
-
-!SLIDE center full-page
-
-## center full-page
-
-![octocat](../images/octocat.png)
 
 !SLIDE columns
 

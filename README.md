@@ -264,9 +264,6 @@ Parade defines a number of special CSS classes:
 > ### center
 > centers images on a slide
 >
-> ### full-page
-> allows an image to take up the whole slide
->
 > ### bullets
 > sizes and separates bullets properly (fits up to 5, generally)
 >
