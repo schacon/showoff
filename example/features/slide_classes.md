@@ -168,17 +168,24 @@ $ command
 response
 ```
 
-!SLIDE small
+!SLIDE text-size-150
 
-## small
+## text-size-150
 
-make all slide text 80%
+make all slide text 150% (largest value)
 
-!SLIDE smaller
+!SLIDE text-size-70
 
-## smaller
+## text-size-70
 
-make all slide text 70%
+make all slide text 70% (smallest value)
+
+!SLIDE
+
+## text-size-(percentage)
+
+note that you may feel free to increment text size by 10 percent
+from 80 to 150. the current slide is set to the standard font size.
 
 !SLIDE execute
 
