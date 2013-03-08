@@ -330,6 +330,32 @@ end
 * merlot
 * slate
 
+### Customized Footer
+
+The presentation has the following default footer:
+
+```html
+<div id="footer">
+  <span id="slideInfo"></span>
+  <span id="debugInfo"></span>
+  <span id="notesInfo"></span>
+</div>
+```
+
+You can override the default footer of the presentation by specifying a file path to a customized footer.
+
+```ruby
+title "My Presentation"
+
+footer "custom_footer.erb"
+
+section "Introduction" do
+  slides "intro.md"
+end
+```
+
+This example will load a file named `customer_footer.erb` within your presentation directory.
+
 ## Loading Custom CSS and JavaScript
 
 By default Parade will load most CSS and JavaScript it finds within the the
