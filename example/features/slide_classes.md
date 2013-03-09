@@ -1,4 +1,4 @@
-!SLIDE title
+!SLIDE section-header
 
 # Slide Classes
 
@@ -21,6 +21,12 @@ A traditional title slide
     ![octocat](../images/octocat.png)
 
     A traditional title slide
+
+!SLIDE section-header text-size-90
+
+# !SLIDE section-header
+
+A section title slide (after the middle on the page)
 
 !SLIDE center
 

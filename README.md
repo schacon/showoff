@@ -270,6 +270,9 @@ Parade defines a number of special CSS classes:
 > ### title-and-content
 > places the title at the top and the content is left-aligned below it.
 >
+> ### section-header
+> similar to a `title` class except it is a litle further down the page.
+>
 > ### bullets
 > sizes and separates bullets properly (fits up to 5, generally)
 >
