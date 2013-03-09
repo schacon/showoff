@@ -19,7 +19,10 @@ end
 
 !SLIDE execute
 
-# Executable Ruby #
+# Executable Ruby
+
+If you install the [parade-liveruby](https://github.com/burtlo/parade-liveruby)
+gem, you can have ruby code be executable as well.
 
 ```ruby
 [1, 2, 3].map { |n| n*7 }
