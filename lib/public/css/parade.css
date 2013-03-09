@@ -102,9 +102,15 @@
   }
 }
 
-/* Slide Class */
+/* Slide Classes */
+
 .title {
   padding-top: 10%;
+}
+
+.title-and-content .content p {
+  margin: 2em;
+  text-align: left;
 }
 
 /* plain (non-bullet) text */
