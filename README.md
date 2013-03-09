@@ -284,9 +284,6 @@ Parade defines a number of special CSS classes:
 > for pasted commandline sections (needs leading '$' for commands, then
 > output on subsequent lines)
 >
-> ### code
-> monospaces everything on the slide
->
 > ### incremental
 > can be used with 'bullets' and 'commandline' styles, will incrementally
 >  update elements on arrow key rather than switch slides
