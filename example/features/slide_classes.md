@@ -1,24 +1,38 @@
-!SLIDE
+!SLIDE title
 
 # Slide Classes
 
+Use slide classes to help style your slides
+
+!SLIDE title
+
+# !SLIDE title
+
+A traditional title slide
+
+!SLIDE title
+
+## The Markdown
+
+    !SLIDE title
+
+    # Title
+
+    ![octocat](../images/octocat.png)
+
+    A traditional title slide
+
 !SLIDE center
 
-## center
+## !SLIDE center
 
 ![octocat](../images/octocat.png)
 
-centers images on a slide
+Everything
 
-!SLIDE
+IS
 
-```
-    !SLIDE center
-
-    ## center
-
-    ![octocat](../images/octocat.png)
-```
+**centered**
 
 !SLIDE columns
 

@@ -9,7 +9,7 @@ describe "Loading the Example Presentation", :integration => true do
 
   let(:default_title) { "Example Presentation" }
   let(:description) { "Several parade examples to assist with showing others how to get started with Parade" }
-  let(:slide_count) { 73 }
+  let(:slide_count) { 74 }
   let(:section_count) { 4 }
 
   its(:title) { should eq default_title }
@@ -37,7 +37,7 @@ describe "Loading the Example Presentation", :integration => true do
     let(:section) { subject.sections[1] }
 
     let(:title) { "Advanced Features" }
-    let(:slide_count) { 54 }
+    let(:slide_count) { 55 }
 
     it_should_behave_like "a properly parsed section"
   end
