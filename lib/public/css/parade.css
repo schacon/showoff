@@ -249,13 +249,14 @@
   padding: .25em;
 }
 
-.small {
-    font-size: 80%;
-}
-
-.smaller {
-    font-size: 70%;
-}
+.text-size-150 { font-size: 150%; }
+.text-size-140 { font-size: 140%; }
+.text-size-130 { font-size: 130%; }
+.text-size-120 { font-size: 120%; }
+.text-size-110 { font-size: 110%; }
+.text-size-90  { font-size: 90%; }
+.text-size-80  { font-size: 80%; }
+.text-size-70  { font-size: 70%; }
 
 h1,h2,h3 { font-weight: normal; text-align: center; margin: 0.5em 0; }
 h1 { font-size: 5em; }

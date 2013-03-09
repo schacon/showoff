@@ -294,11 +294,9 @@ Parade defines a number of special CSS classes:
 > can be used with 'bullets' and 'commandline' styles, will incrementally
 >  update elements on arrow key rather than switch slides
 >
-> ### small
-> make all slide text 80%
->
-> ### smaller
-> make all slide text 70%
+> ### text-size-(percentage)
+> make all slide text size from 70% up to 150%, by percent increments of
+> ten. E.G.: text-size-150, text-size-120, text-size-90, text-size-70.
 >
 > ### execute
 > on Javascript and Coffeescript highlighted code slides, you can
