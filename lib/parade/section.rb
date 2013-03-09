@@ -153,7 +153,7 @@ module Parade
     end
 
     def default_footer
-      File.join(File.dirname(__FILE__), "..", "views", "footer")
+      File.join(File.dirname(__FILE__), "..", "views", "footer.erb")
     end
 
     def resources
