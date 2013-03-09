@@ -52,15 +52,15 @@ Please don't subject your presentation viewers to slides with this much content.
 
 !SLIDE columns
 
-# Columns
+# !SLIDE columns
 
 ## One Column
 
 The content will space the length of the entire slide.
 
-!SLIDE columns
+!SLIDE comparison
 
-# Columns
+# !SLIDE comparison
 
 ## Markdown
 
@@ -75,7 +75,7 @@ end
 
 !SLIDE columns
 
-# Columns
+# !SLIDE columns
 
 ## Markdown
 
@@ -93,9 +93,9 @@ end
 > Code will execute live
 
 
-!SLIDE columns
+!SLIDE comparison
 
-# Columns
+# !SLIDE comparison
 
 ## Markdown
 
