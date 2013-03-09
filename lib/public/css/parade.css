@@ -113,6 +113,10 @@
   text-align: left;
 }
 
+.section-header {
+  padding-top: 18%;
+}
+
 /* plain (non-bullet) text */
 .content > p {
   font-size: 2em;
