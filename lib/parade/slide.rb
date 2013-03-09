@@ -54,10 +54,9 @@ module Parade
     end
 
     #
-    # @return [Boolean] true if the slide has no content and false if the slide
-    #   has content.
+    # @return [Boolean] true if the slide has no content and not intentionly marked blank.
     def empty?
-      @content.to_s.strip == ""
+      @content.to_s.strip == "" && !content_classes.include?('blank')
     end
 
     #

@@ -295,6 +295,10 @@ Parade defines a number of special CSS classes:
 > ### execute
 > on Javascript and Coffeescript highlighted code slides, you can
 > click on the code to execute it and display the results on the slide
+>
+> ### blank
+> a slide without content is removed unless you specify that the slide is
+> blank.
 
 
 # Presentation Customization
