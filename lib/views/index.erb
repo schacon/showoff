@@ -24,11 +24,11 @@
 
 <div id="preso">loading presentation...</div>
 
-<%= erb :footer %>
-
 <div id="slides" class="offscreen" <%= 'style="display:none;"' if slides %>>
 <%= slides %>
 </div>
+
+<%= footer %>
 
 <div id="pauseScreen">
   <%= pause_message %>

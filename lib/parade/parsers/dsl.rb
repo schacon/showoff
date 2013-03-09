@@ -101,6 +101,14 @@ module Parade
         current_section.theme = theme_name
       end
 
+      #
+      # Sets the current sections footer to the specified template file
+      # @note this will only work at the top level section of the presentation
+      #
+      def footer(footer_name)
+        current_section.footer = File.join(options[:current_path], footer_name)
+      end
+
       def pause_message(message)
         current_section.pause_message = message
       end

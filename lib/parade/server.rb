@@ -172,6 +172,10 @@ module Parade
         presentation.to_html
       end
 
+      def footer
+        presentation.footer
+      end
+
       def pause_message
         presentation.pause_message
       end
