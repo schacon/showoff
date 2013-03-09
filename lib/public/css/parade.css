@@ -149,33 +149,33 @@
 /* Column Layout */
 
 /* Center the images when they are within a column */
-.content.columns img {
+.content.columns img, .content.comparison img {
   margin: 0 auto;
   display: block;
 }
 
-.content.columns .grid_12 p {
+.content.columns .grid_12 p, .content.comparison .grid_12 p {
   font-size: 200%;
 }
 
-.content.columns .grid_6 p {
+.content.columns .grid_6 p, .content.comparison .grid_6 p {
   font-size: 150%;
 }
 
-.content.columns .grid_4 p {
+.content.columns .grid_4 p, .content.comparison .grid_4 p {
   font-size: 125%;
 }
 
-.content.columns pre {
+.content.columns pre, .content.comparison pre {
   margin-left: 0px;
   margin-right: 0px;
 }
 
-.content.columns .grid_3 p {
+.content.columns .grid_3 p, .content.comparison .grid_3 p {
   font-size: 100%;
 }
 
-.content.columns h2 {
+.content.columns h2, .content.comparison h2 {
   padding-bottom: 10px;
   border-bottom: 1px dotted black;
 }
