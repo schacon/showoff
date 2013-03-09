@@ -261,6 +261,9 @@ All remaining single terms are added as css classes to the slide's `div`.
 
 Parade defines a number of special CSS classes:
 
+> ### title
+> places the content closer to the center of the page
+>
 > ### center
 > centers images on a slide
 >

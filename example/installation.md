@@ -1,4 +1,4 @@
-!SLIDE
+!SLIDE title
 
 # Installation
 
@@ -6,9 +6,12 @@
 $ gem install parade
 ```
 
-!SLIDE
+!SLIDE title
+
+# Starting a Presentation
 
 ```bash
-$ parade server [filepath]
-$ parade server presentation/
+$ parade
+$ parade [filepath]
+$ parade presentation/parade
 ```

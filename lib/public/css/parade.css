@@ -102,6 +102,11 @@
   }
 }
 
+/* Slide Class */
+.title {
+  padding-top: 10%;
+}
+
 /* plain (non-bullet) text */
 .content > p {
   font-size: 2em;
