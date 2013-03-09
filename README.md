@@ -267,6 +267,9 @@ Parade defines a number of special CSS classes:
 > ### center
 > centers images on a slide
 >
+> ### title-and-content
+> places the title at the top and the content is left-aligned below it.
+>
 > ### bullets
 > sizes and separates bullets properly (fits up to 5, generally)
 >
