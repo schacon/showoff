@@ -149,12 +149,6 @@
     font-size: 3em;
 }
 
-.subsection h1 {
-  background: #008;
-  color: #fff;
-  padding: .25em;
-}
-
 .text-size-150 { font-size: 150%; }
 .text-size-140 { font-size: 140%; }
 .text-size-130 { font-size: 130%; }

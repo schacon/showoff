@@ -143,14 +143,6 @@ sizes and separates bullets properly (fits up to 5, generally)
 
 sizes and separates more bullets (smaller, closer together)
 
-!SLIDE subsection
-
-## subsection
-
-# titles
-
-creates a different background for titles
-
 !SLIDE command
 
 ## command

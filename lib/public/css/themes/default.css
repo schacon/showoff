@@ -70,7 +70,7 @@ pre { margin: 1em 40px; padding: .25em; }
     position: absolute;
     right: 80px;
     display: none;
-    z-index: 2147483647;  max, see http://www.puidokas.com/max-z-index/
+    z-index: 2147483647;
 }
 
 #help table tr td.key {

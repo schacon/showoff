@@ -283,9 +283,6 @@ Parade defines a number of special CSS classes:
 > ### smbullets
 > sizes and separates more bullets (smaller, closer together)
 >
-> ### subsection
-> creates a different background for titles
->
 > ### command
 > monospaces h1 title slides
 >
