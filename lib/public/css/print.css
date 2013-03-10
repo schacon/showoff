@@ -1,0 +1,40 @@
+/** Print **/
+@media print {
+  body {
+    font-size: 70%;
+  }
+
+  #preso, .slide {
+    border: 1px solid #999;
+  }
+
+  .slide .center {
+    width: 600px;
+    height: 600px;
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+  }
+
+  #preso, .slide {
+      background: #fff;
+      width: 600px;
+      height: 600px;
+      margin-left:auto;
+      margin-right:auto;
+      overflow:hidden;
+  }
+
+  #footer {
+      background: #eee;
+      padding: 2px;
+      width: 590px;
+      height: 20  px;
+      margin-left:auto;
+      margin-right:auto;
+  }
+
+  pre, code {
+    font-family: Monaco, monospace;
+  }
+}

@@ -3,10 +3,36 @@ Author:	Maggie Wachs, maggie@filamentgroup.com
 Date:		September 2008
 */
 
+/* REQUIRED STYLES - the menus will only render correctly with these rules */
 
-/* REQUIRED STYLES - the menus will only render correctly with these rules */	
+.fg-button {
+    clear:left;
+    margin:0 4px 40px 20px;
+    padding: .4em 1em;
+    text-decoration:none !important;
+    cursor:pointer;
+    position: relative;
+    text-align: center;
+    zoom: 1;
+}
 
-.fg-menu-container { position: absolute; top:0; left:-999px; padding: .4em;  overflow: hidden; }
+.fg-button .ui-icon {
+    position: absolute;
+    top: 50%;
+    margin-top: -8px;
+    left: 50%;
+    margin-left: -8px;
+}
+
+a.fg-button { float:left; }
+
+.fg-button-icon-right { padding-right: 2.1em; }
+
+.fg-button-icon-right .ui-icon { left: auto; right: .2em; margin-left: 0; }
+
+.fg-button.ui-state-loading .ui-icon { background: url(spinner_bar.gif) no-repeat 0 0; }
+
+.fg-menu-container { z-index: 2147483647; position: absolute; top:0; left:-999px; padding: .4em;  overflow: hidden; }
 .fg-menu-container.fg-menu-flyout { overflow: visible; }
 
 .fg-menu, .fg-menu ul { list-style-type:none; padding: 0; margin:0; }
@@ -17,13 +43,13 @@ Date:		September 2008
 .fg-menu ul { position:absolute; top:0; }
 .fg-menu ul ul { top:-1px; }
 
-.fg-menu-container.fg-menu-ipod .fg-menu-content, 
+.fg-menu-container.fg-menu-ipod .fg-menu-content,
 .fg-menu-container.fg-menu-ipod .fg-menu-content ul { background: none !important; }
 
 .fg-menu.fg-menu-scroll,
 .fg-menu ul.fg-menu-scroll { overflow: scroll;  overflow-x: hidden; }
 
-.fg-menu li { clear:both; float:left; width:100%; margin: 0; padding:0; border: 0; }	
+.fg-menu li { clear:both; float:left; width:100%; margin: 0; padding:0; border: 0; }
 .fg-menu li li { font-size:1em; } /* inner li font size must be reset so that they don't blow up */
 
 .fg-menu-flyout ul ul { padding: .4em; }
@@ -41,7 +67,7 @@ Date:		September 2008
 .fg-menu-breadcrumb li.fg-menu-current-crumb { clear: left; float: none; opacity: 1; }
 .fg-menu-breadcrumb li.fg-menu-current-crumb { padding-top: .2em; }
 
-.fg-menu-breadcrumb a, 
+.fg-menu-breadcrumb a,
 .fg-menu-breadcrumb span { float: left; }
 
 .fg-menu-footer a:link,
@@ -55,10 +81,10 @@ Date:		September 2008
 .fg-menu-breadcrumb .fg-menu-prev-list a:visited,
 .fg-menu-breadcrumb .fg-menu-prev-list a:hover,
 .fg-menu-breadcrumb .fg-menu-prev-list a:active { background-image: none; text-decoration:none; }
-	
+
 .fg-menu-breadcrumb .fg-menu-prev-list a { float: left; padding-right: .4em; }
 .fg-menu-breadcrumb .fg-menu-prev-list a .ui-icon { float: left; }
-	
+
 .fg-menu-breadcrumb .fg-menu-current-crumb a:link,
 .fg-menu-breadcrumb .fg-menu-current-crumb a:visited,
 .fg-menu-breadcrumb .fg-menu-current-crumb a:hover,
@@ -66,7 +92,7 @@ Date:		September 2008
 
 
 
-/* REQUIRED LINK STYLES: links are "display:block" by default; if the menu options are split into 
+/* REQUIRED LINK STYLES: links are "display:block" by default; if the menu options are split into
 	selectable node links and 'next' links, the script floats the node links left and floats the 'next' links to the right	*/
 
 .fg-menu a:link,
@@ -92,12 +118,12 @@ Date:		September 2008
 .fg-menu a span { display:block; cursor:pointer; }
 
 
- /* SUGGESTED STYLES - for use with jQuery UI Themeroller CSS */	
- 
+ /* SUGGESTED STYLES - for use with jQuery UI Themeroller CSS */
+
 .fg-menu-indicator span { float:left; }
 .fg-menu-indicator span.ui-icon { float:right; }
 
-.fg-menu-content.ui-widget-content, 
+.fg-menu-content.ui-widget-content,
 .fg-menu-content ul.ui-widget-content { border:0; }
 
 
