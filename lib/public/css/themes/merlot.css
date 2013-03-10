@@ -31,15 +31,15 @@ pre, pre.highlight, pre.highlight pre {
 }
 
 #pauseScreen {
-    background: rgba(124, 51, 79, 0.85);
+  background: rgba(124, 51, 79, 0.85);
 }
 
 #help {
-    background: #7c334f;
+  background: #7c334f;
 }
 
 #help table tr td.key {
-    border-right: 2px solid #7c334f;
+  border-right: 2px solid #7c334f;
 }
 
 .content.columns h2 {
