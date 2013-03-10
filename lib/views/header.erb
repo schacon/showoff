@@ -5,8 +5,7 @@
 
   <!-- Set up the initial stylesheet -->
 
-  <%= css 'reset.css' %>
-  <%= css 'parade.css' %>
+  <%= css 'reset.css', 'themes/default.css', 'slide_formats.css', 'print.css' %>
 
   <!-- JavaScript Powers This Ship! -->
 
@@ -61,15 +60,11 @@
        the slides  -->
 
   <%= js 'fg.menu.js' %>
-  <%= css 'fg.menu.css' %>
-  <%= css 'theme/ui.all.css' %>
-  <%= css 'jquery-terminal.css' %>
+  <%= css 'fg.menu.css', 'theme/ui.all.css', 'jquery-terminal.css' %>
 
   <!-- Required for the Syntax Highlighting of Code to Work -->
 
   <%= css 'ghf_marked.css' %>
-
-  <%= css 'default.css' %>
 
   <%= plugin_css_files %>
   <%= theme_css %>

@@ -1,0 +1,86 @@
+body {
+    font-size: 100%;
+    font-family: "Gill Sans", Helvetica, Arial, sans-serif;
+    background:#333;
+    overflow:hidden;
+    margin:0;
+    padding:0;
+}
+
+h1,h2,h3 { font-weight: normal; text-align: center; margin: 0.5em 0; }
+h1 { font-size: 5em; }
+h2 { font-size: 3em; }
+h3 { font-size: 2em; }
+
+pre { margin: 1em 40px; padding: .25em; }
+
+#preso, .slide {
+    background: #fff;
+    width: 1024px;
+    height: 768px;
+    margin-left:auto;
+    margin-right:auto;
+    overflow:hidden;
+    -webkit-box-shadow:0 0 25px rgba(0,0,0,0.35);
+    -moz-box-shadow:0 0 25px rgba(0,0,0,0.35);
+    box-shadow:0 0 25px rgba(0,0,0,0.35);
+}
+
+#footer {
+    background: rgba(221,221,221,0.75);
+    color:#333;
+    padding: 2px 5px;
+    width: 1005px;
+    height: 20px;
+    line-height:20px;
+    font-size:14px;
+    position:relative;
+    top:-24px;
+    margin:0 auto;
+    -webkit-border-top-left-radius: 3px;
+    -webkit-border-top-right-radius: 3px;
+    -moz-border-radius-topleft: 3px;
+    -moz-border-radius-topright: 3px;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    z-index: 2147483647;
+}
+
+#pauseScreen {
+    background: rgba(0, 0, 0, 0.85);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    display: none;
+    margin: auto;
+    color: white;
+    font-size: 2em;
+    padding: 1em;
+    z-index: 2147483647;
+    text-align: center;
+}
+
+#debugInfo { margin-left: 30px; }
+#notesInfo { margin-left: 30px; display: none }
+
+#help {
+    background: #9f9;
+    position: absolute;
+    right: 80px;
+    display: none;
+    z-index: 2147483647;  max, see http://www.puidokas.com/max-z-index/
+}
+
+#help table tr td.key {
+    text-align: right;
+    border-right: 2px solid #8b8;
+    padding-right: 4px;
+    font-weight: bold;
+}
+
+.notes { display: none }
+.hidden { position:absolute; top:0; left:-9999px; width:1px; height:1px; overflow:hidden; }
+.offscreen { position:absolute; top:0; left:-9999px; overflow:hidden; }
+.buttonNav { display: none }
