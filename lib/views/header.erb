@@ -5,7 +5,7 @@
 
   <!-- Set up the initial stylesheet -->
 
-  <%= css 'reset.css', 'themes/default.css', 'slide_formats.css', 'print.css' %>
+  <%= css 'reset.css', 'themes/default.css', 'slide_formats.css', 'mobile.css', 'print.css' %>
 
   <!-- JavaScript Powers This Ship! -->
 
@@ -30,6 +30,8 @@
        the presentation is ready to start. -->
 
   <%= js 'jquery.batchImageLoad.js' %>
+
+  <%= js 'hammer.js' %>
 
   <!-- Results from the live executed code is powered by this little js -->
   <%= js 'jquery-print.js' %>
