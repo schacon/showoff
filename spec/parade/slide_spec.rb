@@ -55,6 +55,13 @@ describe Parade::Slide do
       its(:empty?) { should be_true }
     end
 
+    context "when there is no content but the slide is marked as blank" do
+      it "empty? should be false" do
+        subject.metadata = Parade::Metadata.new classes: ["blank"]
+        subject.should_not be_empty
+      end
+    end
+
     context "when there is content" do
       subject { described_class.new :content => 'new content' }
       its(:empty?) { should be_false }

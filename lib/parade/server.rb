@@ -94,15 +94,19 @@ module Parade
       #
       # A shortcut to define a CSS resource file within a view template
       #
-      def css(filepath)
-        %{<link rel="stylesheet" href="#{File.join "css", filepath}" type="text/css"/>}
+      def css(*filepaths)
+        filepaths.map do |filepath|
+          %{<link rel="stylesheet" href="#{File.join "css", filepath}" type="text/css"/>}
+        end.join("\n")
       end
 
       #
       # A shortcut to define a Javascript resource file within a view template
       #
-      def js(filepath)
-        %{<script type="text/javascript" src="#{File.join "js", filepath}"></script>}
+      def js(*filepaths)
+        filepaths.map do |filepath|
+          %{<script type="text/javascript" src="#{File.join "js", filepath}"></script>}
+        end.join("\n")
       end
 
       def custom_resource(resource_extension)
@@ -170,6 +174,10 @@ module Parade
 
       def slides
         presentation.to_html
+      end
+
+      def footer
+        presentation.footer
       end
 
       def pause_message

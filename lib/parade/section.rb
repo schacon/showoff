@@ -145,6 +145,17 @@ module Parade
       ""
     end
 
+    attr_writer :footer
+
+    def footer
+      footer_erb = ERB.new File.read(@footer || default_footer)
+      footer_erb.result(binding)
+    end
+
+    def default_footer
+      File.join(File.dirname(__FILE__), "..", "views", "footer.erb")
+    end
+
     def resources
       @resources || []
     end

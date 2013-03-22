@@ -1,42 +1,66 @@
-!SLIDE
+!SLIDE section-header
 
 # Slide Classes
 
+Use slide classes to help style your slides
+
+!SLIDE title
+
+# !SLIDE title
+
+A traditional title slide
+
+!SLIDE title
+
+## The Markdown
+
+    !SLIDE title
+
+    # Title
+
+    ![octocat](../images/octocat.png)
+
+    A traditional title slide
+
+!SLIDE section-header text-size-90
+
+# !SLIDE section-header
+
+A section title slide (after the middle on the page)
+
 !SLIDE center
 
-## center
+## !SLIDE center
 
 ![octocat](../images/octocat.png)
 
-centers images on a slide
+Everything
 
-!SLIDE
+IS
 
-```
-    !SLIDE center
+**centered**
 
-    ## center
+!SLIDE title-and-content
 
-    ![octocat](../images/octocat.png) 
-```
+# !SLIDE title-and-content
 
-!SLIDE center full-page
+Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
 
-## center full-page
+Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.
 
-![octocat](../images/octocat.png)
+Please don't subject your presentation viewers to slides with this much content. That's just cruel!
 
 !SLIDE columns
 
-# Columns
+# !SLIDE columns
 
 ## One Column
 
 The content will space the length of the entire slide.
 
-!SLIDE columns
+!SLIDE comparison
 
-# Columns
+# !SLIDE comparison
 
 ## Markdown
 
@@ -51,7 +75,7 @@ end
 
 !SLIDE columns
 
-# Columns
+# !SLIDE columns
 
 ## Markdown
 
@@ -69,9 +93,9 @@ end
 > Code will execute live
 
 
-!SLIDE columns
+!SLIDE comparison
 
-# Columns
+# !SLIDE comparison
 
 ## Markdown
 
@@ -119,14 +143,6 @@ sizes and separates bullets properly (fits up to 5, generally)
 
 sizes and separates more bullets (smaller, closer together)
 
-!SLIDE subsection
-
-## subsection
-
-# titles
-
-creates a different background for titles
-
 !SLIDE command
 
 ## command
@@ -145,12 +161,6 @@ response
 for pasted commandline sections (needs leading '$' for commands, then
 output on subsequent lines)
 
-!SLIDE code
-
-## code
-
-monospaces everything on the slide
-
 !SLIDE incremental bullets
 
 ## incremental bullets
@@ -168,17 +178,24 @@ $ command
 response
 ```
 
-!SLIDE small
+!SLIDE text-size-150
 
-## small
+## text-size-150
 
-make all slide text 80%
+make all slide text 150% (largest value)
 
-!SLIDE smaller
+!SLIDE text-size-70
 
-## smaller
+## text-size-70
 
-make all slide text 70%
+make all slide text 70% (smallest value)
+
+!SLIDE
+
+## text-size-(percentage)
+
+note that you may feel free to increment text size by 10 percent
+from 70 to 150. the current slide is set to the standard font size.
 
 !SLIDE execute
 

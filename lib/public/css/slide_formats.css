@@ -1,0 +1,182 @@
+/* Slide Classes */
+
+.title {
+  padding-top: 10%;
+}
+
+.title-and-content .content p {
+  margin: 2em;
+  text-align: left;
+}
+
+.section-header {
+  padding-top: 18%;
+}
+
+/* plain (non-bullet) text */
+.content > p {
+  font-size: 2em;
+    margin: 1em;
+  text-align: center;
+}
+
+.content > pre {
+    font-size: 300%;
+}
+.content > blockquote {
+    font-size: 250%;
+    margin: 2em;
+}
+
+.center img {
+    display:block;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+.slide .center {
+  height: 740px;
+  width: 1020px;
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+}
+
+/* Column Layout */
+
+/* Center the images when they are within a column */
+.content.columns img, .content.comparison img {
+  margin: 0 auto;
+  display: block;
+}
+
+.content.columns .grid_12 p, .content.comparison .grid_12 p {
+  font-size: 200%;
+}
+
+.content.columns .grid_6 p, .content.comparison .grid_6 p {
+  font-size: 150%;
+}
+
+.content.columns .grid_4 p, .content.comparison .grid_4 p {
+  font-size: 125%;
+}
+
+.content.columns pre, .content.comparison pre {
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
+.content.columns .grid_3 p, .content.comparison .grid_3 p {
+  font-size: 100%;
+}
+
+.content.columns h2, .content.comparison h2 {
+  padding-bottom: 10px;
+  border-bottom: 1px dotted black;
+}
+
+/* numbered lists are numbered */
+.content ol {
+    margin-left: 40px;
+  font-size: 3em;
+  text-align: left;
+  padding-left: 40px;
+}
+.content ol > li {
+    list-style: decimal;
+    display: list-item;
+}
+
+
+/* ironically, normal lists have bullets and 'bullets' lists don't */
+.content > ul {
+    list-style: disc;
+}
+.content > ul {
+  font-size: 3em;
+  text-align: left;
+  padding-left: 40px;
+}
+.content > ul > li {
+    padding: .5em;
+    margin-left: 40px;
+}
+
+/* ironically, normal lists have bullets and 'bullets' lists don't */
+.bullets > ul {
+    list-style: none;
+  font-size: 3em;
+  padding-left: 0px;
+}
+.bullets > ul > li {
+    text-align: center;
+    padding: 25px;
+}
+.smbullets > ul {
+    font-size: 2.5em;
+}
+.smbullets > ul > li {
+    text-align: center;
+    padding: 10px;
+}
+
+/* nested lists get their bullets back */
+.content ul ul {
+  list-style: disc;
+  margin: 10px 10px;
+  padding-left: 40px;
+  text-align: left;
+}
+
+.bullets ul ul > li { font-size: 80%; }
+
+.commandline pre {
+    font-size: 2em;
+}
+
+.commandline code.command {
+    color: #000;
+}
+
+.commandline code.result {
+    color: #444;
+}
+
+.command h1 {
+    white-space: pre;
+    font-family: monospace;
+    font-size: 3em;
+}
+
+.text-size-150 { font-size: 150%; }
+.text-size-140 { font-size: 140%; }
+.text-size-130 { font-size: 130%; }
+.text-size-120 { font-size: 120%; }
+.text-size-110 { font-size: 110%; }
+.text-size-90  { font-size: 90%; }
+.text-size-80  { font-size: 80%; }
+.text-size-70  { font-size: 70%; }
+
+.results {
+  background-color:#002200;
+  color:#00AA00;
+  font-size:2em;
+  border:2px solid black;
+  position: fixed;
+  top:0px;
+  width:100%;
+  padding:15px;
+  margin:0px;
+  font-family: monospace;
+  z-index: 2147483647; /* max, see http://www.puidokas.com/max-z-index/ */
+}
+
+.executing {
+  color:#0000FF !important;
+  background-color: yellow;
+}
+
+.executing:hover {
+  cursor: pointer;
+}

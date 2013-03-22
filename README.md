@@ -260,24 +260,27 @@ All remaining single terms are added as css classes to the slide's `div`.
 
 Parade defines a number of special CSS classes:
 
+> ### title
+> places the content closer to the center of the page
+>
 > ### center
 > centers images on a slide
 >
-> ### full-page
-> allows an image to take up the whole slide
+> ### title-and-content
+> places the title at the top and the content is left-aligned below it.
+>
+> ### section-header
+> similar to a `title` class except it is a litle further down the page.
 >
 > ### bullets
 > sizes and separates bullets properly (fits up to 5, generally)
 >
-> ### columns
+> ### columns / comparison
 >
 > creates columns for every `##` markdown element in your slides (up to 4)
 >
 > ### smbullets
 > sizes and separates more bullets (smaller, closer together)
->
-> ### subsection
-> creates a different background for titles
 >
 > ### command
 > monospaces h1 title slides
@@ -286,22 +289,21 @@ Parade defines a number of special CSS classes:
 > for pasted commandline sections (needs leading '$' for commands, then
 > output on subsequent lines)
 >
-> ### code
-> monospaces everything on the slide
->
 > ### incremental
 > can be used with 'bullets' and 'commandline' styles, will incrementally
 >  update elements on arrow key rather than switch slides
 >
-> ### small
-> make all slide text 80%
->
-> ### smaller
-> make all slide text 70%
+> ### text-size-(percentage)
+> make all slide text size from 70% up to 150%, by percent increments of
+> ten. E.G.: text-size-150, text-size-120, text-size-90, text-size-70.
 >
 > ### execute
 > on Javascript and Coffeescript highlighted code slides, you can
 > click on the code to execute it and display the results on the slide
+>
+> ### blank
+> a slide without content is removed unless you specify that the slide is
+> blank.
 
 
 # Presentation Customization
@@ -328,6 +330,32 @@ end
 * hack
 * merlot
 * slate
+
+### Customized Footer
+
+The presentation has the following default footer:
+
+```html
+<div id="footer">
+  <span id="slideInfo"></span>
+  <span id="debugInfo"></span>
+  <span id="notesInfo"></span>
+</div>
+```
+
+You can override the default footer of the presentation by specifying a file path to a customized footer.
+
+```ruby
+title "My Presentation"
+
+footer "custom_footer.erb"
+
+section "Introduction" do
+  slides "intro.md"
+end
+```
+
+This example will load a file named `customer_footer.erb` within your presentation directory.
 
 ## Loading Custom CSS and JavaScript
 
