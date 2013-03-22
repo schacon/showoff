@@ -10,7 +10,7 @@ Parade is easily out-done by professional presentation software packages as
 far as out-of-the-box style and design. However, there are benefits that
 Parade has over presentational software:
 
-### The Good
+### Highlights
 
 * Markdown backed data
 
@@ -21,28 +21,29 @@ Parade has over presentational software:
 * Syntax Highlighting
 
     > Using GitHub flavored markdown, code fences will automatically be
-    syntax highlighted making it incredibly easy to integrate code samples.
+    syntax highlighted, making it incredibly easy to integrate code samples.
 
 * Code Execution
 
-    > Slides are able to provide execution and show results for JavaScript,
+    > Slides are able to provide execution and show results for JavaScript
     and Coffeescript live within the browser. This allows for live
     demonstrations of code.
 
 * Web
 
-    > The system is simply a website which allows for a lot of possibilities.
+    >Slide presentations are basically websites -- they run in your browser from your desktop. This allows for a wide range of possibilities for customization and expandability.
 
-### The Ugly
+* Basic Templating and Color Schemes
 
-* Lack of style
+    > Several templates and color scheme options have been provided to help you get started. While Parade does not currently provide anything near the variety of many other presentation packages, it is well-suited for basic presentations.
 
-    > Most presentation packages have better templates.
-
-* Speed of Layout and Animation
+* Design Flexibility (pros and cons)
 
     > Unless you're skilled in CSS/Animations, you will likely have a harder
-    time creating presentations with as much polish as other programs provide.
+    time creating presentations with as much polish as other programs provide. However, this approach also makes Parade incredibly flexible if you do understand CSS/Animations.
+
+
+### Works In Progress
 
 * Resizing
 
