@@ -109,3 +109,11 @@ a {
   color: #63c0f5;
   text-shadow: 0 0 5px rgba(104, 182, 255, 0.5);
 }
+
+
+@media all and (device-width: 768px) and (device-height: 1024px) and (orientation:portrait) {
+  h1 { font-size: 3em; }
+  h2 { font-size: 1em; }
+  h3 { font-size: 0.5em; }
+
+}

@@ -16,7 +16,6 @@
 body {
   min-width: 960px;
 }
-
 /* `Container
 ----------------------------------------------------------------------------------------------------*/
 
@@ -26,6 +25,7 @@ body {
   margin-right: auto;
   width: 960px;
 }
+
 
 /* `Grid >> Global
 ----------------------------------------------------------------------------------------------------*/
@@ -650,4 +650,62 @@ body {
 .container_12,
 .container_16 {
   zoom: 1;
+}
+
+
+
+/* Overrides for smaller screens and devices */
+
+@media all and (device-width: 768px) and (device-height: 1024px) and (orientation:portrait) {
+  body { min-width: 768px; }
+  .container_12, .container_16 { width: 768px;}
+
+  .container_12 .grid_12 {
+    width: 752px;
+  }
+
+  .container_12 .grid_11 {
+    width: 688px;
+  }
+
+  .container_12 .grid_10 {
+    width: 624px;
+  }
+
+  .container_12 .grid_9 {
+    width: 560px;
+  }
+
+  .container_12 .grid_8 {
+    width: 496px;
+  }
+
+  .container_12 .grid_7 {
+    width: 432px;
+  }
+
+  .container_12 .grid_6 {
+    width: 360px;
+  }
+
+  .container_12 .grid_4 {
+    width: 236px;
+  }
+
+  .container_12 .grid_5 {
+    width: 304px;
+  }
+
+  .container_12 .grid_3 {
+    width: 172px;
+  }
+
+  .container_12 .grid_2 {
+    width: 112px;
+  }
+
+  .container_12 .grid_1 {
+    width: 48px;
+  }
+
 }
