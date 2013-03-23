@@ -188,6 +188,16 @@
 }
 
 
+
+/* iPad Landscape */
+@media all and (device-width: 768px) and (device-height: 1024px) and (orientation:landscape) {
+
+  pre.highlight pre, pre.highlight, pre {
+    font-size: 20px;
+    line-height: 20px;
+  }
+}
+
 /* iPad Portrait */
 
 @media all and (device-width: 768px) and (device-height: 1024px) and (orientation:portrait) {
@@ -213,11 +223,6 @@
     font-size: 16px;
     line-height: 16px;
   }
-
-  .content > pre {
-    font-size: 100%;
-  }
-
 }
 
 /* iPhone */
@@ -245,12 +250,9 @@
     font-size: 50%;
   }
 
-  .content > pre {
-    font-size: 100%;
-  }
-
   .bullets > ul > li { padding: 5px; }
   .smbullets > ul > li { padding: 5px; }
+
   pre.highlight pre, pre.highlight, pre {
     font-size: 12px;
     line-height: 12px;
