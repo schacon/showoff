@@ -3,9 +3,14 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
+  <%= css 'reset.css' %>
   <%= css '960.css' %>
-  <%= erb :header %>
+  <%= css 'ghf_marked.css' %>
+  <%= css 'themes/default.css', 'slide_formats.css' %>
   <%= css 'print.css' %>
+  <%= plugin_css_files %>
+  <%= theme_css %>
+  <%= custom_css_files %>
 </head>
 
 <body>

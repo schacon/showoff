@@ -36,6 +36,7 @@ module Parade
 
         template_options = {  'erb_template_file' => File.join(default_view_path, "#{options['template']}.erb"),
                               'custom_asset_path' => root_path,
+                              'presentation' => root_node,
                               'slides' => root_node.to_html }
 
         render_template template_options

@@ -50,12 +50,12 @@ module Parade
       end
     end
 
-    def custom_js_files
-      if custom_asset_path
-        Dir.glob("#{custom_asset_path}**/*.js").map do |path|
-          js_template(path).render
-        end.join("\n")
-      end
+    #
+    # This helper method is called within the header to return the theme specified
+    # by the preseation
+    #
+    def theme_css
+      css("themes/#{presentation.theme}.css") if presentation.theme
     end
 
     #
@@ -78,6 +78,7 @@ module Parade
       template_file = ERB.new File.read(erb_template_file)
       template_file.result(binding)
     end
+
   end
 
   #

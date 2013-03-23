@@ -16,7 +16,7 @@ module Parade
       end
 
       def generate(options)
-        options.merge!('template' => 'onepage')
+        options.merge!('template' => 'print')
 
         html_generator = HtmlOutput.new
         html_content = html_generator.generate(options)
