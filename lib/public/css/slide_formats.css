@@ -23,6 +23,7 @@
 .content > pre {
   font-size: 300%;
 }
+
 .content > blockquote {
   font-size: 250%;
   margin: 2em;
@@ -212,6 +213,11 @@
     font-size: 16px;
     line-height: 16px;
   }
+
+  .content > pre {
+    font-size: 100%;
+  }
+
 }
 
 /* iPhone */
@@ -237,6 +243,10 @@
 
   .content.columns .grid_4 p, .content.comparison .grid_4 p {
     font-size: 50%;
+  }
+
+  .content > pre {
+    font-size: 100%;
   }
 
   .bullets > ul > li { padding: 5px; }
