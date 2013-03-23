@@ -28,8 +28,8 @@ module Parade
     #
     # @param [String] filepath the filepath to the javascript file
     # @return [String] HTML content that is inlined javascript data
-    def js(filepath)
-      js_template(filepath).render
+    def js(*filepaths)
+      filepaths.map {|filepath| js_template(filepath).render }.join("\n")
     end
 
     #
@@ -38,8 +38,8 @@ module Parade
     # @param [String] filepath the filepath to the stylesheet file
     # @return [String] HTML content that is inlined stylesheet data
     #
-    def css(filepath)
-      css_template(filepath).render
+    def css(*filepaths)
+      filepaths.map {|filepath| css_template(filepath).render }.join("\n")
     end
 
     def custom_css_files
@@ -50,12 +50,12 @@ module Parade
       end
     end
 
-    def custom_js_files
-      if custom_asset_path
-        Dir.glob("#{custom_asset_path}**/*.js").map do |path|
-          js_template(path).render
-        end.join("\n")
-      end
+    #
+    # This helper method is called within the header to return the theme specified
+    # by the preseation
+    #
+    def theme_css
+      css("themes/#{presentation.theme}.css") if presentation.theme
     end
 
     #
@@ -78,14 +78,15 @@ module Parade
       template_file = ERB.new File.read(erb_template_file)
       template_file.result(binding)
     end
+
   end
 
   #
   # Generate inline CSS assets. Using CssParser it is able to traverse imports
   # to ensure all CSS is inlined within the document.
-  # 
+  #
   # Also embeds all images contained within the CSS into the inlined CSS.
-  # 
+  #
   class CSSTemplateGenerator < TemplateGenerator
     include Helpers::EncodeImage
 

@@ -1,40 +1,29 @@
-/** Print **/
-@media print {
+/* Screen */
+@media screen {
   body {
-    font-size: 70%;
+    overflow:scroll;
   }
-
-  #preso, .slide {
-    border: 1px solid #999;
-  }
-
-  .slide .center {
-    width: 600px;
-    height: 600px;
-    display: table-cell;
-    text-align: center;
-    vertical-align: middle;
-  }
-
-  #preso, .slide {
-      background: #fff;
-      width: 600px;
-      height: 600px;
+  .slide {
+      margin: 10px;
+      padding: 0;
+      width: 1020px;
+      height: 740px;
+      max-height: 740px !important;
       margin-left:auto;
       margin-right:auto;
       overflow:hidden;
+      border: 1px solid #333;
+      page-break-after: always;
   }
+}
 
-  #footer {
-      background: #eee;
-      padding: 2px;
-      width: 590px;
-      height: 20  px;
-      margin-left:auto;
-      margin-right:auto;
-  }
-
-  pre, code {
-    font-family: Monaco, monospace;
+/* Print */
+@media print {
+  .slide, .preso {
+      margin: 10px;
+      padding: 0;
+      overflow:hidden;
+      border: none;
+      page-break-after: always;
   }
 }
