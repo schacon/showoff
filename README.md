@@ -82,7 +82,7 @@ or show the end result of the code execution.
 >
 > Move to the previous slide
 >
-> ### *z* or *?*
+> ### *h* or *?*
 >
 > Toggle help
 >
@@ -90,17 +90,9 @@ or show the end result of the code execution.
 >
 > Toggle footer (which shows slide count of total slides, percentage)
 >
-> ### *d*
->
-> Toggle DEBUG information
->
 > ### *c* or *t*
 >
 > Toggle the display of the Table of Contents
->
-> ### *p*
->
-> Toggle pre-show
 >
 > ### Visit "http://localhost:9090/print"
 >
