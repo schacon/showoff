@@ -5,7 +5,13 @@
 
   <!-- Set up the initial stylesheet -->
 
-  <%= css 'reset.css', 'themes/default.css', 'slide_formats.css', 'mobile.css', 'print.css' %>
+  <%= css 'reset.css' %>
+
+  <!-- Required for the Syntax Highlighting of Code to Work -->
+
+  <%= css 'ghf_marked.css' %>
+
+  <%= css 'themes/default.css', 'slide_formats.css', 'mobile.css', 'print.css' %>
 
   <!-- JavaScript Powers This Ship! -->
 
@@ -63,10 +69,6 @@
 
   <%= js 'fg.menu.js' %>
   <%= css 'fg.menu.css', 'theme/ui.all.css', 'jquery-terminal.css' %>
-
-  <!-- Required for the Syntax Highlighting of Code to Work -->
-
-  <%= css 'ghf_marked.css' %>
 
   <%= plugin_css_files %>
   <%= theme_css %>

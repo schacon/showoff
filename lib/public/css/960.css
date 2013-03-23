@@ -654,58 +654,27 @@ body {
 
 
 
-/* Overrides for smaller screens and devices */
+/* Overrides for iPad and devices */
 
 @media all and (device-width: 768px) and (device-height: 1024px) and (orientation:portrait) {
   body { min-width: 768px; }
-  .container_12, .container_16 { width: 768px;}
 
-  .container_12 .grid_12 {
-    width: 752px;
-  }
+  .container_12 { width: 768px;}
+  .container_12 .grid_12 { width: 752px; }
+  .container_12 .grid_6 { width: 360px; }
+  .container_12 .grid_4 { width: 236px; }
+  .container_12 .grid_3 { width: 172px; }
+}
 
-  .container_12 .grid_11 {
-    width: 688px;
-  }
+/* Overrides for iPhone and devices */
 
-  .container_12 .grid_10 {
-    width: 624px;
-  }
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+  body { min-width: 480px; }
 
-  .container_12 .grid_9 {
-    width: 560px;
-  }
-
-  .container_12 .grid_8 {
-    width: 496px;
-  }
-
-  .container_12 .grid_7 {
-    width: 432px;
-  }
-
-  .container_12 .grid_6 {
-    width: 360px;
-  }
-
-  .container_12 .grid_4 {
-    width: 236px;
-  }
-
-  .container_12 .grid_5 {
-    width: 304px;
-  }
-
-  .container_12 .grid_3 {
-    width: 172px;
-  }
-
-  .container_12 .grid_2 {
-    width: 112px;
-  }
-
-  .container_12 .grid_1 {
-    width: 48px;
-  }
+  .container_12 { width: 480px; }
+  .container_12 .grid_12 { width: 480px; }
+  .container_12 .grid_6 { width: 220px; }
+  .container_12 .grid_4 { width: 140px; }
+  .container_12 .grid_3 { width: 100px; }
 
 }

@@ -102,7 +102,14 @@ pre { margin: 1em 40px; padding: .25em; }
     h1 { font-size: 3em; }
     h2 { font-size: 2em; }
     h3 { font-size: 1em; }
+}
 
-    pre.highlight pre, pre.highlight, pre { font-size: 12px; }
-
+/* iPhone Landscape */
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+    body { min-width: 480px; min-height: 300px; }
+    #preso, .slide { height: 300px; width: 480px; }
+    #footer { width: 400px; }
+    h1 { font-size: 1em; }
+    h2 { font-size: 0.75em; }
+    h3 { font-size: 0.5em; }
 }
