@@ -84,32 +84,3 @@ pre { margin: 1em 40px; padding: .25em; }
 .hidden { position:absolute; top:0; left:-9999px; width:1px; height:1px; overflow:hidden; }
 .offscreen { position:absolute; top:0; left:-9999px; overflow:hidden; }
 .buttonNav { display: none }
-
-/* iPad Landscape */
-
-@media all and (device-width: 768px) and (device-height: 1024px) and (orientation:landscape) {
-    body { width: 1024px; height: 675px; }
-    #preso, .slide { width: 1024px; height: 675px; }
-    #footer { width: 1005px; }
-}
-
-/* iPad Portrait */
-
-@media all and (device-width: 768px) and (device-height: 1024px) and (orientation:portrait) {
-    body { min-width: 768px; }
-    #preso, .slide { height: 720px; width: 768px; }
-    #footer { width: 755px; }
-    h1 { font-size: 3em; }
-    h2 { font-size: 2em; }
-    h3 { font-size: 1em; }
-}
-
-/* iPhone Landscape */
-@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
-    body { min-width: 480px; min-height: 300px; }
-    #preso, .slide { height: 300px; width: 480px; }
-    #footer { width: 400px; }
-    h1 { font-size: 1em; }
-    h2 { font-size: 0.75em; }
-    h3 { font-size: 0.5em; }
-}

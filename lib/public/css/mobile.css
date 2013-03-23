@@ -1,45 +1,129 @@
 
-/* iPhone */
-/* Portrait */
-@media screen and (max-width: 320px)
-{
-  #preso {
-      margin: 0;
-      padding: 0;
-      width: 320px;
-      max-height: 356px;
-      margin-left:auto;
-      margin-right:auto;
-/*      overflow:hidden;*/
-  }
-  #footer {
-      background: #eee;
-      margin: 0;
-      padding: 2px;
-      width: 320px;
-      height: 20px;
-      margin-left:auto;
-      margin-right:auto;
+/* iPad Landscape */
+@media all and (device-width: 768px) and (device-height: 1024px) and (orientation:landscape) {
+  body { width: 1024px; height: 675px; }
+  #preso, .slide { width: 1024px; height: 675px; }
+  #footer { width: 1005px; }
+
+  pre.highlight pre, pre.highlight, pre {
+    font-size: 20px;
+    line-height: 20px;
   }
 }
-/* Landscape */
-@media screen and (max-width: 480px)
-{
+
+/* iPad Portrait */
+@media all and (device-width: 768px) and (device-height: 1024px) and (orientation:portrait) {
+  body { min-width: 768px; }
+  #preso, .slide { height: 720px; width: 768px; }
+  #footer { width: 755px; }
+  h1 { font-size: 3em; }
+  h2 { font-size: 2em; }
+  h3 { font-size: 1em; }
+
+  .content > p { font-size: 1.4em; }
+  .content ol { font-size: 1.5em; }
+  .content > ul { font-size: 2em; }
+  .bullets > ul { font-size: 2em; }
+  .smbullets > ul { font-size: 1.5em; }
+
+  .content.columns .grid_12 p, .content.comparison .grid_12 p {
+    font-size: 125%;
+  }
+
+  .content.columns .grid_6 p, .content.comparison .grid_6 p {
+    font-size: 100%;
+  }
+
+  .content.columns .grid_4 p, .content.comparison .grid_4 p {
+    font-size: 75%;
+  }
+
+  pre.highlight pre, pre.highlight, pre {
+    font-size: 16px;
+    line-height: 16px;
+  }
+}
+
+/* iPhone Portrait and Landscape */
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+  h1 { font-size: 1em; }
+  h2 { font-size: 0.75em; }
+  h3 { font-size: 0.5em; }
+
+  .content > p { font-size: 0.7em; }
+  .content ol { font-size: 0.8em; }
+  .content > ul { font-size: 1em; }
+  .bullets > ul { font-size: 1em; }
+  .smbullets > ul { font-size: 0.8em; }
+
+  .title { padding-top: 5%; }
+  .section-header { padding-top: 12%; }
+  .content > blockquote { font-size: 100%; }
+
+  .content.columns .grid_12 p, .content.comparison .grid_12 p {
+    font-size: 100%;
+  }
+
+  .content.columns .grid_6 p, .content.comparison .grid_6 p {
+    font-size: 75%;
+  }
+
+  .content.columns .grid_4 p, .content.comparison .grid_4 p {
+    font-size: 50%;
+  }
+
+  .bullets > ul > li { padding: 5px; }
+  .smbullets > ul > li { padding: 5px; }
+
+  pre.highlight pre, pre.highlight, pre {
+    font-size: 12px;
+    line-height: 12px;
+  }
+}
+
+/* iPhone Portrait */
+@media screen and (max-width: 320px) and (orientation:portrait) {
+  body { min-width: 320px; }
+  #preso, .slide { height: 300px; width: 320px; }
   #preso {
-      margin: 0;
-      padding: 0;
-/*      min-height: 320px;*/
-      width: 480px;
-      margin-left:auto;
-      margin-right:auto;
+    margin: 0;
+    padding: 0;
+    width: 320px;
+    max-height: 356px;
+    margin-left:auto;
+    margin-right:auto;
+  }
+
+  #footer {
+    background: #eee;
+    margin: 0;
+    padding: 2px;
+    width: 300px;
+    height: 20px;
+    margin-left:auto;
+    margin-right:auto;
+  }
+}
+
+/* iPhone Landscape */
+@media screen and (max-width: 480px) and (orientation:landscape) {
+  body { min-width: 480px; min-height: 300px; height: 320px; }
+  #preso, .slide { height: 300px; width: 480px; }
+  #preso {
+    margin: 0;
+    padding: 0;
+    height: 320px;
+    width: 480px;
+    margin-left:auto;
+    margin-right:auto;
   }
   #footer {
-      background: #eee;
-      margin: 0;
-      padding: 2px;
-      width: 480px;
-      height: 20px;
-      margin-left:auto;
-      margin-right:auto;
+    background: #eee;
+    margin: 0;
+    padding: 2px;
+    width: 470px;
+    height: 20px;
+    margin-left:auto;
+    margin-right:auto;
   }
 }
