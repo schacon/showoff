@@ -206,8 +206,8 @@ module Parade
       erb :index
     end
 
-    get "/onepage" do
-      erb :onepage
+    get "/print" do
+      erb :print
     end
 
   end
