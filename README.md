@@ -1,8 +1,8 @@
 # Parade Presentation Software
 
-Parade is a Sinatra web app that reads serves up markdown files in a
-presentation format. Parade can serve a directory or be configured to run with
-a simple configuration file.
+Parade is an open source presentation software that consists of a Sinatra web
+app that serves up markdown files in a presentation format. Parade can serve a
+directory or be configured to run with a simple configuration file.
 
 ## Comparison Vs PowerPoint / Keynote
 
@@ -10,7 +10,7 @@ Parade is easily out-done by professional presentation software packages as
 far as out-of-the-box style and design. However, there are benefits that
 Parade has over presentational software:
 
-### The Good
+### Highlights
 
 * Markdown backed data
 
@@ -21,34 +21,34 @@ Parade has over presentational software:
 * Syntax Highlighting
 
     > Using GitHub flavored markdown, code fences will automatically be
-    syntax highlighted making it incredibly easy to integrate code samples
+    syntax highlighted, making it incredibly easy to integrate code samples.
 
 * Code Execution
 
-    > Slides are able to provide execution and show results for JavaScript,
-    and Coffeescript live within the browser. Allowing for live
+    > Slides are able to provide execution and show results for JavaScript
+    and Coffeescript live within the browser. This allows for live
     demonstrations of code.
 
 * Web
 
-    > The system is simply a website which allows for a lot of possibilities
+    >Slide presentations are basically websites -- they run in your browser from your desktop. This allows for a wide range of possibilities for customization and expandability.
 
-### The Ugly
+* Basic Templating and Color Schemes
 
-* Lack of style
+    > Several templates and color scheme options have been provided to help you get started. While Parade does not currently provide anything near the variety of many other presentation packages, it is well-suited for basic presentations.
 
-    > Most presentation packages are going to provide for you better templates
+* Design Flexibility (pros and cons)
 
-* Speed of Layout and Animation
+    > Unless you're skilled in CSS/Animations, you will likely have a harder
+    time creating presentations with as much polish as other programs provide. However, this approach also makes Parade incredibly flexible if you do understand CSS/Animations.
 
-    > Unless you're skills are great with CSS/Animations, you are likely going
-    to have a harder time creating presentations with as much polish.
+
+### Works In Progress
 
 * Resizing
 
-    > Currently the presentation system can change gradual sizes, but is not
-    very capable of growing well to the full resolution of current presentation
-    resolution.
+    > Currently, the presentation system can change gradual sizes, but does not
+    have true full screen mode.
 
 # Installation and Usage
 
@@ -62,9 +62,9 @@ $ gem install parade
 $ parade
 ```
 
-By default running parade with start a presentation from the current working
-directory. It will find all markdown files, `**/*.md`, within the directory
-and create a presentation out of them.
+By default, running parade starts a presentation from the current working
+directory. It finds all markdown files, `**/*.md`, within the directory
+and creates a presentation out of them.
 
 >  By default parade will split slides along lines that start with a single `#`
 
@@ -109,12 +109,12 @@ or show the end result of the code execution.
 $ parade [directory]
 ```
 
-This will start a presentation from the specified directory. Again, finding all
+This will start a presentation from the specified directory, finding all
 markdown files contained within the directories or sub-directories.
 
 ### Serving specific files
 
-To include certain files, specify an order, duplicate slides, you will need to
+To include certain files, specify an order, or duplicate slides, you will need to
 define a `parade` file. Within that file, you may define specific files,
 specific folders, and the order of the presentation.
 
@@ -124,12 +124,12 @@ slides "intro.md"
 section "directory_name"
 ```
 
-> **slides** and **section** are exactly the same, however you may choose to
-  use one over the other depending of you are mentioning a specific file of
+> **slides** and **section** are exactly the same. However, you may choose to
+  use one over the other depending on if you are mentioning a specific file of
   slides or a directory which could contain another `parade` or be considered
   a section.
 
-You can so define sub sections with a title and slides or additional sections.
+You can also define sub-sections with a title and slides or additional sections.
 
 ```ruby
 
@@ -152,12 +152,12 @@ end
 
 ### Separator: **#**
 
-Slides are simply markdown format. As stated previously, slides will be
-separated along the `#`elements within your document.
+Slides are simply markdown format. Slides will be separated along
+the `#`elements within your document.
 
 ### Separator: !SLIDE
 
-Relying on the `#` as a separator is not always ideal. So you may alternatively
+Relying on the `#` as a separator is not always ideal. Alternatively, you can
 use the `!SLIDE` separator. This also provides you with the ability to define
 additional metadata with your slides and presentation.
 
@@ -536,7 +536,7 @@ Shows list of commands or help for one command
 
 Create new parade presentation
 
-This command helps start a new parade presentation by setting up the proper directory structure for you.  It takes the directory name you would like parade to create for you.
+This command helps start a new parade presentation by setting up the proper directory structure for you.  It takes the directory name you would like Parade to create for you.
 
 > ### Options
 >
