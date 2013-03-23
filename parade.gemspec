@@ -22,7 +22,7 @@ Gem::Specification.new do |s|
   s.add_dependency      "blankslate", '2.1.2.4'
   s.add_dependency      "gli","~> 1.6.0"
   s.add_dependency      "parslet", "1.4.0"
-  s.add_dependency      "rouge", '~> 0.2.15'
+  s.add_dependency      "rouge", '0.2.14'
   s.add_dependency      "css_parser"
   s.add_development_dependency "mg"
   s.description       = <<-desc
