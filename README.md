@@ -73,12 +73,12 @@ and creates a presentation out of them.
 
 You can manage the presentation with the following keys:
 
-> ### *space* or *cursor right*
+> ### *space* or *cursor right* or *cursor down*
 >
 > Advance to the next slide or advance the next incremental bullet point
 or show the end result of the code execution.
 >
-> ### *shift-space* or *cursor left*
+> ### *shift-space* or *cursor left* or *cursor up*
 >
 > Move to the previous slide
 >
@@ -101,7 +101,11 @@ or show the end result of the code execution.
 > ### *p*
 >
 > Toggle pre-show
-
+>
+> ### Visit "http://localhost:9090/print"
+>
+> Visiting this URL will generate a single page presentation that is printable
+>
 
 ### Serving a specific directory
 
