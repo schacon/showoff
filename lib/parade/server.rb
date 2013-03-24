@@ -172,8 +172,8 @@ module Parade
         presentation.title
       end
 
-      def slides
-        presentation.to_html
+      def slides(options = {})
+        presentation.to_html(options)
       end
 
       def footer
@@ -198,8 +198,11 @@ module Parade
     # The request for slides is used by the client-side javascript presentation
     # and returns all the slides HTML.
     #
+    # A hash of params may contain:
+    #   * height - the current height of the window
+    #   * width - the current width of the window
     get "/slides" do
-      slides
+      slides(params)
     end
 
     get "/" do
