@@ -54,9 +54,10 @@ command [:s,:serve,:server] do |c|
     puts "
 -------------------------
 
-your Parade presentation is now starting up.
+  Your Parade presentation is now starting up.
 
-To view it plainly, visit [ #{url} ]
+  To view it visit [ #{url} ]
+  To view a printable version [ #{url}/print ]
 
 -------------------------
 
