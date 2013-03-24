@@ -194,10 +194,10 @@ module Parade
     end
 
     # @return [String] HTML representation of the section
-    def to_html
+    def to_html(options = {})
       slides.map do |section_or_slide|
         post_renderers.inject(section_or_slide.to_html) do |content,renderer|
-          renderer.render(content)
+          renderer.render(content,options)
         end
       end.join("\n")
     end

@@ -26,46 +26,49 @@ module Parade
       end
 
       def render(content,options = {})
+        # puts "UpdateImagePaths: #{options}"
         render_root_path = options[:root_path] || root_path || "."
 
         content.gsub(/img src=["'](?!https?:\/\/)\/?([^\/].*?)["']/) do |image_source|
           image_name = Regexp.last_match(1)
-          
+
           html_image_path = File.join("/","image",image_name)
           updated_image_source = %{img src="#{html_image_path}"}
 
           html_asset_path = File.join(render_root_path,image_name)
-          width, height = get_image_size(html_asset_path)
+          width, height = get_image_size(html_asset_path,options)
           updated_image_source << %( width="#{width}" height="#{height}") if width and height
 
           updated_image_source
         end
       end
 
-      def get_image_size(path) ; end
+      def get_image_size(path,options={}) ; end
 
       if defined?(Magick)
 
-        def get_image_size(path)
-          unless cached_image_size.key?(path)
+        def get_image_size(path,options={})
+          image = Magick::Image.ping(path).first
+          # image = Magick::Image.read(path).first
+          # # don't set a size for svgs so they can expand to fit their container
+          if image.mime_type == 'image/svg+xml'
+            [nil, nil]
+          else
 
-            image = Magick::Image.ping(path).first
+            final_width = image.columns
+            final_height = image.rows
 
-            # # don't set a size for svgs so they can expand to fit their container
-            if image.mime_type == 'image/svg+xml'
-              cached_image_size[path] = [nil, nil]
-            else
-              cached_image_size[path] = [image.columns, image.rows]
+            if !options[:width].nil? && image.columns.to_i > options[:width].to_i
+              final_width = (options[:width].to_f - 100) / image.columns * image.columns
             end
 
+            if !options[:height].nil? && image.rows.to_i > options[:height].to_i
+              final_height = (options[:height].to_f - 100) / image.rows * image.rows
+            end
+
+            [final_width, final_height]
           end
-          cached_image_size[path]
         end
-
-        def cached_image_size
-          @cached_image_size ||= {}
-        end
-
 
       end
 

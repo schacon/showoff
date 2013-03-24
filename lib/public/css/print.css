@@ -1,3 +1,6 @@
+body { overflow:scroll; }
+.slide, .preso { margin: 10px; }
+
 @media print {
   body { background: none; overflow:scroll; }
   .slide, .preso {
