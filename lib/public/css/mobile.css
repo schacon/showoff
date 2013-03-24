@@ -103,6 +103,15 @@
     margin-left:auto;
     margin-right:auto;
   }
+
+  .slide .center {
+    height: 300px;
+    width: 320px;
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+  }
+
 }
 
 /* iPhone Landscape */
@@ -125,6 +134,14 @@
     height: 20px;
     margin-left:auto;
     margin-right:auto;
+  }
+
+  .slide .center {
+    height: 320px;
+    width: 480px;
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
   }
 }
 
