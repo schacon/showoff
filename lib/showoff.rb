@@ -220,6 +220,7 @@ class ShowOff < Sinatra::Application
         end
         sl = Tilt[:markdown].new { slide.text }.render
         sl = update_image_paths(name, sl, static, pdf)
+        sl = update_codeblock_links(sl)
         content += sl
         content += "</div>\n"
 
@@ -260,6 +261,20 @@ class ShowOff < Sinatra::Application
     # find any lines that start with a <p>.(something) and turn them into <p class="something">
     def update_p_classes(markdown)
       markdown.gsub(/<p>\.(.*?) /, '<p class="\1">')
+    end
+
+    def update_codeblock_links(slide)
+      replacements = []
+      slide.scan(/<code>[^<]*\.com\/[^<]*<\/code>/) do |x|
+        match_data = x.match(/<code>([^<]*)<\/code>/)
+        url_to_show = match_data[1]
+        url_to_link = "http://#{url_to_show}".gsub(/\s/,"")
+        replacements << [match_data[0], "<a href='#{url_to_link}'><code>#{url_to_show}</code></a>"]
+      end
+      replacements.each do |a,b|
+        slide = slide.gsub(a,b)
+      end
+      slide
     end
 
     def update_image_paths(path, slide, static=false, pdf=false)
