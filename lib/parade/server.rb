@@ -91,12 +91,17 @@ module Parade
 
     helpers do
 
+      def presentation_path_prefix
+        env['SCRIPT_NAME'].to_s
+      end
+
       #
       # A shortcut to define a CSS resource file within a view template
       #
       def css(*filepaths)
         filepaths.map do |filepath|
-          %{<link rel="stylesheet" href="#{File.join "css", filepath}" type="text/css"/>}
+          css_path = File.join(presentation_path_prefix,"css",filepath)
+          %{<link rel="stylesheet" href="#{css_path}" type="text/css"/>}
         end.join("\n")
       end
 
@@ -105,7 +110,8 @@ module Parade
       #
       def js(*filepaths)
         filepaths.map do |filepath|
-          %{<script type="text/javascript" src="#{File.join "js", filepath}"></script>}
+          js_path = File.join(presentation_path_prefix,"js",filepath)
+          %{<script type="text/javascript" src="#{js_path}"></script>}
         end.join("\n")
       end
 
@@ -173,6 +179,7 @@ module Parade
       end
 
       def slides(options = {})
+        options = { presentation_path_prefix: presentation_path_prefix }
         presentation.to_html(options)
       end
 

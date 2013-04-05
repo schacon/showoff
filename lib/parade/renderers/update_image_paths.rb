@@ -32,7 +32,9 @@ module Parade
         content.gsub(/img src=["'](?!https?:\/\/)\/?([^\/].*?)["']/) do |image_source|
           image_name = Regexp.last_match(1)
 
-          html_image_path = File.join("/","image",image_name)
+          presentation_path_prefix = options[:presentation_path_prefix].to_s
+
+          html_image_path = File.join(presentation_path_prefix,"/","image",image_name)
           updated_image_source = %{img src="#{html_image_path}"}
 
           html_asset_path = File.join(render_root_path,image_name)
