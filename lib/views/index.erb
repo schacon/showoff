@@ -29,7 +29,7 @@
 <script type="text/javascript">
 
   $(document).ready(function() {
-    presentation = new Presentation();
+    presentation = new Presentation('<%= presentation_path_prefix %>');
 
     var locationWatcher = new LocationWatcher();
     locationWatcher.start();
