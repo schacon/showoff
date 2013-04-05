@@ -26,5 +26,34 @@
   <%= pause_message %>
 </div>
 
+<script type="text/javascript">
+
+  $(document).ready(function() {
+    presentation = new Presentation();
+
+    var locationWatcher = new LocationWatcher();
+    locationWatcher.start();
+
+    /* Add Support for Touch Devices */
+
+    var presoElement = document.getElementById('preso');
+
+    Hammer(presoElement).on("swipeleft", function() {
+      $.publish("presentation:slide:next");
+    });
+
+    Hammer(presoElement).on("swiperight", function() {
+      $.publish("presentation:slide:previous");
+    });
+
+    // bind event handlers
+    /* window.onresize  = resized; */
+    /* window.onscroll = scrolled; */
+    /* window.onunload = unloaded; */
+
+  });
+
+</script>
+
 </body>
 </html>
