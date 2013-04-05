@@ -607,59 +607,23 @@ Generates a pdf representation of the presentation.
 >
 > *-o, --output=file* Presentation output file
 
-
 # Future Plans
-
-I really want this to evolve into a dynamic presentation software server,
-that gives the audience a lot of interaction into the presentation -
-helping them decide dynamically what the content of the presentation is,
-ask questions without interrupting the presenter, etc.  I want the audience
-to be able to download a dynamically generated PDF of either the actual
-talk that was given, or all the available slides, plus supplementary
-material. And I want the presenter (me) to be able to push each
-presentation to Heroku or GitHub pages for archiving super easily.
-
 
 ## Presenter Tools
 
-* simple highlighting (highlight region of slide / click to highlight)
-* timer (time left, percent done, percent time done)
-* editing slides
-* preview
-* let you write on the slide with your mouse, madden-style via canvas
+* Elapsed / Remaining Timer
+* Drawing mode over the slides (Madden-style via canvas)
+* Highlighting (highlight region of slide / click to highlight)
 
 ## Presentation Layout
 
-* theme support
-* squeeze-to-fit style
-* simple animations (image from A to B)
-* show a timer - elapsed / remaining
-* perform simple animations of images moving between keyframes
-* automatically resize text to fit screen [see Alex's shrink.js]
-
-## Output Formats
-
-* pdf with notes
-* webpage
-* let audience members download slides, code samples or other supplementary
-  material
-
-## Clean up
-
-* More modularity with presentation filters and renderers to allow presenters
-  to create custom ones for the particular slide show
-* Modular approach to features
-* Clean up Javascript
+* More Themes
+* Key-Frame Animations
+* Better slide resizing
 
 ## Interaction
 
 * questions / comments system
 * audience vote-based presentation builder, results live view
 * show audience questions / comments (twitter or direct)
-* let audience members go back / catch up as you talk
 * let audience members vote on sections (?)
-
-## Platforms
-
-* show synchronized, hidden notes on another browser (like an iphone)
-* broadcast itself on Bonjour
