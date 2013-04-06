@@ -1,4 +1,6 @@
-# Parade Presentation Software
+
+![parade](lib/public/parade.png)
+
 
 Parade is an open source presentation software that consists of a Sinatra web
 app that serves up markdown files in a presentation format. Parade can serve a
