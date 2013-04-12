@@ -1,10 +1,27 @@
 /* customr css and js files included at the top level of your presentation will
  * will be included in your presentation */
 
+/*
+
+   The styles defined within this file will override the
+   default styles of any themes.
+
+   They are commented out here to show what can be done.
+   Uncomment them to see their effect.
+*/
+
+
+/* This will change the h1s on any slides that are marked as title slides */
+
+/*
 .title-slide h1 {
   color: blue;
 }
+*/
+
+/* This will change the background color of all the slides in the
+   introduction section */
 
 .slide.introduction {
   background-color: #DDD;
-}
+}*/
