@@ -37,8 +37,9 @@ a:hover {
   background-color: #F7F794;
 }
 
-.content {
-  /*background-color: black;*/
+#footer {
+  background: #183018;
+  color: #b5e853;
 }
 
 blockquote {
