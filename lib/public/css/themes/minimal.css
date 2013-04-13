@@ -12,12 +12,12 @@ h1 { font-size: 5em; }
 h2 { font-size: 2.5em; }
 h3 { font-size: 2em; }
 
-pre { 
+pre {
     margin: 1em 40px;
-    padding: .25em; 
+    padding: .25em;
 }
 
-pre.highlight, pre {
+pre, pre.highlight, pre.highlight pre {
     background-color: #eee;
     font-size: 20px;
     line-height: 26px;
@@ -28,7 +28,8 @@ pre.highlight, pre {
     padding: 6px 10px;
 }
 
-a, a code { 
+
+a, a code {
     color: #4183C4;
     text-decoration: none;
 }
