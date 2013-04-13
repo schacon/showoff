@@ -1,9 +1,0 @@
-getSlideProgress() - returns string '5/18'
-getCurrentNotes() - returns string of current notes
-gotoSlide(num)
-getSlidePercent() - returns int
-prevStep()
-nextStep()
-toggleFooter()
-togglePreshow()
-executeAnyCode()
