@@ -22,6 +22,6 @@
 /* This will change the background color of all the slides in the
    introduction section */
 
-.slide.introduction {
+/*.slide.introduction {
   background-color: #DDD;
 }*/
