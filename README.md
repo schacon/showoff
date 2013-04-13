@@ -329,6 +329,7 @@ end
 * hack
 * merlot
 * slate
+* hayfield
 
 ### Customized Footer
 
