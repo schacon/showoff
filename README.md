@@ -327,9 +327,10 @@ end
 
 * archetect
 * hack
-* merlot
-* slate
 * hayfield
+* merlot
+* minimal
+* slate
 
 ### Customized Footer
 
