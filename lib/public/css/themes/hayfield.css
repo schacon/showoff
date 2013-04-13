@@ -1,0 +1,57 @@
+/* customr css and js files included at the top level of your presentation will
+ * will be included in your presentation */
+
+body {
+  box-sizing: border-box;
+  color: #2f5d2f;
+  background: #489060;
+  font-size: 16px;
+  font-family: Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+
+h1{
+  color: #183018;
+  font-family: 'Lucida Console', Tahoma, fantasy;
+  font-weight: bold;
+  background: #A8C060;
+}
+
+h2{
+  color: #183018;
+  font-family: 'Lucida Console', Tahoma, fantasy;
+  border-bottom: 1px dotted #183018;
+}
+
+a{
+  color: #F5582F;
+}
+
+a:hover {
+  color: #FF0033;
+}
+
+.slide {
+  background-color: #F7F794;
+}
+
+.content {
+  /*background-color: black;*/
+}
+
+blockquote {
+  background-color: #D8D878;
+  color: #376e49;
+  border-left: 4px solid #489060;
+}
+
+.highlight.text,
+.highlight.ruby,
+.highlight.javascript,
+.highlight.shell,
+.highlight.shell pre.command,
+.highlight.shell pre.result {
+  background-color: #fdfde3;
+}
