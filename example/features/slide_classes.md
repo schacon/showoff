@@ -123,43 +123,43 @@ end
 
 ## bullets
 
+Sizes and separates bullets properly (fits up to 5, generally).
+
 * One
 * Two
 * Three
 * Four
 * Five
-
-sizes and separates bullets properly (fits up to 5, generally)
 
 !SLIDE smbullets
 
 ## smbullets
 
+Sizes and separates more bullets (smaller, closer together).
+
 * One
 * Two
 * Three
 * Four
 * Five
 
-sizes and separates more bullets (smaller, closer together)
-
 !SLIDE command
 
 ## command
 
-monospaces h1 title slides
+Monospaces h1 title slides.
 
 !SLIDE commandline
 
 ## commandline
 
+For pasted commandline sections (needs leading '$' for commands, then
+output on subsequent lines).
+
 ```bash
 $ command
 response
 ```
-
-for pasted commandline sections (needs leading '$' for commands, then
-output on subsequent lines)
 
 !SLIDE incremental bullets
 
