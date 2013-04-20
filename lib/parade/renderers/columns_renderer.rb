@@ -26,40 +26,58 @@ module Parade
       end
 
       def render(content)
-
         html = Nokogiri::XML.fragment(content)
+
+        #for each element with the class 'content.css_class'
         html.css(".content.#{css_class}").each do |slide|
 
-          columns = []
-          slop = []
+          #chunk and mark nods that are html_element as columns
+          chunks = chunk_children_by_element(slide, html_element)
 
-          chunks = slide.children.chunk {|child| child.name == html_element }
-
+          #remove the current children
           slide.children = ""
 
+          #append the container grid count..size.. thing
           slide['class'] += " container_#{segments}"
           current_column = slide
 
-          column_count = chunks.find_all {|is_column,contents| is_column }.count
+          #get the number of elements that are html_element
+          column_count = chunks.find_all {|is_column, contents| is_column }.count
 
           chunks.each do |is_column,contents|
 
             if is_column
-              slide.add_child current_column unless current_column == slide
-              current_column = Nokogiri::XML::Node.new('div',html)
-              current_column['class'] = "grid_#{ segments / column_count }"
+              current_column = new_column_div(html, column_count)
             end
 
             contents.each {|content| current_column.add_child content }
-          end
+            slide.add_child current_column unless current_column == slide
 
-          slide.add_child current_column
+          end
 
         end
 
         html.to_s
 
       end
+
+      private
+
+      def chunk_children_by_element slide, html_element
+        chunks = slide.children.chunk {|child| child.name == html_element }
+      end
+
+      def new_column_div(html, column_count)
+        column = Nokogiri::XML::Node.new('div',html)
+        column['class'] = grid_class(column_count)
+
+        column
+      end
+
+      def grid_class column_count
+        "grid_#{ segments / column_count }"
+      end
+
     end
 
   end
