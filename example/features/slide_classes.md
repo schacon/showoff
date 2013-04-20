@@ -92,6 +92,23 @@ end
 
 > Code will execute live
 
+!SLIDE content-with-caption
+
+# !SLIDE content-with-caption
+
+## Markdown
+
+All content is written and managed in markdown
+
+## Code
+
+```ruby
+class Parade
+end
+```
+## Execution
+
+> Code will execute live
 
 !SLIDE comparison
 
@@ -118,6 +135,7 @@ end
 * Ruby
 * Javascript
 * CSS
+
 
 !SLIDE bullets
 

@@ -21,10 +21,9 @@ module Parade
   SlidePostRenderers.register Renderers::CommandLineRenderer
   SlidePostRenderers.register Renderers::ColumnsRenderer.new(css_class: 'columns',
     html_element: "h2", segments: 12)
-  SlidePostRenderers.register Renderers::ColumnsRenderer.new(css_class: 'content-with-caption', html_element: "h2")
   SlidePostRenderers.register Renderers::ColumnsRenderer.new(css_class: 'comparison',
     html_element: "h2", segments: 12)
-  SlidePostRenderers.register Renderers::ColumnsRenderer.new(css_class: 'content-with-caption',
+  SlidePostRenderers.register Renderers::ContentWithCaptionRenderer.new(css_class: 'content-with-caption',
   html_element: "h2")
 
 end
