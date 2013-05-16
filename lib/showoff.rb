@@ -196,6 +196,8 @@ class ShowOff < Sinatra::Application
         # create html
         md += "<div"
         md += " id=\"#{id}\"" if id
+        #Need to enable this version for PDF export to work:
+        # md += " style=\"background: url('#{slide.bg}') center no-repeat;\"" if slide.bg
         md += " style=\"background: url('file/./#{slide.bg}') center no-repeat;\"" if slide.bg
         md += " class=\"slide\" data-transition=\"#{transition}\">"
 
@@ -268,7 +270,8 @@ class ShowOff < Sinatra::Application
       slide.scan(/<code>[^<]*\.com\/[^<]*<\/code>/) do |x|
         match_data = x.match(/<code>([^<]*)<\/code>/)
         url_to_show = match_data[1]
-        url_to_link = "http://#{url_to_show}".gsub(/\s/,"")
+        url_to_link = url_to_show.gsub(/\s/,"")
+        url_to_link = "http://#{url_to_link}" unless url_to_link[0,4] == "http"
         replacements << [match_data[0], "<a href='#{url_to_link}'><code>#{url_to_show}</code></a>"]
       end
       replacements.each do |a,b|
