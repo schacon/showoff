@@ -26,7 +26,7 @@ module Parade
         if File.directory? filepath
           root_path = filepath
           root_node = Parsers::PresentationDirectoryParser.parse filepath, :root_path => ".",
-            :parade_file => (Array(options['parade_file']) + [ "parade", "parade.json" ]).compact.uniq
+            :parade_file => (Array(options['parade_file']) + [ "parade" ]).compact.uniq
         else
           root_path = File.dirname filepath
           root_node = Parsers::PresentationFileParser.parse filepath, :root_path => root_path

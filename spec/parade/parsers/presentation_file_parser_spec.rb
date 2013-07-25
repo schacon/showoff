@@ -4,22 +4,7 @@ describe Parade::Parsers::PresentationFileParser do
 
   subject { described_class }
 
-  context "when the file extension is json" do
-
-    let(:filepath) { "current/path/parade.json" }
-
-    let(:expected_options) do
-      { :current_path => File.dirname(filepath) }
-    end
-
-    it "should use the JSON Parser" do
-      Parade::Parsers::JsonFileParser.should_receive(:parse).with(filepath,expected_options)
-      subject.parse(filepath)
-    end
-    
-  end
-
-  context "when the file extension is not json" do
+  context "when specifying the parade presentation file" do
 
     let(:filepath) { "parade" }
 

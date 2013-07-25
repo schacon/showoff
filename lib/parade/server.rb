@@ -27,7 +27,7 @@ module Parade
     end
 
     set :presentation_file, 'parade'
-    set :default_presentation_files, [ 'parade', 'parade.json' ]
+    set :default_presentation_files, [ 'parade' ]
 
 
     #
