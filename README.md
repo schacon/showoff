@@ -177,9 +177,8 @@ additional metadata with your slides and presentation.
 
 ## Notes
 
-You can define special notes that are shown in presenter mode.
-
-> Presenter mode has been removed until it can be rebuilt
+You can define special notes to your markdown which will not be displayed in
+the final presentation to the user.
 
 Add a line that starts with .notes:
 
