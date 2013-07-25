@@ -11,6 +11,11 @@
   <%= plugin_css_files %>
   <%= theme_css %>
   <%= custom_css_files %>
+
+  <!-- Even though this is the print representation, this is required if any
+       slides have custom JavaScript -->
+
+  <%= js 'jquery-1.4.2.js' %>
 </head>
 
 <body>
