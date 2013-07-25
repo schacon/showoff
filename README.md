@@ -191,11 +191,6 @@ Add a line that starts with .notes:
 .notes The reason that the second thing came about is because things changed.
 ```
 
-> In this example, the HTML output will contain a `<p class='notes'>`
-Toggle presenter notes with the `n` key while in the presentation.
-
-> Presenter mode has been removed until it can be rebuilt
-
 ### Metadata
 
 #### HTML IDs
