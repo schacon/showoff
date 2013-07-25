@@ -1,15 +1,12 @@
 
 ![parade](lib/public/parade.png)
 
-Parade is an open source presentation software that consists of a Sinatra web
-app that serves up markdown files in a presentation format. Parade can serve a
-directory or be configured to run with a simple configuration file.
+Parade is a slide presentation deck built with developers in mind.
 
-## Comparison Vs PowerPoint / Keynote
-
-Parade is easily out-done by professional presentation software packages as
-far as out-of-the-box style and design. However, there are benefits that
-Parade has over presentational software:
+You compose parade presentations in markdown files and these files are presented
+as a small web-application. This allows you to quickly build technical
+presentations within minutes within your text editor instead of the tedious
+drag'n'drop and arrange you find in most presentation packages.
 
 ### Highlights
 
@@ -32,19 +29,25 @@ Parade has over presentational software:
 
 * Web
 
-    >Slide presentations are basically websites -- they run in your browser from your desktop. This allows for a wide range of possibilities for customization and expandability.
+    > Slide presentations are basically websites -- they run in your browser
+    from your desktop. This allows for a wide range of possibilities for
+    customization and expandability.
 
 * Basic Templating and Color Schemes
 
-    > Several templates and color scheme options have been provided to help you get started. While Parade does not currently provide anything near the variety of many other presentation packages, it is well-suited for basic presentations.
+    > Several templates and color scheme options have been provided to help you
+    get started. While Parade does not currently provide anything near the
+    variety of many other presentation packages, it is well-suited for basic
+    presentations.
+
+### Lowlights
 
 * Design Flexibility (pros and cons)
 
     > Unless you're skilled in CSS/Animations, you will likely have a harder
-    time creating presentations with as much polish as other programs provide. However, this approach also makes Parade incredibly flexible if you do understand CSS/Animations.
-
-
-### Works In Progress
+    time creating presentations with as much polish as other programs provide.
+    However, this approach also makes Parade incredibly flexible if you do
+    understand CSS/Animations.
 
 * Resizing
 
@@ -82,6 +85,13 @@ or show the end result of the code execution.
 > ### *shift-space* or *cursor left* or *cursor up*
 >
 > Move to the previous slide
+>
+>
+> ### *\`* (backtick)
+>
+> Launches a visor terminal within your presentation that allows you to go to
+> a specific slide by number, name or partial match of the slide title:
+> `goto 12`, `goto start`, `goto end`, `goto javascript`.
 >
 > ### *h* or *?*
 >
