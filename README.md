@@ -340,7 +340,6 @@ The presentation has the following default footer:
 <div id="footer">
   <span id="slideInfo"></span>
   <span id="debugInfo"></span>
-  <span id="notesInfo"></span>
 </div>
 ```
 
