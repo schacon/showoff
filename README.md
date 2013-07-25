@@ -155,15 +155,14 @@ the `#`elements within your document.
 ### Separator: !SLIDE
 
 Relying on the `#` as a separator is not always ideal. Alternatively, you can
-use the `!SLIDE` separator. This also provides you with the ability to define
-additional metadata with your slides and presentation.
+use the `!SLIDE` separator.
 
 ```markdown
 !SLIDE
 
 # My Presentation
 
-!SLIDE bullets incremental transition=fade
+!SLIDE
 
 # Bullet Points
 
@@ -191,9 +190,44 @@ Add a line that starts with .notes:
 .notes The reason that the second thing came about is because things changed.
 ```
 
-### Metadata
 
-#### HTML IDs
+# Presentation Customization
+
+There are many ways you are able to customize your presentation.
+
+## Themes
+
+Parade comes with a set of themes which can be enabled in your **parade** file:
+
+```ruby
+
+title "My Presentation"
+
+theme "hack"
+
+section "Introduction" do
+  slides "intro.md"
+end
+
+```
+
+### Available Themes
+
+* archetect
+* hack
+* hayfield
+* merlot
+* minimal
+* slate
+
+
+## Slide Layout
+
+Parade supports various slide formats. These can be specified alongside the
+slide separators. By adding a slide format, it adds a special CSS class to the
+slide that is rendered. You may also specify custom CSS classes and an Id.
+
+### HTML IDs
 
 ```markdown
 !SLIDE #slide-id-1
@@ -204,53 +238,18 @@ Add a line that starts with .notes:
 You can define an ID that will be added to the slide's `div`. This id will be
 set to any value prefaced with the `#` character.
 
-#### Transitions
-
-```markdown
-!SLIDE transition=fade
-```
-
-> In this example, the slide will __fade__ when it is viewed. This will set
-  `data-transition='fade'` on the slides's `div`.
-
-You can define transitions from the available body of transitions.
-
-The transitions are provided by jQuery Cycle plugin. See http://www.malsup.com/jquery/cycle/browser.html to view the effects and http://www.malsup.com/jquery/cycle/adv2.html for how to add custom effects.
-
-##### Available Transitions
-
-* none (this is the default)
-* blindX, blindY, blindZ
-* cover
-* curtainX, curtainY
-* fade
-* fadeZoom
-* growX, growY
-* scrollUp, scrollDown, scrollLeft, scrollRight
-* scrollHorz, scrollVert
-* shuffle
-* slideX, slideY
-* toss
-* turnUp, turnDown, turnLeft, turnRight
-* uncover
-* wipe
-* zoom
-
-#### CSS Classes
+### CSS Classes
 
 ```markdown
 !SLIDE bullets incremental my-custom-css-class
 ```
-> In this example, this will add custom css classes to the slide's `div` will
+> In this example, this will add css classes to the slide's `div` and will
   display the following classes:
-  `class='content bullets incremental my-custom-css-class'`. _Note:_ the content
-  class is added by the default slide template.
+  `class='content bullets incremental my-custom-css-class'`.
 
-All remaining single terms are added as css classes to the slide's `div`.
+#### Defined Classes
 
-##### Defined Classes
-
-Parade defines a number of special CSS classes:
+Parade defines a number of common slide formats:
 
 > ### title
 > places the content closer to the center of the page
@@ -294,21 +293,24 @@ Parade defines a number of special CSS classes:
 > click on the code to execute it and display the results on the slide
 >
 > ### blank
-> a slide without content is removed unless you specify that the slide is
-> blank.
+> a slide without content is removed from the presentation unless you specify
+> that the slide is blank.
 
 
-# Presentation Customization
+#### Loading Custom CSS
 
-## Themes
+By default Parade will load most CSS it finds within the the
+directory which parade was launched; the current working directory.
 
-Parade comes with a set of themes which can be enabled in your **parade** file:
+You may however also specify a single resource folder or multiple resource folders
+which parade will load instead of the current working directory.
 
 ```ruby
 
 title "My Presentation"
 
 theme "hack"
+resources "stylesheets"
 
 section "Introduction" do
   slides "intro.md"
@@ -316,14 +318,9 @@ end
 
 ```
 
-### Available Themes
+The following will look for a folder named *stylesheets* relative to the current
+working directory and load all the CSS files found within the directory.
 
-* archetect
-* hack
-* hayfield
-* merlot
-* minimal
-* slate
 
 ### Customized Footer
 
@@ -351,9 +348,46 @@ end
 
 This example will load a file named `customer_footer.erb` within your presentation directory.
 
-## Loading Custom CSS and JavaScript
 
-By default Parade will load most CSS and JavaScript it finds within the the
+## Slide Transitions
+
+What is a presentation without slide transitions. Parade supports a variety
+for slide transitions that can be specified alongside the side separator.
+
+```markdown
+!SLIDE transition=fade
+```
+
+> In this example, the slide will __fade__ when it is viewed. This will set
+  `data-transition='fade'` on the slides's `div`.
+
+You can define transitions from the available body of transitions.
+
+The transitions are provided by jQuery Cycle plugin. See http://www.malsup.com/jquery/cycle/browser.html to view the effects and http://www.malsup.com/jquery/cycle/adv2.html for how to add custom effects.
+
+##### Available Transitions
+
+* none (this is the default)
+* blindX, blindY, blindZ
+* cover
+* curtainX, curtainY
+* fade
+* fadeZoom
+* growX, growY
+* scrollUp, scrollDown, scrollLeft, scrollRight
+* scrollHorz, scrollVert
+* shuffle
+* slideX, slideY
+* toss
+* turnUp, turnDown, turnLeft, turnRight
+* uncover
+* wipe
+* zoom
+
+
+## Loading Custom JavaScript
+
+By default Parade will load most JavaScript it finds within the the
 directory which parade was launched, the current working directory.
 
 You may however also specify a single resource folder or multiple resource folders
@@ -365,7 +399,6 @@ title "My Presentation"
 
 theme "hack"
 resources "scripts"
-resources "stylesheets"
 
 section "Introduction" do
   slides "intro.md"
@@ -375,15 +408,15 @@ end
 
 The following will look for a folder named *scripts* and a folder named
 *stylesheets* relative to the current working directory and load all
-the CSS and JavaScript files found within those directories.
+the JavaScript files found within those directories.
 
 
-## Custom JavaScript
+### Custom JavaScript
 
 To insert custom JavaScript into your presentation you can either place it into
 a file (with extension .js) into the root directory of your presentation or you
 can embed a *script* element directly into your slides. This JavaScript will
-be executed—as usually—as soon as it is loaded.
+be executed as soon as it is loaded.
 
 If you want to trigger some JavaScript as soon as a certain page is shown or
 when you switch to the next or previous slide, you can bind a callback to a
