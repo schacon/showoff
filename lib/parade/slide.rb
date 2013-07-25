@@ -70,12 +70,17 @@ module Parade
 
     # @return [String] the CSS classes for the slide
     def slide_classes
-      [ title.downcase.gsub(' ','-') ] + content_classes
+      [ title.downcase.gsub(' ','-') ] + section_classes + content_classes
     end
 
     # @return [String] the CSS classes for the content section of the slide
     def content_classes
       metadata.classes
+    end
+
+    # @return [String] the CSS classes specifed at the section level
+    def section_classes
+      section.css_classes
     end
 
     # @return [String] the transition style for the slide

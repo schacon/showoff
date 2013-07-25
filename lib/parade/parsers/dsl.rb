@@ -87,11 +87,40 @@ module Parade
       end
 
       #
+      # This is used by the DSL to specify any additional CSS Classes specific
+      # to the section. All slides within the section will receive these
+      # additional CSS Classes when the slide is rendered
+      #
+      # @example Specifying the css classes in multiple different ways
+      #
+      #     section "Iteration 0" do
+      #       css_classes "blue-background"
+      #       slides "iteration-zero.md"
+      #     end
+      #     section "Iteration 1" do
+      #       css_classes [ "blue-background" ]
+      #       slides "iteration-zero.md"
+      #     end
+      #     section "Iteration WonderWoman" do
+      #       css_classes "blue-background", "red-font", "white-borders"
+      #       slides "iteration-zero.md"
+      #     end
+      #     section "Iteration Spiderman" do
+      #       css_classes "blue-background red-spandex web-spitters"
+      #       slides "iteration-zero.md"
+      #     end
+      #
+      def css_classes(*css_classes)
+        current_section.css_classes = css_classes.flatten.map { |css_class| css_class.split(" ") }.flatten
+      end
+
+      #
       # This is used by the DSL to specify the resources used by the presentation
       #
       def resources(resource_filepath)
         current_section.add_resource File.join(options[:current_path], resource_filepath)
       end
+
 
       #
       # Sets the current sections theme to the specified theme

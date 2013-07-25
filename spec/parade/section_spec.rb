@@ -43,4 +43,19 @@ describe Parade::Section do
     end
   end
 
+  describe "#css_classes" do
+    context "when not created with a css classes" do
+      it "returns an empty array" do
+        subject.css_classes.should eq []
+      end
+    end
+
+    context "when created with css classes" do
+      it "returns those css classes" do
+        subject.css_classes = [ "red-background" ]
+        subject.css_classes.should eq [ "red-background" ]
+      end
+    end
+  end
+
 end

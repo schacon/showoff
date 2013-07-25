@@ -79,6 +79,36 @@ describe Parade::Slide do
     end
   end
 
+  describe "#section_classes" do
+    context "when the section has no css classes" do
+      subject { described_class.new section: mock('section',css_classes: []) }
+      it "returns an empty array" do
+        subject.section_classes.should eq([])
+      end
+    end
+
+    context "when the section has css classes" do
+      subject { described_class.new section: mock('section',css_classes: css_classes) }
+
+      let(:css_classes) { [ "exercises", "even" ] }
+
+      it "returns an empty array" do
+        subject.section_classes.should eq(css_classes)
+      end
+    end
+  end
+
+  describe "#slide_classes" do
+    subject do
+      described_class.new section: mock('section',title: "one", css_classes: [ "two" ]),
+        metadata: mock('metadata',classes: [ "three", "four", "five" ])
+    end
+
+    it "has the title, metadata classes, and the section css classes" do
+      subject.slide_classes.should eq %w[ one two three four five ]
+    end
+  end
+
   describe "#transition" do
     context "when created with no metadata" do
       let(:default_transition) { "none" }

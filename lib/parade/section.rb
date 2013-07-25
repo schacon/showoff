@@ -44,6 +44,15 @@ module Parade
     #   root section.
     attr_accessor :section
 
+    # Set the additional css classes that will be applied to all the slides
+    # within the section.
+    attr_writer :css_classes
+
+    # @return [Array<String>] returns an array of css classes names
+    def css_classes
+      @css_classes || []
+    end
+
     #
     # Append sections to this section.
     #
