@@ -248,7 +248,25 @@ slide that is rendered. You may also specify custom CSS classes and an Id.
 You can define an ID that will be added to the slide's `div`. This id will be
 set to any value prefaced with the `#` character.
 
-### CSS Classes
+### CSS Classes for Slide Sections
+
+Sometimes you want to add CSS classes to an entire section of slides:
+
+```ruby
+section "Iteration 0" do
+  css_classes "title-and-content"
+  slides "iteration-zero-intro.md"
+  slides "iteration-zero-example.md"
+end
+
+section "Iteration 1" do
+  css_classes title"
+  slides "iteration-one-intro.md"
+  slides "iteration-one-example.md"
+end
+```
+
+### CSS Classes for Individual Slides
 
 ```markdown
 !SLIDE bullets incremental my-custom-css-class
