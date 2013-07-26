@@ -357,6 +357,48 @@ end
 
 This example will load a file named `customer_footer.erb` within your presentation directory.
 
+### Customized Slide
+
+Sometimes adding a class is not strong enough for what you need. So that's why
+it is possible to override the entire slide
+[template](https://github.com/burtlo/parade/blob/master/lib/views/slide.erb).
+
+### Overriding the default slide template for a presentation or section
+
+```ruby
+
+# Overrides the default slide template for the entire presentation
+# This file is in the root directory of the presentation
+template "default", "slide.erb"
+
+section "Iteration" do
+  # Overrides the default slide template for this SECTION of the presentation
+  # This file is in the root directory of the presentation
+  template "default", "iteration-slide.erb"
+  slides "outline.md"
+end
+```
+
+#### Setting a custom template for a single slide
+
+```markdown
+!SLIDE
+
+Introduction
+
+!SLIDE template=full_screen
+```
+
+```ruby
+
+section "Introduction" do
+  # Overrides the all slides with the 'full_screen' template value set
+  # This file is in the root directory of the presentation
+  template "full_screen", "full_screen.erb"
+  slides "outline.md"
+end
+```
+
 
 ## Slide Transitions
 
