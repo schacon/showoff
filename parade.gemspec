@@ -14,8 +14,10 @@ Gem::Specification.new do |s|
   s.license           = "MIT"
   s.executables       = %w( parade )
   s.files             = %w( README.md Rakefile LICENSE )
+
   s.files            += Dir.glob("lib/**/*")
-  s.files            += Dir.glob("bin/**/*")
+  s.files.reject! { |file| File.extname(file) =~ /\.(png|gif|png|svg)$/ }
+
   s.add_dependency      "sinatra", "~> 1.3"
   s.add_dependency      "redcarpet"
   s.add_dependency      "nokogiri"
