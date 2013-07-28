@@ -2,7 +2,7 @@
 var w = null;
 
 $(function(){
-	w = window.open('/' + window.location.search);
+	w = window.open('/' + window.location.search + window.location.hash);
 
 	// Give the slide window a handle to the presenter view window.
 	// This will let either window be made fullscreen and
